@@ -18,4 +18,9 @@ public class NewYearApplication {
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
         return String.format("Hello %s!", name);
     }
+
+    @GetMapping("/con")
+    public String con(@RequestParam(value = "name", defaultValue = "Thomas") String name) {
+        return String.format("Qui est con ? %s!", name);
+    }
 }
