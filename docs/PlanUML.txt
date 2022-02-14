@@ -1,0 +1,13 @@
+@startmindmap
+* NewYearResolution
+** ecranAccueil
+*** ecranConnection
+**** ecranResolutions
+**** ecranAjouterResolutions
+*** topResolutions
+left side
+** creationBDD
+*** ScrumUser
+*** gestionResolution
+**** CRUDResolutionUser
+@endmindmap
