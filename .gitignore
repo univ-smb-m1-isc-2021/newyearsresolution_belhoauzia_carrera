@@ -32,3 +32,28 @@ projectName.iml
 /local.properties
 target/
 .mvn/wrapper/maven-wrapper.properties
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+
+.vueReact/mon-app/node_modules
+.vueReact/mon-app/.pnp
+.vueReact/mon-app.pnp.js
+
+# testing
+.vueReact/mon-app/coverage
+
+# production
+.vueReact/mon-app/build
+
+# misc
+.vueReact/mon-app/.DS_Store
+.vueReact/mon-app/.env.local
+.vueReact/mon-app/.env.development.local
+*.env.test.local
+*.env.production.local
+
+*npm-debug.log*
+*yarn-debug.log*
+*yarn-error.log*
