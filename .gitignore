@@ -31,3 +31,4 @@ projectName.iml
 /build
 /local.properties
 target/
+.mvn/wrapper/maven-wrapper.properties
