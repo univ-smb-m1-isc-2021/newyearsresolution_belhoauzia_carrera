@@ -1,13 +1,18 @@
 @startmindmap
 * NewYearResolution
+** UI
+*** maquette
+*** responsiv
 ** ecranAccueil
 *** ecranConnection
 **** ecranResolutions
 **** ecranAjouterResolutions
 *** topResolutions
 left side
-** creationBDD
-*** ScrumUser
-*** gestionResolution
-**** CRUDResolutionUser
+** setUpProjet
+*** creationBDD
+**** ScrumUser
+***** creationFakeUser
+**** gestionResolution
+***** CRUDResolutionUser
 @endmindmap
