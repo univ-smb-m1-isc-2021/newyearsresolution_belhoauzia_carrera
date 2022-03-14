@@ -1,1 +1,0 @@
-{"version":3,"sources":["..\\scss\\global-styles.scss"],"names":[],"mappings":"AAAA,KACE,wBAAyB,CACzB,QAAS,CACT,SAAU","file":"bundle.css","sourceRoot":"..\\..\\..\\..\\src\\main\\js","sourcesContent":["body {\r\n  background-color: #1a1a1a;\r\n  margin: 0;\r\n  padding: 0;\r\n}"]}
