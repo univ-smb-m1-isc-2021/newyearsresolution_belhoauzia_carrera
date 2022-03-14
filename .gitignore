@@ -30,7 +30,6 @@ projectName.iml
 *.iml
 /build
 /local.properties
-target/
 .mvn/wrapper/maven-wrapper.properties
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
