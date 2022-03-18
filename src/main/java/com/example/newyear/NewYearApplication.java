@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NewYearApplication {
 
-    @GetMapping("/hello")
+    @GetMapping("/app")
     public String renderMainPage() {
+        return new InitReact().serialize();
+    }
+
+    @GetMapping("/app/login")
+    public String renderLogin() {
         return new InitReact().serialize();
     }
 
