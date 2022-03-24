@@ -25,7 +25,7 @@ jobs:
       #          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t NewYearsResolution_Belhoauzia_Carrera .
+        run: docker build -t new-year-resolution .
 
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
