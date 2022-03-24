@@ -33,5 +33,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: univ-smb-m1-isc-2021/NewYearsResolution_Belhoauzia_Carrera/main
+          repository: univ-smb-m1-isc-2021/newyearsresolution_belhoauzia_carrera/main
           tags: latest
