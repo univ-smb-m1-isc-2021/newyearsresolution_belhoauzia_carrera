@@ -9,13 +9,13 @@
     "postwatch": "date-now --format='DD.MM.YYYY-HH:mm:ss (A)' | cowthink $1"
   },
   "dependencies": {
+    "bulma": "^0.9.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-router-dom": "^6.2.2",
     "styled-components": "5.3.3"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.2",
     "babel-core": "6.26.3",
     "babel-eslint": "10.1.0",
     "babel-jest": "27.5.1",

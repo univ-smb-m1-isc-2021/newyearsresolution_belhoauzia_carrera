@@ -9,7 +9,7 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-.cache*
+.cache\*
 # Package Files #
 *.jar
 *.war
@@ -58,3 +58,7 @@ projectName.iml
 *npm-debug.log*
 *yarn-debug.log*
 *yarn-error.log*
+/.cache/
+.cache/07/6a0b5167f7c703264b7100b6639599.json
+.cache/1e/99edc49dbe203c5340b2aa46fbcefb.json
+.cache/fd/db24ccc10b1ba1828cbb0ee64f0835.json

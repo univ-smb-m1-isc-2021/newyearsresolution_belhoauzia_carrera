@@ -1,25 +1,20 @@
 import React from "react";
-import styled from "styled-components";
 
-const StyledDiv = styled.div`
-text-align:center;
-background-color:gray;
-padding:15px;
-witdh:50%;
-`;
 
 class Login extends React.Component {
 
     render() {
         return (
-            <StyledDiv>
-                <h1>Connexion</h1>
-                <label htmlFor="name">Name: </label>
-                <input type="text" id="name" name="name" required /><br/><br/>
-                <label htmlFor="password">Password: </label>
-                <input type="password" id="password" name="password" required/><br/><br/>
-                <button>Log in</button>
-            </StyledDiv>
+            <div class="columns is-mobile is-centered">
+                <div class="column field is-half">
+                    <h1 class="title">Connexion</h1>
+                    <label class="subtitle" htmlFor="name">Name: </label>
+                    <input class="input is-link" type="text" id="name" name="name" required /><br/><br/>
+                    <label class="subtitle" htmlFor="password">Password: </label>
+                    <input class="input is-link" type="password" id="password" name="password" required/><br/><br/>
+                    <button class="button">Log in</button>
+                </div>
+            </div>
         );
     }
 }
