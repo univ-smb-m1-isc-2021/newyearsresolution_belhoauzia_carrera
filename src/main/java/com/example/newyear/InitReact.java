@@ -17,6 +17,7 @@ public class InitReact {
                 .append("<body>")
                 .append("<div id=\"reactEntryPoint\">")
                 .append("<script src=\"/dist/bundle.js\">")
+                .append("<script src=\"https://cdn.tailwindcss.com\"></script>")
                 .append("</script>")
                 .append("</div>")
                 .append("</body>")

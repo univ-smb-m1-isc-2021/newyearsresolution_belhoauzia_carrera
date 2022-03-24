@@ -15,6 +15,9 @@
     <description>New Year</description>
     <properties>
         <java.version>17</java.version>
+        <sonar.projectKey>gjambet_chuck-facts</sonar.projectKey>
+        <sonar.organization>gjambet</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
