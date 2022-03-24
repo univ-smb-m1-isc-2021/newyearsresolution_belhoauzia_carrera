@@ -1,26 +1,39 @@
-import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Login from "./components/Login";
-import Home from "./components/Home";
+import React from "react";
+import Login from "./components/Login.js";
+import Home from "./components/Home.js";
 
-class App extends Component {
+
+const components = {
+    "Home": <Home />,
+    "Login": <Login />,
+}
+
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayedTable:<Home />
+        }
+
+    }
+    showComponent(componentName) {
+        this.setState({displayedTable: componentName});
+    }
+    componentWillMount(){
+        this.showComponent('Home')
+    }
 
     render() {
         return (
             <div>
-            <Home/>
-            </div>
-           /* <Router>
-                <h1>Welcome in our crazy website ! </h1>
+                <button onClick={() => this.showComponent('Home')}>Home</button>
+                <button onClick={() => this.showComponent('Login')}>Login</button>
                 <div id="content">
-                    <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/login" exact component={Login} />
-                    </Switch>
+                    {components[this.state.displayedTable]}
                 </div>
-            </Router>*/
+            </div>
         );
     }
 }
-
 export default App;

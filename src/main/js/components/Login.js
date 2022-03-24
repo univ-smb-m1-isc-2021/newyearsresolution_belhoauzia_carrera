@@ -1,11 +1,11 @@
-import React, {Component} from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
   background-color:red;
 `;
 
-class Login extends Component {
+class Login extends React.Component {
 
     render() {
         return (
