@@ -29,9 +29,11 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <button class="button" onClick={() => this.showComponent('Home')}>Home</button>
-                <button class="button" onClick={() => this.showComponent('Login')}>Login</button>
-                <button className="button" onClick={() => this.showComponent('Inscription')}>Inscription</button>
+                <div class="m-2 navbar">
+                    <button class="button m-2 is-success" onClick={() => this.showComponent('Home')}>Home</button>
+                    <button class="button m-2 is-success" onClick={() => this.showComponent('Login')}>Login</button>
+                    <button class="button m-2 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
+                </div>
                 <div id="content">
                     {components[this.state.displayedTable]}
                 </div>
