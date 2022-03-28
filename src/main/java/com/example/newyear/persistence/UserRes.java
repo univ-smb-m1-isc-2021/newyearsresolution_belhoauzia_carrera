@@ -3,19 +3,16 @@ package com.example.newyear.persistence;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import java.util.Date;
 
 @Entity
 public class UserRes {
 
     @ManyToOne
-    @MapsId("id")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @MapsId("id")
     @JoinColumn(name = "resolution_id")
     private Resolution resolution;
 
