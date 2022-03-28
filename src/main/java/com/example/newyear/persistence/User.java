@@ -25,6 +25,10 @@ public class User {
 
     }
 
+    public User() {
+        //JPA
+    }
+
     public long getId() {
         return id;
     }

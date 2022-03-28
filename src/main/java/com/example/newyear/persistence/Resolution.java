@@ -25,6 +25,10 @@ public class Resolution {
         this.frequency = frequency;
     }
 
+    public Resolution() {
+        //JPA
+    }
+
 
     public long getId() {
         return id;

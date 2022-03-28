@@ -26,6 +26,10 @@ public class UserRes {
         this.nb_do = nb_do;
     }
 
+    public UserRes() {
+        //JPA
+    }
+
     public User getUser() {
         return user;
     }
