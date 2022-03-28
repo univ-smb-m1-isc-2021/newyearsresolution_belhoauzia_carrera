@@ -1,11 +1,13 @@
 import React from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
+import Inscription from "./components/Inscription.js";
 
 
 const components = {
     "Home": <Home />,
     "Login": <Login />,
+    "Inscription": <Inscription />,
 }
 
 class App extends React.Component {
@@ -29,6 +31,7 @@ class App extends React.Component {
             <div>
                 <button class="button" onClick={() => this.showComponent('Home')}>Home</button>
                 <button class="button" onClick={() => this.showComponent('Login')}>Login</button>
+                <button className="button" onClick={() => this.showComponent('Inscription')}>Inscription</button>
                 <div id="content">
                     {components[this.state.displayedTable]}
                 </div>
