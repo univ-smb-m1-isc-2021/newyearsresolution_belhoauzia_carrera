@@ -9,13 +9,13 @@ class AddResolution extends React.Component {
                 <div className="modal-background"></div>
                 <div className="modal-content">
                     <div class="box">
-                        <h1 className="title has-text-centered">Add a new resolution</h1>
+                        <h1 className="title has-text-centered has-text-white">Add a new resolution</h1>
                         <div id="form" class="box has-text-centered">
-                            <label className="subtitle" htmlFor="name">Name: </label>
+                            <label className="subtitle has-text-white" htmlFor="name">Name: </label>
                             <input className="input is-link" type="text" id="name" name="name" required/><br/><br/>
-                            <label className="subtitle" htmlFor="description">Description: </label>
+                            <label className="subtitle has-text-white" htmlFor="description">Description: </label>
                             <textarea  className="input is-link" type="text" id="description" name="description" required></textarea><br/><br/>
-                            <button className="button is-success">Add resolution</button>
+                            <button className="button is-success" onClick={() => document.getElementById("popup-resolution").classList.remove('is-active')}>Add resolution</button>
                         </div>
                     </div>
                 </div>
