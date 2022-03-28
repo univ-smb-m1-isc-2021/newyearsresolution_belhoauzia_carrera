@@ -3,7 +3,7 @@ services:
 
   db:
     image: postgres
-    container_name: "local_postgres"
+    container_name: "local_postgres_new_year"
     ports:
       - "5432:5432"
     restart: always

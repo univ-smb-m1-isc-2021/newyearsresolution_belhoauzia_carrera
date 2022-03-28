@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Repository
 public interface ResolutionRepository extends JpaRepository<Resolution, Long> {
 
-    Resolution findByID(long id);
-    //Resolution findALL(long id);
+    Resolution findById(long id);
+    //Resolution findAll(long id);
 
 }
