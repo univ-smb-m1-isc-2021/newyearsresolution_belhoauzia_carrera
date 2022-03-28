@@ -32,7 +32,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div class="m-2 navbar">
+                <div class="mx-2 navbar">
                     <figure className="image is-48x48 m-2">
                         <img src="/assets/logo.png" alt="logo"/>
                     </figure>
