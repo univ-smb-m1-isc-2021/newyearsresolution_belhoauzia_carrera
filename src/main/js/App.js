@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import Inscription from "./components/Inscription.js";
+import AddResolution from "./components/AddResolution.js";
 
 
 const components = {
@@ -33,9 +34,11 @@ class App extends React.Component {
                     <button class="button m-2 is-success" onClick={() => this.showComponent('Home')}>Home</button>
                     <button class="button m-2 is-success" onClick={() => this.showComponent('Login')}>Login</button>
                     <button class="button m-2 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
+                    <button className="button m-2 is-success" onClick={() => document.getElementById("popup-resolution").classList.add('is-active') }>AddResolution</button>
                 </div>
                 <div id="content">
                     {components[this.state.displayedTable]}
+                    <AddResolution/>
                 </div>
             </div>
         );
