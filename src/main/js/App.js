@@ -4,6 +4,7 @@ import Home from "./components/Home.js";
 import Inscription from "./components/Inscription.js";
 import AddResolution from "./components/AddResolution.js";
 import MyResolution from "./components/MyResolution.js";
+import axios from 'axios';
 
 
 const components = {
@@ -14,13 +15,19 @@ const components = {
 }
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            displayedTable:<Home />
+            displayedTable:<Home />,
+            name : "default"
         }
 
+    }
+    componentDidMount() {
+        axios.get(`/user`)
+            .then(res => {
+                name = "Logged as " + res.data.name
+            })
     }
     showComponent(componentName) {
         this.setState({displayedTable: componentName});
@@ -41,6 +48,7 @@ class App extends React.Component {
                     <button class="button m-4 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
                     <button className="button m-4 is-success" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
                     <button className="button m-4 is-success" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
+                    <div className="subtitle has-text-white">{name}</div>
                 </div>
                 <div id="content m-6">
                     {components[this.state.displayedTable]}
