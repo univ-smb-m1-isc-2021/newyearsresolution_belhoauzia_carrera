@@ -1,12 +1,9 @@
-com\example\newyear\service\ResolutionService.class
-com\example\newyear\persistence\UserRes.class
-com\example\newyear\persistence\Timeline.class
 com\example\newyear\persistence\ResolutionRepository.class
 com\example\newyear\InitReact.class
 com\example\newyear\persistence\Resolution.class
 com\example\newyear\persistence\User.class
+com\example\newyear\service\ResolutionService.class
 com\example\newyear\persistence\UserRes.class
 com\example\newyear\persistence\Timeline.class
 com\example\newyear\Application.class
-com\example\newyear\persistence\User.class
 com\example\newyear\NewYearApplication.class
