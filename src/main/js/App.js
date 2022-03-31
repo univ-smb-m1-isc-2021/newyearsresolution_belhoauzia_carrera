@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{ useState } from "react";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import Inscription from "./components/Inscription.js";
@@ -19,14 +19,24 @@ class App extends React.Component {
         super(props);
         this.state = {
             displayedTable:<Home />,
-            name : "default"
+            name : "",
+            msg : "",
         }
 
     }
     componentDidMount() {
         axios.get(`/user`)
             .then(res => {
-                name = "Logged as " + res.data.name
+                if(res.data.name != undefined) {
+                    this.setState({name: "Logged as " + res.data.name})
+                    document.getElementById("login").classList.add('is-hidden')
+                    document.getElementById("inscription").classList.add('is-hidden')
+                    document.getElementById("logout").classList.remove('is-hidden')
+                }
+            })
+        axios.get(`/getError`)
+            .then(res => {
+                this.setState({ msg : res.data})
             })
     }
     showComponent(componentName) {
@@ -44,16 +54,20 @@ class App extends React.Component {
                         <img src="/assets/logo.png" alt="logo"/>
                     </figure>
                     <button class="button m-4 is-success" onClick={() => this.showComponent('Home')}>Home</button>
-                    <button class="button m-4 is-success" onClick={() => this.showComponent('Login')}>Login</button>
-                    <button class="button m-4 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
+                    <button id="login" class="button m-4 is-success" onClick={() => this.showComponent('Login')}>Login</button>
+                    <button id="inscription" class="button m-4 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
                     <button className="button m-4 is-success" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
                     <button className="button m-4 is-success" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
-                    <div className="subtitle has-text-white">{name}</div>
+                    <div className="subtitle m-4 p-2 has-text-white">{this.state.name}</div>
+                    <div className="subtitle m-4 p-2 has-text-white">{this.state.msg}</div>
                     <button onClick={()=>
                         axios.post(`/logout`)
                         .then(res => {
-                            name = "Succesfully logged out"
-                        })} className="button m-4 is-danger">Logout</button>
+                            document.getElementById("login").classList.remove('is-hidden')
+                            document.getElementById("inscription").classList.remove('is-hidden')
+                            document.getElementById("logout").classList.add('is-hidden')
+                            this.setState({name : "Succesfully logged out"})
+                        })} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>
                 <div id="content m-6">
                     {components[this.state.displayedTable]}
