@@ -9,6 +9,7 @@
     "postwatch": "date-now --format='DD.MM.YYYY-HH:mm:ss (A)' | cowthink $1"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "bulma": "^0.9.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
