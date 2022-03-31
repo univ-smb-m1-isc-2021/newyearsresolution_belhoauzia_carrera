@@ -49,6 +49,11 @@ class App extends React.Component {
                     <button className="button m-4 is-success" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
                     <button className="button m-4 is-success" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
                     <div className="subtitle has-text-white">{name}</div>
+                    <button onClick={()=>
+                        axios.post(`/logout`)
+                        .then(res => {
+                            name = "Succesfully logged out"
+                        })} className="button m-4 is-danger">Logout</button>
                 </div>
                 <div id="content m-6">
                     {components[this.state.displayedTable]}

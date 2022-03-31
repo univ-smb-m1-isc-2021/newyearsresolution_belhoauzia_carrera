@@ -18,6 +18,7 @@ public class InitReact {
                 .append("<body>")
                 .append("<div id=\"reactEntryPoint\" class=\"background\">")
                 .append("<script src=\"/dist/bundle.js\">")
+                .append("<script type=\"text/javascript\" src=\"/webjars/js-cookie/js.cookie.js\"></script>")
                 .append("</script>")
                 .append("</div>")
                 .append("</body>")
