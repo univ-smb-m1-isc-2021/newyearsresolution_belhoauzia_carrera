@@ -5,6 +5,8 @@ import com.example.newyear.service.ResolutionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,6 +28,13 @@ public class NewYearController {
         logger.info("Service Resolutions");
         return resolutionService.resolutionList().stream().map(p ->p.getTitle()).collect(toList());
 
+    }
+
+    @GetMapping(value = "/api/newResolution")
+    @ResponseBody
+    public void newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq){
+        logger.info("nouvelle resolution ajouté");
+        resolutionService.addResolution(title,des,nb_oc,freq);
     }
 
 }

@@ -18,4 +18,8 @@ public class ResolutionService {
     public List<Resolution> resolutionList(){
         return repository.findAll();
     }
+
+    public void addResolution(String title,String des,int nb_oc,int freq){
+        repository.saveAndFlush(new Resolution(title,des,nb_oc,freq));
+    }
 }
