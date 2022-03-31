@@ -8,3 +8,14 @@ pour chaque jours je peux indiquer si j ai fait / ne pas fait chacune des action
 pour le jours courant je vois ou j'en suis de l objectif vis a vis de chaque fréquence
 pour chaque resolution je vois sur une timeline graphique (cf commits github) les occurences
 la page d'acceil indique les resolutions les plus populaires et le pourcentage de gens qui les ont réussissent sur la derniére période échue
+
+Requetes : 
+
+- ajouter resolution
+- recuperer list en fonction de l'utilisateur
+- 3 plus commune plus deux random
+- validation ou non d'un resolution
+- commit github
+- ajouter un compte
+- supprimer un compte
+- connexion
