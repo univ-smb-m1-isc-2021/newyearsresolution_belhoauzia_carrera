@@ -12,18 +12,18 @@ import java.util.Map;
 @RestController
 public class NewYearApplication {
 
+    @GetMapping("/error")
+    public String error() {
+        return new InitReact().serialize();
+    }
+
     @GetMapping(value = "/")
     public String renderMainPage() {
         return new InitReact().serialize();
     }
 
-    @GetMapping(value = "/error")
-    public String renderErrorPage() {
-        return new InitReact().serialize();
-    }
-
     @GetMapping("/getError")
-    public String error(HttpServletRequest request) {
+    public String getError(HttpServletRequest request) {
         String message = (String) request.getSession().getAttribute("error.message");
         request.getSession().removeAttribute("error.message");
         return message;

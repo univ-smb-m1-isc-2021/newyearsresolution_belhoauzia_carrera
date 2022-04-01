@@ -32,6 +32,8 @@ class App extends React.Component {
                     document.getElementById("login").classList.add('is-hidden')
                     document.getElementById("inscription").classList.add('is-hidden')
                     document.getElementById("logout").classList.remove('is-hidden')
+                    document.getElementById("resolution").classList.remove('is-hidden')
+                    document.getElementById("addResolution").classList.remove('is-hidden')
                 }
             })
         axios.get(`/getError`)
@@ -56,8 +58,8 @@ class App extends React.Component {
                     <button class="button m-4 is-success" onClick={() => this.showComponent('Home')}>Home</button>
                     <button id="login" class="button m-4 is-success" onClick={() => this.showComponent('Login')}>Login</button>
                     <button id="inscription" class="button m-4 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
-                    <button className="button m-4 is-success" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
-                    <button className="button m-4 is-success" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
+                    <button id="resolution" className="button m-4 is-success is-hidden" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
+                    <button id="addResolution" className="button m-4 is-success is-hidden" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.name}</div>
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.msg}</div>
                     <button onClick={()=>
@@ -66,6 +68,8 @@ class App extends React.Component {
                             document.getElementById("login").classList.remove('is-hidden')
                             document.getElementById("inscription").classList.remove('is-hidden')
                             document.getElementById("logout").classList.add('is-hidden')
+                            document.getElementById("resolution").classList.add('is-hidden')
+                            document.getElementById("addResolution").classList.add('is-hidden')
                             this.setState({name : "Succesfully logged out"})
                         })} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>

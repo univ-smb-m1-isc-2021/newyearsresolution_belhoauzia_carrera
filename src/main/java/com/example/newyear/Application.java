@@ -1,7 +1,9 @@
 package com.example.newyear;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,6 +12,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @SpringBootApplication
+@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 public class Application extends WebSecurityConfigurerAdapter {
 
     public static void main(String[] args) {
@@ -23,7 +26,7 @@ public class Application extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/error", "/webjars/**","/api/*","/dist/*","/login/oauth2/*","/user").permitAll()
+                        .antMatchers("/", "/error", "/webjars/**","/assets/*","/service-worker.js","/api/*","/dist/*","/login/oauth2/*","/user").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e -> e
