@@ -23,7 +23,7 @@ public class Application extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/error", "/webjars/**","/dist","/dist/bundle.js","/dist/bundle.css","/user").permitAll()
+                        .antMatchers("/", "/error", "/webjars/**","/api/*","/dist/*","/login/oauth2/*","/user").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e -> e
