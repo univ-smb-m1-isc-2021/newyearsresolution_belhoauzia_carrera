@@ -23,7 +23,7 @@ class Inscription extends React.Component {
                     <label className="subtitle has-text-white" htmlFor="confirm_password">Confirm password: </label>
                     <input className="input is-link" type="password" id="confirm_password" name="confirm_password" required onChange={event => this.setState({confirmation: event.target.value})} /><br/><br/>
                     <input type="checkbox" name="remember-me" onChange={event => this.setState({remember: event.target.value})}/>
-                    <label className="subtitle has-text-white" htmlFor="password">Remember me </label>
+                    <label className="subtitle has-text-white" htmlFor="password">Remember me </label><br/>
                     <button class="button is-success" onClick={() => this.props.createAccount(this.state.username,this.state.password,this.state.confirmation,this.state.remember)}>Validate</button>
                 </div>
             </div>

@@ -24,15 +24,6 @@ public class UserClass {
 
     }
 
-    public UserClass(String username,String password,boolean token){
-        if(token){
-            setToken();
-        }
-        this.username = username;
-        this.password = password;
-
-    }
-
     public static String encrytePassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);

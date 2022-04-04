@@ -104,6 +104,7 @@ public class NewYearController {
             }
             u.setToken();
             res.add(u.getToken());
+            resolutionService.saveUser(u);
         }
         return res;
     }
