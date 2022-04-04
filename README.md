@@ -11,14 +11,14 @@ la page d'acceil indique les resolutions les plus populaires et le pourcentage d
 
 Requetes : 
 
-- ajouter resolution
-- recuperer list en fonction de l'utilisateur
-- 3 plus commune plus deux random
-- validation ou non d'un resolution
-- commit github
-- ajouter un compte
-- supprimer un compte
-- connexion
+- [ ] ajouter resolution
+- [ ] recuperer list en fonction de l'utilisateur
+- [ ] 3 plus commune plus deux random
+- [ ] validation ou non d'un resolution
+- [ ] commit github
+- [x] ajouter un compte 
+- [ ] supprimer un compte (je le fait soon)
+- [x] connexion 
  
  
 Pour moi : 
