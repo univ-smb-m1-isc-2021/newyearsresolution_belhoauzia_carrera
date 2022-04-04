@@ -75,6 +75,34 @@ public class NewYearController {
         return res;
 
     }
+    @GetMapping(value = "/api/getToken")
+    public String generateToken(@RequestParam String username){
+        List<UserClass> ul = resolutionService.userList();
+        for (int i = 0 ; i < ul.size();i++){
+            if(ul.get(i).getUsername().equals(username)){
+                ul.get(i).setToken();
+                resolutionService.saveUser(ul.get(i));
+                logger.info("token generated");
+                return ul.get(i).getToken();
+            }
+        }
+        logger.info("error during generation");
+        return null;
+    }
+    @GetMapping(value = "/api/changePassword")
+    public String changePassword(@RequestParam String username,@RequestParam String password){
+        List<UserClass> ul = resolutionService.userList();
+        for (int i = 0 ; i < ul.size();i++){
+            if(ul.get(i).getUsername().equals(username)){
+                ul.get(i).setPassword(UserClass.encrytePassword(password));
+                resolutionService.saveUser(ul.get(i));
+                logger.info("password changed");
+                return "Password have been changed";
+            }
+        }
+        logger.info("error while changing password");
+        return "Error while changing the password";
+    }
     @GetMapping(value = "/api/auto_connect")
     public String autoConnection(@RequestParam String token){
         List<UserClass> ul = resolutionService.userList();

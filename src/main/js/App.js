@@ -4,6 +4,7 @@ import Home from "./components/Home.js";
 import Inscription from "./components/Inscription.js";
 import AddResolution from "./components/AddResolution.js";
 import MyResolution from "./components/MyResolution.js";
+import Settings from "./components/Settings.js";
 import axios from 'axios';
 
 class App extends React.Component {
@@ -13,24 +14,23 @@ class App extends React.Component {
         this.state = {
             displayedTable:<Home />,
             name : "",
+            username : "",
             msg : "",
-            components : {
-                "Home": <Home />,
-                "Login": <Login login={this.login} showButton={this.showButton} addToken={this.addToken}/>,
-                "Inscription": <Inscription createAccount={this.createAccount} showButton={this.showButton} addToken={this.addToken}/>,
-                "MyResolution": <MyResolution />,
-            }
+            components : {}
         }
 
     }
     componentDidMount() {
+        this.updateSate()
         let token = this.getWithExpiry("remeberme")
         if(token != null){
             axios.get(`/api/auto_connect?token=`+token)
                 .then(res => {
                     if(res.data != null) {
                         this.setState({name: "Logged as " + res.data})
+                        this.setState({username: res.data})
                         this.showButton()
+                        this.updateSate()
                     }else{this.setState({ msg : "Something went wrong"})}
                 })
         }else{
@@ -38,7 +38,9 @@ class App extends React.Component {
                 .then(res => {
                     if(res.data.name != undefined) {
                         this.setState({name: "Logged as " + res.data.name})
+                        this.setState({username: res.data.name})
                         this.showButton()
+                        this.updateSate()
                     }else if(res.data.erreur != undefined){
                         this.setState({msg:  res.data.erreur})
                     }
@@ -54,23 +56,36 @@ class App extends React.Component {
             .then((res) => {
                 if(res.data != "null") {
                     this.setState({name: "Logged as " + res.data[0]})
+                    this.setState({username: res.data[0]})
                     this.setState({ msg : ""})
                     this.showButton(res)
+                    this.updateSate()
                     this.addToken(res.data)
                 }else{
                     this.setState({ msg : "Password or Username is wrong"})
                 }
             })
     }
-
+    updateSate = () =>{
+        this.setState({components :{
+                "Home": <Home />,
+                "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
+                "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
+                "MyResolution": <MyResolution />,
+                "Settings": <Settings setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
+            }
+        })
+    }
     createAccount = (username,password,confirmation,remember) => {
         if(password === confirmation) {
             axios.get(`/api/newUser?username=` + username + "&password=" + password+"&remember="+remember)
                 .then((res) => {
                     if (res.data != "Un utilisateur porte déjà ce nom") {
                         this.setState({name: "Logged as " + res.data[0]})
+                        this.setState({username: res.data[0]})
                         this.setState({msg: ""})
                         this.showButton(res)
+                        this.updateSate()
                         this.addToken(res.data)
                     } else {
                         this.setState({msg: res.data[0]})
@@ -91,6 +106,8 @@ class App extends React.Component {
         document.getElementById("logout").classList.remove('is-hidden')
         document.getElementById("resolution").classList.remove('is-hidden')
         document.getElementById("addResolution").classList.remove('is-hidden')
+        document.getElementById("addResolution").classList.remove('is-hidden')
+        document.getElementById("settings").classList.remove('is-hidden')
         this.showComponent('Home')
     }
     showComponent(componentName) {
@@ -114,6 +131,7 @@ class App extends React.Component {
                     <button id="addResolution" className="button m-4 is-success is-hidden" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.name}</div>
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.msg}</div>
+                    <button id="settings" className="button m-4 is-success is-hidden" onClick={() => this.showComponent('Settings')}>Settings</button>
                     <button onClick={()=>
                         axios.post(`/logout`)
                         .then(res => {
@@ -122,6 +140,7 @@ class App extends React.Component {
                             document.getElementById("logout").classList.add('is-hidden')
                             document.getElementById("resolution").classList.add('is-hidden')
                             document.getElementById("addResolution").classList.add('is-hidden')
+                            document.getElementById("settings").classList.add('is-hidden')
                             this.setState({name : "Succesfully logged out"})
                         })} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>
