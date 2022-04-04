@@ -39,6 +39,8 @@ class App extends React.Component {
                     if(res.data.name != undefined) {
                         this.setState({name: "Logged as " + res.data.name})
                         this.showButton()
+                    }else if(res.data.erreur != undefined){
+                        this.setState({msg:  res.data.erreur})
                     }
                 })
             axios.get(`/getError`)
@@ -50,7 +52,7 @@ class App extends React.Component {
     login = (username,password,remember) => {
         axios.get(`/api/login?username=`+username+"&password="+password+"&remember="+remember)
             .then((res) => {
-                if(res.data != null) {
+                if(res.data != "null") {
                     this.setState({name: "Logged as " + res.data[0]})
                     this.setState({ msg : ""})
                     this.showButton(res)

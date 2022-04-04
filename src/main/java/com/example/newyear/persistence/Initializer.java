@@ -20,7 +20,7 @@ public class Initializer {
         if (repository.findAll().isEmpty()) {
             repository.saveAndFlush(new Resolution("Test 1","c'est un test d'affichage",1,1));
             repository.saveAndFlush(new Resolution("Test 2","c'est un deuxiem test",2,7));
-            userRepository.saveAndFlush(new UserClass( "Zohir", UserClass.encrytePassword("caca")));
+            userRepository.saveAndFlush(new UserClass( "Zohir", UserClass.encrytePassword("oups"),false));
         }
     }
 }

@@ -14,11 +14,13 @@ public class UserClass {
     private int userId;
 
     private String token;
+    private Boolean isSocial;
     private String username;
     private String password;
 
-    public UserClass(String username,String password){
+    public UserClass(String username,String password,Boolean iSocial){
         this.token = null;
+        this.isSocial = iSocial;
         this.username = username;
         this.password = password;
 
@@ -36,6 +38,8 @@ public class UserClass {
     public long getId() {
         return userId;
     }
+
+    public boolean getIsSocial(){return isSocial;}
 
     public String getUsername() {
         return username;

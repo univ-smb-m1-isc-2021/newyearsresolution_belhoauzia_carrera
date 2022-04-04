@@ -30,8 +30,8 @@ public class ResolutionService {
         repository.saveAndFlush(new Resolution(title,des,nb_oc,freq));
     }
 
-    public void addUser(String username,String pass){
-        userRepository.saveAndFlush(new UserClass(username,pass));
+    public void addUser(String username,String pass,Boolean isSocial){
+        userRepository.saveAndFlush(new UserClass(username,pass,isSocial));
     }
 
     public void saveUser(UserClass u){

@@ -1,14 +1,10 @@
 package com.example.newyear.Api;
 
-import com.example.newyear.persistence.Resolution;
 import com.example.newyear.persistence.UserClass;
 import com.example.newyear.service.ResolutionService;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +50,7 @@ public class NewYearController {
                 return res;
             }
         }
-        resolutionService.addUser(username, UserClass.encrytePassword(password));
+        resolutionService.addUser(username, UserClass.encrytePassword(password),false);
         res.add(username);
         return rememberMe(username, remember, res);
     }
@@ -83,7 +79,6 @@ public class NewYearController {
     public String autoConnection(@RequestParam String token){
         List<UserClass> ul = resolutionService.userList();
         for (int i = 0 ; i < ul.size();i++){
-            System.out.println(token + " - " + ul.get(i).getToken());
             if(token.equals(ul.get(i).getToken())){
                 return ul.get(i).getUsername();
             }
