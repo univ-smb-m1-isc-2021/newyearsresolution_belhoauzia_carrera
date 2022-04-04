@@ -15,9 +15,9 @@ public class Timeline {
     private int nb_resolution;
 
     @ManyToOne
-    private User user_id;
+    private UserClass user_id;
 
-    public Timeline(Date id, int nb_resolution, User user_id) {
+    public Timeline(Date id, int nb_resolution, UserClass user_id) {
         this.id = id;
         this.nb_resolution = nb_resolution;
         this.user_id = user_id;
@@ -43,11 +43,11 @@ public class Timeline {
         this.nb_resolution = nb_resolution;
     }
 
-    public User getUser_id() {
+    public UserClass getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(User user_id) {
+    public void setUser_id(UserClass user_id) {
         this.user_id = user_id;
     }
 }

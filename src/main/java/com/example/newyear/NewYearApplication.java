@@ -16,7 +16,10 @@ public class NewYearApplication {
     public String error() {
         return new InitReact().serialize();
     }
-
+    @GetMapping("/perform_login")
+    public String login(HttpServletRequest request) {
+        return request.getParameter("name");
+    }
     @GetMapping(value = "/")
     public String renderMainPage() {
         return new InitReact().serialize();

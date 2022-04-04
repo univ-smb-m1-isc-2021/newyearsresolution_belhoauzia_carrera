@@ -26,7 +26,7 @@ public class Application extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/error", "/webjars/**","/assets/*","/service-worker.js","/api/*","/dist/*","/login/oauth2/*","/user").permitAll()
+                        .antMatchers("/", "/error","/perform_login", "/webjars/**","/assets/*","/service-worker.js","/api/*","/dist/*","/login/oauth2/*","/user").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e -> e

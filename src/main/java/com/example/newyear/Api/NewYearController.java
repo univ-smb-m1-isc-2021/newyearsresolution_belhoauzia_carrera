@@ -1,6 +1,7 @@
 package com.example.newyear.Api;
 
 import com.example.newyear.persistence.Resolution;
+import com.example.newyear.persistence.UserClass;
 import com.example.newyear.service.ResolutionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,12 @@ public class NewYearController {
     public void newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq){
         logger.info("nouvelle resolution ajouté");
         resolutionService.addResolution(title,des,nb_oc,freq);
+    }
+    @GetMapping(value = "/api/newUser")
+    @ResponseBody
+    public void newUser(@RequestParam String username,@RequestParam String password){
+        logger.info("nouvelle utilisateur ajouté");
+        resolutionService.addUser(username, UserClass.encrytePassword(password));
     }
 
 }

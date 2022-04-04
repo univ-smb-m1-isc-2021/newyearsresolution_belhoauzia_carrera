@@ -15,8 +15,7 @@
     <description>New Year</description>
     <properties>
         <java.version>11</java.version>
-        <sonar.projectKey>gjambet_chuck-facts</sonar.projectKey>
-        <sonar.organization>gjambet</sonar.organization>
+        <sonar.organization>univ-smb-m1-isc-2021</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
@@ -138,7 +137,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <environmentVariables>
-                        <!-- Default config for vanilla install of a local postgresql -->
                         <SPRING_DATASOURCE_URL>jdbc:postgresql://localhost:5432/postgres</SPRING_DATASOURCE_URL>
                         <SPRING_DATASOURCE_USERNAME>postgres</SPRING_DATASOURCE_USERNAME>
                         <SPRING_DATASOURCE_PASSWORD>password</SPRING_DATASOURCE_PASSWORD>
@@ -147,6 +145,7 @@
                     </environmentVariables>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>

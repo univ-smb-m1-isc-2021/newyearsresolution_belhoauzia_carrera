@@ -14,7 +14,7 @@ public class UserRes implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserClass user;
 
     @ManyToOne
     @JoinColumn(name = "resolution_id")
@@ -23,7 +23,7 @@ public class UserRes implements Serializable {
     private Date start_date;
     private int nb_do;
 
-    public UserRes(User user, Resolution resolution, Date start_date, int nb_do) {
+    public UserRes(UserClass user, Resolution resolution, Date start_date, int nb_do) {
         this.user = user;
         this.resolution = resolution;
         this.start_date = start_date;
@@ -42,11 +42,11 @@ public class UserRes implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    public User getUser() {
+    public UserClass getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserClass user) {
         this.user = user;
     }
 
