@@ -9,6 +9,7 @@ class Settings extends React.Component {
             password:"",
             confirmation:"",
             message:"",
+            password_delete:"",
             remember:false
         }
     }
@@ -43,10 +44,19 @@ class Settings extends React.Component {
         }
     }
 
+    deleteAccount = (password) =>{
+        axios.get(`/api/deleteAccount?username=`+this.props.name+"&password="+password)
+            .then(res => {
+                this.setState({message:res.data})
+                this.props.hideButton()
+            })
+    }
+
     render() {return (
             <div className="columns is-mobile is-centered">
                 <div className="box column field is-one-third is-centered has-text-centered">
                     <h1 className="title has-text-centered has-text-white">Settings</h1>
+                    <div id="message" className="m-2 has-text-white">{this.state.message}</div>
                     <input type="checkbox" name="remember-me" className="m-2" defaultChecked={this.state.remember} onChange={() =>this.changeBox()}/>
                     <label className="subtitle has-text-white" htmlFor="password">Remember me </label><br/>
                     <h1 className="title has-text-centered has-text-white">Change password</h1>
@@ -56,9 +66,15 @@ class Settings extends React.Component {
                     <label className="subtitle has-text-white" htmlFor="confirm_password">Confirm password: </label>
                     <input className="input is-link" type="password" id="confirm_password" name="confirm_password"
                            required onChange={event => this.setState({confirmation: event.target.value})}/><br/><br/>
-                    <div id="message" className="m-2 has-text-white">{this.state.message}</div>
                     <button className="button is-success"
                             onClick={() => this.changePassword(this.state.password, this.state.confirmation)}>Validate
+                    </button>
+                    <h1 className="title has-text-centered has-text-white">Delete Account</h1>
+                    <label className="subtitle has-text-white" htmlFor="password">Password: </label>
+                    <input className="input is-link " type="password" id="password_delete" name="password" required
+                           onChange={event => this.setState({password_delete: event.target.value})}/><br/><br/>
+                    <button className="button is-danger"
+                            onClick={() => this.deleteAccount(this.state.password_delete)}>Delete
                     </button>
                </div>
             </div>

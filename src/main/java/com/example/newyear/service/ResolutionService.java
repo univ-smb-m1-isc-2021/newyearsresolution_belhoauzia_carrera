@@ -37,4 +37,6 @@ public class ResolutionService {
     public void saveUser(UserClass u){
         userRepository.saveAndFlush(u);
     }
+
+    public void removeUser(UserClass u){userRepository.delete(u);}
 }

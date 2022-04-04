@@ -89,6 +89,24 @@ public class NewYearController {
         logger.info("error during generation");
         return null;
     }
+    @GetMapping(value = "/api/deleteAccount")
+    public String deleteAccount(@RequestParam String username,@RequestParam String password){
+        List<UserClass> ul = resolutionService.userList();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        for (int i = 0 ; i < ul.size();i++){
+            if(ul.get(i).getUsername().equals(username)){
+                if(encoder.matches(password, ul.get(i).getPassword())) {
+                    resolutionService.removeUser(ul.get(i));
+                    logger.info("account deleted");
+                    return "Account deleted";
+                }else{
+                    return "Password incorrect";
+                }
+            }
+        }
+        logger.info("error account deletion");
+        return null;
+    }
     @GetMapping(value = "/api/changePassword")
     public String changePassword(@RequestParam String username,@RequestParam String password){
         List<UserClass> ul = resolutionService.userList();

@@ -72,7 +72,7 @@ class App extends React.Component {
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "MyResolution": <MyResolution />,
-                "Settings": <Settings setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
+                "Settings": <Settings hideButton={this.hideButton}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         })
     }
@@ -110,6 +110,16 @@ class App extends React.Component {
         document.getElementById("settings").classList.remove('is-hidden')
         this.showComponent('Home')
     }
+    hideButton = ()=>{
+        document.getElementById("login").classList.remove('is-hidden')
+        document.getElementById("inscription").classList.remove('is-hidden')
+        document.getElementById("logout").classList.add('is-hidden')
+        document.getElementById("resolution").classList.add('is-hidden')
+        document.getElementById("addResolution").classList.add('is-hidden')
+        document.getElementById("settings").classList.add('is-hidden')
+        this.showComponent('Home')
+        this.setState({name : "Succesfully logged out"})
+    }
     showComponent(componentName) {
         this.setState({displayedTable: componentName});
     }
@@ -135,13 +145,7 @@ class App extends React.Component {
                     <button onClick={()=>
                         axios.post(`/logout`)
                         .then(res => {
-                            document.getElementById("login").classList.remove('is-hidden')
-                            document.getElementById("inscription").classList.remove('is-hidden')
-                            document.getElementById("logout").classList.add('is-hidden')
-                            document.getElementById("resolution").classList.add('is-hidden')
-                            document.getElementById("addResolution").classList.add('is-hidden')
-                            document.getElementById("settings").classList.add('is-hidden')
-                            this.setState({name : "Succesfully logged out"})
+                            this.hideButton()
                         })} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>
                 <div id="content m-6">
