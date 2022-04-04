@@ -31,7 +31,6 @@ public class ResolutionService {
     }
 
     public void addUser(String username,String pass){
-        System.out.println(username);
         userRepository.saveAndFlush(new UserClass(username,pass));
     }
 }

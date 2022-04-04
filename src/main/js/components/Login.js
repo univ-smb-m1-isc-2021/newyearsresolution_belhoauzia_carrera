@@ -5,7 +5,8 @@ class Login extends React.Component {
         super(props);
         this.state = {
             username : "",
-            password : ""
+            password : "",
+            remember : false
         }
     }
 
@@ -20,10 +21,10 @@ class Login extends React.Component {
                     <input class="input is-link" type="text" id="username" name="username" onChange={event => this.setState({username: event.target.value})} required /><br/><br/>
                     <label class="subtitle has-text-white" htmlFor="password">Password: </label>
                     <input class="input is-link" type="password" id="password" name="password"  onChange={event => this.setState({password: event.target.value})} required/><br/><br/>
-                    <input type="checkbox" name="remember-me" />
+                    <input type="checkbox" name="remember-me" onChange={event => this.setState({remember: event.target.value})}/>
                     <label className="subtitle has-text-white" htmlFor="password">Remember me </label>
                     <br/>
-                    <button className="button is-success" onClick={() => this.props.login(this.state.username,this.state.password)}>Log in</button>
+                    <button className="button is-success" onClick={() => this.props.login(this.state.username,this.state.password,this.state.remember)}>Log in</button>
                 </div>
             </div>
         );

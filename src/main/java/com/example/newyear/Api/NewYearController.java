@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -43,33 +44,67 @@ public class NewYearController {
     }
     @GetMapping(value = "/api/newUser")
     @ResponseBody
-    public String newUser(@RequestParam String username,@RequestParam String password){
+    public List<String> newUser(@RequestParam String username,@RequestParam String password,@RequestParam Boolean remember){
         logger.info("nouvelle utilisateur ajouté");
+        List<String> res = new ArrayList<>();
         List<UserClass> ul = resolutionService.userList();
         for (int i = 0 ; i < ul.size();i++){
             if(ul.get(i).getUsername().equals(username)){
-                return "Un utilisateur porte déjà ce nom";
+                res.add("Un utilisateur porte déjà ce nom");
+                return res;
             }
         }
         resolutionService.addUser(username, UserClass.encrytePassword(password));
-        return username;
+        res.add(username);
+        return rememberMe(username, remember, res);
     }
     @GetMapping(value = "/api/login")
-    public String login(@RequestParam String username,@RequestParam String password){
+    public List<String> login(@RequestParam String username,@RequestParam String password,@RequestParam Boolean remember){
         List<UserClass> ul = resolutionService.userList();
+        List<String> res = new ArrayList<>();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         for (int i = 0 ; i < ul.size();i++){
             if(ul.get(i).getUsername().equals(username)){
                 if(encoder.matches(password, ul.get(i).getPassword())) {
                     logger.info("login success");
-                    return ul.get(i).getUsername();
+                    res.add(ul.get(i).getUsername());
+                    return rememberMe(username, remember, res);
                 }else{
                     break;
                 }
             }
         }
         logger.info("login failed");
+        res.add("null");
+        return res;
+
+    }
+    @GetMapping(value = "/api/auto_connect")
+    public String autoConnection(@RequestParam String token){
+        List<UserClass> ul = resolutionService.userList();
+        for (int i = 0 ; i < ul.size();i++){
+            System.out.println(token + " - " + ul.get(i).getToken());
+            if(token.equals(ul.get(i).getToken())){
+                return ul.get(i).getUsername();
+            }
+        }
+        logger.info("auto connect failed");
         return "null";
 
+    }
+    private List<String> rememberMe( String username, Boolean remember, List<String> res) {
+        List<UserClass> ul;
+        if(remember){
+            UserClass u = null;
+            ul = resolutionService.userList();
+            for (int j = 0 ; j < ul.size();j++){
+                if(ul.get(j).getUsername().equals(username)){
+                    u = ul.get(j);
+                }
+            }
+            u.setToken();
+            res.add(u.getToken());
+        }
+        return res;
     }
 }

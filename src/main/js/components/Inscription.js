@@ -7,7 +7,8 @@ class Inscription extends React.Component {
         this.state = {
             username : "",
             password : "",
-            confirmation : ""
+            confirmation : "",
+            remember:false
         }
     }
     render() {
@@ -21,7 +22,9 @@ class Inscription extends React.Component {
                     <input class="input is-link " type="password" id="password" name="password" required onChange={event => this.setState({password: event.target.value})} /><br/><br/>
                     <label className="subtitle has-text-white" htmlFor="confirm_password">Confirm password: </label>
                     <input className="input is-link" type="password" id="confirm_password" name="confirm_password" required onChange={event => this.setState({confirmation: event.target.value})} /><br/><br/>
-                    <button class="button is-success" onClick={() => this.props.createAccount(this.state.username,this.state.password,this.state.confirmation)}>Validate</button>
+                    <input type="checkbox" name="remember-me" onChange={event => this.setState({remember: event.target.value})}/>
+                    <label className="subtitle has-text-white" htmlFor="password">Remember me </label>
+                    <button class="button is-success" onClick={() => this.props.createAccount(this.state.username,this.state.password,this.state.confirmation,this.state.remember)}>Validate</button>
                 </div>
             </div>
         );

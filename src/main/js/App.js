@@ -16,56 +16,73 @@ class App extends React.Component {
             msg : "",
             components : {
                 "Home": <Home />,
-                "Login": <Login login={this.login} showButton={this.showButton} />,
-                "Inscription": <Inscription createAccount={this.createAccount} showButton={this.showButton}/>,
+                "Login": <Login login={this.login} showButton={this.showButton} addToken={this.addToken}/>,
+                "Inscription": <Inscription createAccount={this.createAccount} showButton={this.showButton} addToken={this.addToken}/>,
                 "MyResolution": <MyResolution />,
             }
         }
 
     }
     componentDidMount() {
-        axios.get(`/user`)
-            .then(res => {
-                if(res.data.name != undefined) {
-                    this.setState({name: "Logged as " + res.data.name})
-                    this.showButton()
-                }
-            })
-        axios.get(`/getError`)
-            .then(res => {
-                this.setState({ msg : res.data})
-            })
+        let token = this.getWithExpiry("remeberme")
+        if(token != null){
+            axios.get(`/api/auto_connect?token=`+token)
+                .then(res => {
+                    if(res.data != null) {
+                        this.setState({name: "Logged as " + res.data})
+                        this.showButton()
+                    }else{this.setState({ msg : "Something went wrong"})}
+                })
+        }else{
+            axios.get(`/user`)
+                .then(res => {
+                    if(res.data.name != undefined) {
+                        this.setState({name: "Logged as " + res.data.name})
+                        this.showButton()
+                    }
+                })
+            axios.get(`/getError`)
+                .then(res => {
+                    this.setState({ msg : res.data})
+                })
+        }
     }
-    login = (username,password) => {
-        axios.get(`/api/login?username=`+username+"&password="+password)
+    login = (username,password,remember) => {
+        axios.get(`/api/login?username=`+username+"&password="+password+"&remember="+remember)
             .then((res) => {
                 if(res.data != null) {
-                    this.setState({name: "Logged as " + res.data})
+                    this.setState({name: "Logged as " + res.data[0]})
                     this.setState({ msg : ""})
                     this.showButton(res)
+                    this.addToken(res.data)
                 }else{
-                    this.setState({ msg : "failed to connect"})
+                    this.setState({ msg : "Password or Username is wrong"})
                 }
             })
     }
 
-    createAccount = (username,password,confirmation) => {
+    createAccount = (username,password,confirmation,remember) => {
         if(password === confirmation) {
-            axios.get(`/api/newUser?username=` + username + "&password=" + password)
+            axios.get(`/api/newUser?username=` + username + "&password=" + password+"&remember="+remember)
                 .then((res) => {
                     if (res.data != "Un utilisateur porte déjà ce nom") {
-                        this.setState({name: "Logged as " + res.data})
+                        this.setState({name: "Logged as " + res.data[0]})
                         this.setState({msg: ""})
                         this.showButton(res)
+                        this.addToken(res.data)
                     } else {
-                        this.setState({msg: res.data})
+                        this.setState({msg: res.data[0]})
                     }
                 })
         }else{
             this.setState({msg: "password are different"})
         }
     }
-
+    addToken = (data) =>{
+        if(data.length > 1){
+            this.setWithExpiry("remeberme",data[1],1209600000)
+        }
+    }
     showButton = ()=>{
         document.getElementById("login").classList.add('is-hidden')
         document.getElementById("inscription").classList.add('is-hidden')
@@ -112,6 +129,34 @@ class App extends React.Component {
                 </div>
             </div>
         );
+    }
+    setWithExpiry = (key, value, ttl) => {
+        const now = new Date()
+
+        // `item` is an object which contains the original value
+        // as well as the time when it's supposed to expire
+        const item = {
+            value: value,
+            expiry: now.getTime() + ttl,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+    }
+    getWithExpiry = (key) => {
+        const itemStr = localStorage.getItem(key)
+        // if the item doesn't exist, return null
+        if (!itemStr) {
+            return null
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+        // compare the expiry time of the item with the current time
+        if (now.getTime() > item.expiry) {
+            // If the item is expired, delete the item from storage
+            // and return null
+            localStorage.removeItem(key)
+            return null
+        }
+        return item.value
     }
 }
 export default App;
