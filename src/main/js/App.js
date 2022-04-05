@@ -22,7 +22,7 @@ class App extends React.Component {
     }
     componentDidMount() {
         this.updateSate()
-        let token = this.getWithExpiry("remeberme")
+        let token = this.getWithExpiry("rememberme")
         if(token != null){
             axios.get(`/api/auto_connect?token=`+token)
                 .then(res => {
@@ -97,7 +97,7 @@ class App extends React.Component {
     }
     addToken = (data) =>{
         if(data.length > 1){
-            this.setWithExpiry("remeberme",data[1],1209600000)
+            this.setWithExpiry("rememberme",data[1],1209600000)
         }
     }
     showButton = ()=>{

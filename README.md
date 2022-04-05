@@ -17,7 +17,7 @@ Requetes :
 - [ ] validation ou non d'un resolution
 - [ ] commit github
 - [x] ajouter un compte 
-- [ ] supprimer un compte (je le fait soon)
+- [x] supprimer un compte (je le fait soon)
 - [x] connexion 
  
  

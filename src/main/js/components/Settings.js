@@ -14,7 +14,7 @@ class Settings extends React.Component {
         }
     }
     componentDidMount() {
-        let token = this.props.getWithExpiry("remeberme")
+        let token = this.props.getWithExpiry("rememberme")
         if(token != null) {
             this.setState({remember:true})
         }
@@ -23,13 +23,13 @@ class Settings extends React.Component {
 
     changeBox = () =>{
         this.setState({remember: !this.state.remember})
-        if(this.state.remember){
+        if(!this.state.remember){
             axios.get(`/api/getToken?username=`+this.props.name)
                 .then(res => {
-                    this.props.setWithExpiry("remeberme",res.data,1209600000)
+                    this.props.setWithExpiry("rememberme",res.data,1209600000)
                 })
         }else{
-            localStorage.removeItem("remeberme")
+            localStorage.removeItem("rememberme")
         }
     }
 
@@ -57,10 +57,10 @@ class Settings extends React.Component {
                 <div className="box column field is-one-third is-centered has-text-centered">
                     <h1 className="title has-text-centered has-text-white">Settings</h1>
                     <div id="message" className="m-2 has-text-white">{this.state.message}</div>
-                    <input type="checkbox" name="remember-me" className="m-2" defaultChecked={this.state.remember} onChange={() =>this.changeBox()}/>
+                    <input type="checkbox" name="remember-me" className="m-2" checked={this.state.remember} onChange={() =>this.changeBox()}/>
                     <label className="subtitle has-text-white" htmlFor="password">Remember me </label><br/>
                     <h1 className="title has-text-centered has-text-white">Change password</h1>
-                    <label className="subtitle has-text-white" htmlFor="password">Password: </label>
+                    <label className="subtitle has-text-white" htmlFor="password">New password: </label>
                     <input className="input is-link " type="password" id="password" name="password" required
                            onChange={event => this.setState({password: event.target.value})}/><br/><br/>
                     <label className="subtitle has-text-white" htmlFor="confirm_password">Confirm password: </label>
