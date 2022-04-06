@@ -58,6 +58,16 @@ public class ResolutionService {
         return res;
     }
 
+    public boolean haveResolution(String username,int id){
+        UserClass u = userRepository.findByUsername(username);
+        Resolution r = repository.findById(id);
+        UserRes res = userResRepository.findByResolution(r);
+        if(res != null){
+            return res.getUser().getId() == u.getId();
+        }
+        return false;
+    }
+
     public void addUser(String username,String pass,Boolean isSocial){
         userRepository.saveAndFlush(new UserClass(username,pass,isSocial));
     }

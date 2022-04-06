@@ -43,6 +43,17 @@ public class NewYearController {
         }
     }
 
+    @GetMapping(value = "/api/addResolutionToUser")
+    @ResponseBody
+    public String addResolutionToUser(@RequestParam String username,@RequestParam int id){
+        if(resolutionService.haveResolution(username,id)){
+            return "You already have this resolution";
+        }else {
+            resolutionService.addResolutionToUser(id,username);
+            return "Resolution added succesfully";
+        }
+    }
+
     @GetMapping(value = "/api/newResolution")
     @ResponseBody
     public String newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq,@RequestParam String username){

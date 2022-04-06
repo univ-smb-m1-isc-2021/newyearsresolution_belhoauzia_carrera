@@ -17,13 +17,15 @@ class MyResolution extends React.Component {
     fetchResolution(){
         axios.get(`/api/myResolution?username=`+this.props.username)
             .then(res => {
-                this.setState({resolutions :{"resolutions":res.data }})
+                if(res.data.length != 0) {
+                    this.setState({resolutions: {"resolutions": res.data}})
+                }else{this.setState({message :"You don't have any resolutions :("})}
             }).catch(res =>{
             this.setState({message :"You don't have any resolutions :("})
         })
     }
     createResolution =  (resolution) => {
-        return <Resolution resolution={resolution} key={resolution}/>;
+        return <Resolution username={this.props.username} showButton={false} resolution={resolution} key={resolution}/>;
     }
     createResolutions =  (resolutions) => {
         return resolutions.map(this.createResolution);

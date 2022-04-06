@@ -69,7 +69,7 @@ class App extends React.Component {
     }
     updateSate = () =>{
         this.setState({components :{
-                "Home": <Home />,
+                "Home": <Home username={this.state.username} />,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "MyResolution": <MyResolution username={this.state.username}/>,
