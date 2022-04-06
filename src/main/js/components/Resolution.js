@@ -9,7 +9,7 @@ class Resolution extends React.Component {
             <div class="columns mt-1 is-centered">
                 <div class="box has-text-centered is-one-third">
                     <h1 class="title has-text-white">Resolution</h1>
-                    <div className="subtitle has-text-white">{this.props.resolution}</div>
+                    <div className="subtitle has-text-white">{this.props.resolution.title}</div>
                 </div>
             </div>
         );

@@ -27,9 +27,9 @@ public class NewYearController {
     }
 
     @GetMapping(value = "/api/AllResolutions")
-    public List<String> title(){
+    public List<Resolution> title(){
         logger.info("Service Resolutions");
-        return resolutionService.resolutionList().stream().map(p ->p.getTitle()).collect(toList());
+        return resolutionService.resolutionList().stream().collect(toList());
 
     }
 
