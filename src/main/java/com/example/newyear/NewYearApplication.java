@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class NewYearApplication {
@@ -54,7 +55,7 @@ public class NewYearApplication {
                 }
             }
             if(!user_exist){
-                resolutionService.addUser(name,"",true);
+                resolutionService.addUser(name, UUID.randomUUID().toString(),true);
             }
             return Collections.singletonMap("name", name);
         }else{

@@ -49,13 +49,14 @@ class Settings extends React.Component {
             .then(res => {
                 this.setState({message:res.data})
                 this.props.hideButton()
+                localStorage.removeItem("rememberme")
             })
     }
 
     render() {return (
             <div className="columns is-mobile is-centered">
                 <div className="box column field is-one-third is-centered has-text-centered">
-                    <h1 className="title has-text-centered has-text-white">Settings</h1>
+                    <h1 className="title mt-2 has-text-centered has-text-white">Settings</h1>
                     <div id="message" className="m-2 has-text-white">{this.state.message}</div>
                     <input type="checkbox" name="remember-me" className="m-2" checked={this.state.remember} onChange={() =>this.changeBox()}/>
                     <label className="subtitle has-text-white" htmlFor="password">Remember me </label><br/>
@@ -69,7 +70,8 @@ class Settings extends React.Component {
                     <button className="button is-success"
                             onClick={() => this.changePassword(this.state.password, this.state.confirmation)}>Validate
                     </button>
-                    <h1 className="title has-text-centered has-text-white">Delete Account</h1>
+                    <h1 className="title m-2 has-text-centered has-text-white">Delete Account</h1>
+                    <div className="subtitle m-2 has-text-white">(If social login please change your password fisrt)</div>
                     <label className="subtitle has-text-white" htmlFor="password">Password: </label>
                     <input className="input is-link " type="password" id="password_delete" name="password" required
                            onChange={event => this.setState({password_delete: event.target.value})}/><br/><br/>

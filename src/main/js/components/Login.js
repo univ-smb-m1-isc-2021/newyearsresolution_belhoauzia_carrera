@@ -17,6 +17,7 @@ class Login extends React.Component {
                     <h1 class="title has-text-centered has-text-white">Connexion</h1>
                     <div className="subtitle has-text-white">With GitHub: <a href="/oauth2/authorization/github">click here</a></div>
                     <div className="subtitle has-text-white">With Google: <a href="/oauth2/authorization/google">click here</a></div>
+                    <div className="subtitle has-text-white">With Facebook: <a href="/oauth2/authorization/facebook">click here</a></div>
                     <label class="subtitle has-text-white" htmlFor="name">Name: </label>
                     <input class="input is-link" type="text" id="username" name="username" onChange={event => this.setState({username: event.target.value})} required /><br/><br/>
                     <label class="subtitle has-text-white" htmlFor="password">Password: </label>
