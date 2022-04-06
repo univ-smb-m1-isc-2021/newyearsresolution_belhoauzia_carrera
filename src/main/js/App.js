@@ -112,14 +112,24 @@ class App extends React.Component {
         this.showComponent('Home')
     }
     hideButton = ()=>{
-        document.getElementById("login").classList.remove('is-hidden')
-        document.getElementById("inscription").classList.remove('is-hidden')
-        document.getElementById("logout").classList.add('is-hidden')
-        document.getElementById("resolution").classList.add('is-hidden')
-        document.getElementById("addResolution").classList.add('is-hidden')
-        document.getElementById("settings").classList.add('is-hidden')
-        this.showComponent('Home')
-        this.setState({name : "Succesfully logged out"})
+        this.setState({components :{
+                "Home": <Home username={this.state.username} />,
+                "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
+                "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
+                "MyResolution": <MyResolution username={this.state.username}/>,
+                "Settings": <Settings hideButton={this.hideButton}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
+            }
+        },()=>{
+            document.getElementById("login").classList.remove('is-hidden')
+            document.getElementById("inscription").classList.remove('is-hidden')
+            document.getElementById("logout").classList.add('is-hidden')
+            document.getElementById("resolution").classList.add('is-hidden')
+            document.getElementById("addResolution").classList.add('is-hidden')
+            document.getElementById("settings").classList.add('is-hidden')
+            this.showComponent('Home')
+            this.setState({name : "Succesfully logged out"})
+        })
+
     }
     showComponent(componentName) {
         this.setState({displayedTable: componentName});
@@ -127,7 +137,13 @@ class App extends React.Component {
     componentWillMount(){
         this.showComponent('Home')
     }
-
+    logout(){
+        axios.post(`/logout`)
+            .then(res => {
+                this.setState({username:""},this.hideButton)
+                localStorage.removeItem("rememberme")
+            })
+    }
     render() {
         return (
             <div>
@@ -143,13 +159,7 @@ class App extends React.Component {
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.name}</div>
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.msg}</div>
                     <button id="settings" className="button m-4 is-success is-hidden" onClick={() => this.showComponent('Settings')}>Settings</button>
-                    <button onClick={()=>
-                        axios.post(`/logout`)
-                        .then(res => {
-                            this.setState({username:""})
-                            localStorage.removeItem("rememberme")
-                            this.hideButton()
-                        })} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
+                    <button onClick={()=>this.logout() } className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>
                 <div id="content">
                     {this.state.components[this.state.displayedTable]}

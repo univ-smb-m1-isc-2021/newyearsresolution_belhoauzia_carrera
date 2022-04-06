@@ -11,6 +11,7 @@ class Resolution extends React.Component {
         }
     }
     componentDidMount() {
+        console.log("Blaze:" + this.props.username)
         if(!this.props.showButton) {
             axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.id)
                 .then(res => {
