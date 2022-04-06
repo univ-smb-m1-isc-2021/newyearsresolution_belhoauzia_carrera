@@ -33,6 +33,12 @@ public class ResolutionService {
         userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis()),0));
     }
 
+    public void addResolutionToUser(int id,String username){
+        Resolution r = repository.findById(id);
+        UserClass u = userRepository.findByUsername(username);
+        userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis()),0));
+    }
+
     public void addUser(String username,String pass,Boolean isSocial){
         userRepository.saveAndFlush(new UserClass(username,pass,isSocial));
     }
