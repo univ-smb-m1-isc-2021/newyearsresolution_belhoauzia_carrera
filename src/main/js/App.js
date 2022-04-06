@@ -152,7 +152,7 @@ class App extends React.Component {
                 </div>
                 <div id="content">
                     {this.state.components[this.state.displayedTable]}
-                    <AddResolution/>
+                    <AddResolution username={this.state.username}/>
                 </div>
                 <Footer/>
             </div>
