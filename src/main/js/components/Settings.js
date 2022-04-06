@@ -48,8 +48,10 @@ class Settings extends React.Component {
         axios.get(`/api/deleteAccount?username=`+this.props.name+"&password="+password)
             .then(res => {
                 this.setState({message:res.data})
-                this.props.hideButton()
-                localStorage.removeItem("rememberme")
+                if(res.data == "Account deleted") {
+                    this.props.hideButton()
+                    localStorage.removeItem("rememberme")
+                }
             })
     }
 
