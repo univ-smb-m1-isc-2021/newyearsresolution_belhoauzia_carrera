@@ -146,6 +146,7 @@ class App extends React.Component {
                     <button onClick={()=>
                         axios.post(`/logout`)
                         .then(res => {
+                            this.setState({username:""})
                             localStorage.removeItem("rememberme")
                             this.hideButton()
                         })} className="button m-4 is-danger is-hidden" id="logout">Logout</button>

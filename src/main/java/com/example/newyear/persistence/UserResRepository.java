@@ -6,5 +6,6 @@ import java.util.ArrayList;
 
 public interface UserResRepository extends JpaRepository<UserRes, Long> {
     ArrayList<UserRes> findByUser(UserClass u);
-    UserRes findByResolution(Resolution r);
+    ArrayList<UserRes> findByResolution(Resolution r);
+    UserRes findByResolutionAndUser(Resolution r,UserClass u);
 }

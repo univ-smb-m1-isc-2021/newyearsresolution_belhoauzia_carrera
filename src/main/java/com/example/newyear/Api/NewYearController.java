@@ -1,7 +1,9 @@
 package com.example.newyear.Api;
 
+import com.example.newyear.persistence.InfoResolution;
 import com.example.newyear.persistence.Resolution;
 import com.example.newyear.persistence.UserClass;
+import com.example.newyear.persistence.UserRes;
 import com.example.newyear.service.ResolutionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +54,13 @@ public class NewYearController {
             resolutionService.addResolutionToUser(id,username);
             return "Resolution added succesfully";
         }
+    }
+
+    @GetMapping(value = "/api/getUserRes")
+    @ResponseBody
+    public InfoResolution getUserRes(@RequestParam String username, @RequestParam int id){
+        UserRes r = resolutionService.getUserRes(username,id);
+        return new InfoResolution(r.getStart_date(),r.getNb_do(),"yyyy-MM-dd");
     }
 
     @GetMapping(value = "/api/newResolution")

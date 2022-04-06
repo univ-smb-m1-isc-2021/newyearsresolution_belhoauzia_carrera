@@ -58,12 +58,22 @@ public class ResolutionService {
         return res;
     }
 
+    public UserRes getUserRes(String username,int id){
+        UserClass u = userRepository.findByUsername(username);
+        Resolution r = repository.findById(id);
+        return userResRepository.findByResolutionAndUser(r,u);
+    }
+
     public boolean haveResolution(String username,int id){
         UserClass u = userRepository.findByUsername(username);
         Resolution r = repository.findById(id);
-        UserRes res = userResRepository.findByResolution(r);
+        ArrayList<UserRes> res = userResRepository.findByResolution(r);
         if(res != null){
-            return res.getUser().getId() == u.getId();
+            for(int i = 0 ; i < res.size();i++){
+                if(res.get(i).getUser().getId() == u.getId()){
+                    return true;
+                }
+            }
         }
         return false;
     }
