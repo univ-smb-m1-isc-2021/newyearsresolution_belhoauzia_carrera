@@ -34,10 +34,10 @@ public class NewYearController {
     }
 
     @GetMapping(value = "/api/myResolution")
-    public List<String> myResolution(@RequestParam String username){
+    public List<Resolution> myResolution(@RequestParam String username){
         List<Resolution> l = resolutionService.myResolution(username);
         if(l.size()>0) {
-            return l.stream().map(p -> p.getTitle()).collect(toList());
+            return l.stream().collect(toList());
         }else{
             return new ArrayList<>();
         }

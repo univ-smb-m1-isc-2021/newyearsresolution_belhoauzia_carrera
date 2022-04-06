@@ -3,10 +3,7 @@ package com.example.newyear.service;
 import com.example.newyear.persistence.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ResolutionService {
@@ -46,11 +43,16 @@ public class ResolutionService {
         List<UserRes> ur = userResRepository.findByUser(u);
         List<Resolution> res = new ArrayList<>();
         for(int i = 0 ; i < ur.size() ; i++){
-            Long id = ur.get(i).getId();
-            Optional<Resolution> r = repository.findById(id);
-            if(r.get() != null){
-                System.out.println(r.get().getTitle());
-                res.add(r.get());
+            Long id = ur.get(i).getResId();
+            Optional<Resolution> re = repository.findById(id);
+            Resolution r=null;
+            try{
+                r = re.get();
+            }catch(NoSuchElementException e){
+                System.out.println(e);
+            }
+            if(r != null){
+                res.add(r);
             }
         }
         return res;

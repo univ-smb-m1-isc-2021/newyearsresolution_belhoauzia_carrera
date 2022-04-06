@@ -38,6 +38,9 @@ public class UserRes implements Serializable {
     public Long getId() {
         return id;
     }
+    public Long getResId() {
+        return resolution.getId();
+    }
 
     public void setId(Long id) {
         this.id = id;
