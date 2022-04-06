@@ -63,6 +63,13 @@ public class NewYearController {
         return new InfoResolution(r.getStart_date(),r.getNb_do(),"yyyy-MM-dd");
     }
 
+    @GetMapping(value = "/api/done")
+    @ResponseBody
+    public InfoResolution done(@RequestParam String username, @RequestParam int id){
+        UserRes r = resolutionService.setUserRes(username,id,1);
+        return new InfoResolution(r.getStart_date(),r.getNb_do(),"yyyy-MM-dd");
+    }
+
     @GetMapping(value = "/api/newResolution")
     @ResponseBody
     public String newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq,@RequestParam String username){

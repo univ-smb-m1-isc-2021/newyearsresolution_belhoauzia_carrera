@@ -64,6 +64,13 @@ public class ResolutionService {
         return userResRepository.findByResolutionAndUser(r,u);
     }
 
+    public UserRes setUserRes(String username,int id,int nb_do){
+        UserRes u = getUserRes(username,id);
+        u.setNb_do(u.getNb_do() + nb_do);
+        userResRepository.saveAndFlush(u);
+        return u;
+    }
+
     public boolean haveResolution(String username,int id){
         UserClass u = userRepository.findByUsername(username);
         Resolution r = repository.findById(id);
