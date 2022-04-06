@@ -5,6 +5,7 @@ import Inscription from "./components/Inscription.js";
 import AddResolution from "./components/AddResolution.js";
 import MyResolution from "./components/MyResolution.js";
 import Settings from "./components/Settings.js";
+import Footer from "./components/Footer";
 import axios from 'axios';
 
 class App extends React.Component {
@@ -149,10 +150,11 @@ class App extends React.Component {
                             this.hideButton()
                         })} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>
-                <div id="content m-6">
+                <div id="content">
                     {this.state.components[this.state.displayedTable]}
                     <AddResolution/>
                 </div>
+                <Footer/>
             </div>
         );
     }
