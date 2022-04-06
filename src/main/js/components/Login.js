@@ -15,9 +15,29 @@ class Login extends React.Component {
             <div class="columns is-mobile is-centered">
                 <div class="column box field is-one-third is-centered has-text-centered">
                     <h1 class="title has-text-centered has-text-white">Connexion</h1>
-                    <div className="subtitle has-text-white">With GitHub: <a href="/oauth2/authorization/github">click here</a></div>
-                    <div className="subtitle has-text-white">With Google: <a href="/oauth2/authorization/google">click here</a></div>
-                    <div className="subtitle has-text-white">With Facebook: <a href="/oauth2/authorization/facebook">click here</a></div>
+                    <div className="columns is-centered">
+                        <div className="column has-text-centered">
+                            <a href="/oauth2/authorization/github">
+                                <figure className="image is-inline-block is-48x48">
+                                    <img className="is-rounded" src="./assets/github.png"/>
+                                </figure>
+                            </a>
+                        </div>
+                        <div className="column has-text-centered">
+                            <a href="/oauth2/authorization/google">
+                                <figure className="image is-inline-block is-48x48">
+                                    <img className="is-rounded" src="./assets/google.png"/>
+                                </figure>
+                            </a>
+                        </div>
+                        <div className="column has-text-centered">
+                            <a href="/oauth2/authorization/facebook">
+                                <figure className="image is-inline-block is-48x48">
+                                    <img className="is-rounded" src="./assets/facebook.png"/>
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
                     <label class="subtitle has-text-white" htmlFor="name">Name: </label>
                     <input class="input is-link" type="text" id="username" name="username" onChange={event => this.setState({username: event.target.value})} required /><br/><br/>
                     <label class="subtitle has-text-white" htmlFor="password">Password: </label>

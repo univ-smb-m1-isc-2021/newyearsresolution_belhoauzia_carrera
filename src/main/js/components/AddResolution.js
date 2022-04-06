@@ -10,7 +10,7 @@ class AddResolution extends React.Component {
                 <div className="modal-content">
                     <div class="box">
                         <h1 className="title has-text-centered has-text-white">Add a new resolution</h1>
-                        <div id="form" class="box has-text-centered">
+                        <div id="form" class="has-text-centered">
                             <label className="subtitle has-text-white" htmlFor="name">Name: </label>
                             <input className="input is-link" type="text" id="name" name="name" required/><br/><br/>
                             <label className="subtitle has-text-white" htmlFor="description">Description: </label>
