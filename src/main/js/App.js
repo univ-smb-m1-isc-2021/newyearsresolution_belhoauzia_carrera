@@ -72,7 +72,7 @@ class App extends React.Component {
                 "Home": <Home />,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
-                "MyResolution": <MyResolution />,
+                "MyResolution": <MyResolution username={this.state.username}/>,
                 "Settings": <Settings hideButton={this.hideButton}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         })

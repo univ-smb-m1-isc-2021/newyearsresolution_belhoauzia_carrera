@@ -3,8 +3,10 @@ package com.example.newyear.service;
 import com.example.newyear.persistence.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResolutionService {
@@ -37,6 +39,21 @@ public class ResolutionService {
         Resolution r = repository.findById(id);
         UserClass u = userRepository.findByUsername(username);
         userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis()),0));
+    }
+
+    public List<Resolution> myResolution(String username){
+        UserClass u = userRepository.findByUsername(username);
+        List<UserRes> ur = userResRepository.findByUser(u);
+        List<Resolution> res = new ArrayList<>();
+        for(int i = 0 ; i < ur.size() ; i++){
+            Long id = ur.get(i).getId();
+            Optional<Resolution> r = repository.findById(id);
+            if(r.get() != null){
+                System.out.println(r.get().getTitle());
+                res.add(r.get());
+            }
+        }
+        return res;
     }
 
     public void addUser(String username,String pass,Boolean isSocial){

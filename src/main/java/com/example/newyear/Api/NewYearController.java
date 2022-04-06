@@ -1,5 +1,6 @@
 package com.example.newyear.Api;
 
+import com.example.newyear.persistence.Resolution;
 import com.example.newyear.persistence.UserClass;
 import com.example.newyear.service.ResolutionService;
 import org.slf4j.Logger;
@@ -30,6 +31,16 @@ public class NewYearController {
         logger.info("Service Resolutions");
         return resolutionService.resolutionList().stream().map(p ->p.getTitle()).collect(toList());
 
+    }
+
+    @GetMapping(value = "/api/myResolution")
+    public List<String> myResolution(@RequestParam String username){
+        List<Resolution> l = resolutionService.myResolution(username);
+        if(l.size()>0) {
+            return l.stream().map(p -> p.getTitle()).collect(toList());
+        }else{
+            return new ArrayList<>();
+        }
     }
 
     @GetMapping(value = "/api/newResolution")
