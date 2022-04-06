@@ -12,7 +12,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div class="columns is-mobile is-centered">
+            <div class="columns mt-1 is-mobile is-centered">
                 <div class="column box field is-one-third is-centered has-text-centered">
                     <h1 class="title has-text-centered has-text-white">Connexion</h1>
                     <div className="columns is-centered">
