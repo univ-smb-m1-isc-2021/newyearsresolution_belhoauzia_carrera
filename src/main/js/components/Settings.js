@@ -49,7 +49,7 @@ class Settings extends React.Component {
             .then(res => {
                 this.setState({message:res.data})
                 if(res.data == "Account deleted") {
-                    this.props.hideButton()
+                    this.props.resetHome()
                     localStorage.removeItem("rememberme")
                 }
             })
@@ -77,9 +77,7 @@ class Settings extends React.Component {
                     <label className="subtitle has-text-white" htmlFor="password">Password: </label>
                     <input className="input is-link " type="password" id="password_delete" name="password" required
                            onChange={event => this.setState({password_delete: event.target.value})}/><br/><br/>
-                    <button className="button is-danger"
-                            onClick={() => this.deleteAccount(this.state.password_delete)}>Delete
-                    </button>
+                    <button className="button is-danger" onClick={() => this.deleteAccount(this.state.password_delete)}>Delete</button>
                </div>
             </div>
         );

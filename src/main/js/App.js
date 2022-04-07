@@ -73,7 +73,7 @@ class App extends React.Component {
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "MyResolution": <MyResolution username={this.state.username}/>,
-                "Settings": <Settings hideButton={this.hideButton}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
+                "Settings": <Settings resetHome={this.resetHome}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         })
     }
@@ -117,7 +117,7 @@ class App extends React.Component {
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "MyResolution": <MyResolution username={this.state.username}/>,
-                "Settings": <Settings hideButton={this.hideButton}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
+                "Settings": <Settings resetHome={this.resetHome}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         },()=>{
             document.getElementById("login").classList.remove('is-hidden')
@@ -137,10 +137,13 @@ class App extends React.Component {
     componentWillMount(){
         this.showComponent('Home')
     }
+    resetHome = () =>{
+        this.setState({username:""},this.hideButton)
+    }
     logout(){
         axios.post(`/logout`)
             .then(res => {
-                this.setState({username:""},this.hideButton)
+                this.resetHome()
                 localStorage.removeItem("rememberme")
             })
     }

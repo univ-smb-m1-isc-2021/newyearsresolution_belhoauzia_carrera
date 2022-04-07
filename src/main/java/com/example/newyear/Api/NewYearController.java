@@ -138,6 +138,10 @@ public class NewYearController {
         for (int i = 0 ; i < ul.size();i++){
             if(ul.get(i).getUsername().equals(username)){
                 if(encoder.matches(password, ul.get(i).getPassword())) {
+                    ArrayList<UserRes> lur = (ArrayList<UserRes>) resolutionService.getUserResList(ul.get(i));
+                    for(int j = 0 ; j < lur.size();j++){
+                        resolutionService.removeUserRes(lur.get(j));
+                    }
                     resolutionService.removeUser(ul.get(i));
                     logger.info("account deleted");
                     return "Account deleted";

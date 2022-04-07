@@ -64,6 +64,12 @@ public class ResolutionService {
         return userResRepository.findByResolutionAndUser(r,u);
     }
 
+    public List<UserRes> getUserResList(UserClass u){
+        return userResRepository.findByUser(u);
+    }
+
+    public void removeUserRes(UserRes u){userResRepository.delete(u);}
+
     public UserRes setUserRes(String username,int id,int nb_do){
         UserRes u = getUserRes(username,id);
         u.setNb_do(u.getNb_do() + nb_do);
