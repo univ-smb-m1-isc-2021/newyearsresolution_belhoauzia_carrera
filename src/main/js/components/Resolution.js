@@ -22,6 +22,17 @@ class Resolution extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        if(!this.props.showButton) {
+            axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.id)
+                .then(res => {
+                    if (res.data != null) {
+                        this.setState({date: res.data.start_date, nb_do: res.data.liste})
+                    }
+                })
+        }
+    }
+
     addResolution(id){
         axios.get(`/api/addResolutionToUser?username=`+this.props.username+"&id="+id)
             .then(res => {
@@ -44,7 +55,11 @@ class Resolution extends React.Component {
         return <ResolutionDo nb_do={nb_do} key={nb_do}/>;
     }
     createNbDos =  (nb_do) => {
-        return nb_do.map(this.createNbDo);
+        if(nb_do.length > 0) {
+            return nb_do.map(this.createNbDo);
+        }else{
+            return <div className="subtitle has-text-white">No action done</div>
+        }
     }
     render() {
         return (

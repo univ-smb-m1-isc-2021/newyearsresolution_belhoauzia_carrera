@@ -37,13 +37,13 @@ class AddResolution extends React.Component {
                         <div className="subtitle has-text-centered has-text-danger">{this.state.erreur}</div>
                         <div id="form" class="has-text-centered">
                             <label className="subtitle has-text-white" htmlFor="name">Name: </label>
-                            <input className="input is-link" type="text" id="name" name="name" required onChange={event => this.setState({title: event.target.value})}/><br/><br/>
+                            <input className="input is-link" type="text" id="name" name="name" required value={this.state.title} onChange={event => this.setState({title: event.target.value})}/><br/><br/>
                             <label className="subtitle has-text-white" htmlFor="description">Description: </label>
-                            <textarea  className="input is-link" type="text" id="description" name="description" required onChange={event => this.setState({des: event.target.value})}></textarea><br/><br/>
+                            <textarea  className="input is-link" type="text" id="description" name="description" required value={this.state.des} onChange={event => this.setState({des: event.target.value})}></textarea><br/><br/>
                             <label className="subtitle has-text-white" htmlFor="nb_oc">Number of occurrences: </label>
-                            <input className="input is-link" type="number"  name="nb_oc" required onChange={event => this.setState({nb_oc: event.target.value})}/><br/><br/>
+                            <input className="input is-link" type="number"  name="nb_oc" required value={this.state.nb_oc} onChange={event => this.setState({nb_oc: event.target.value})}/><br/><br/>
                             <label className="subtitle has-text-white" htmlFor="freq">Frequency: </label>
-                            <input className="input is-link" type="number"  name="freq" required onChange={event => this.setState({freq: event.target.value})}/><br/><br/>
+                            <input className="input is-link" type="number"  name="freq" required value={this.state.freq} onChange={event => this.setState({freq: event.target.value})}/><br/><br/>
                             <button className="button is-success" onClick={() => this.addResolution(this.state.title,this.state.des,this.state.nb_oc,this.state.freq)}>Add resolution</button>
                         </div>
                     </div>

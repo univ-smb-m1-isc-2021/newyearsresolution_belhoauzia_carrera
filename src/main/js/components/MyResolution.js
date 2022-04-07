@@ -23,9 +23,7 @@ class MyResolution extends React.Component {
                 if(res.data.length != 0) {
                     this.setState({resolutions: {"resolutions": res.data}})
                 }else{this.setState({message :"You don't have any resolutions :("})}
-            }).catch(res =>{
-            this.setState({message :"You don't have any resolutions :("})
-        })
+            })
     }
     createResolution =  (resolution) => {
         return <Resolution username={this.props.username} showButton={false} resolution={resolution} key={resolution}/>;
