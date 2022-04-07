@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -39,6 +41,11 @@ public class NewYearController {
     public List<Resolution> myResolution(@RequestParam String username){
         List<Resolution> l = resolutionService.myResolution(username);
         if(l.size()>0) {
+            Collections.sort(l, new Comparator<Resolution>(){
+                public int compare(Resolution o1, Resolution o2){
+                    return (int) (o1.getId() - o2.getId());
+                }
+            });
             return l.stream().collect(toList());
         }else{
             return new ArrayList<>();
