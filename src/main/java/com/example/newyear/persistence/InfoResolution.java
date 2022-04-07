@@ -1,23 +1,24 @@
 package com.example.newyear.persistence;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class InfoResolution {
     private String start_date;
-    private int nb_do;
+    private ArrayList<ResolutionDo> liste;
 
-    public InfoResolution(Date start_date,int nb_do,String pattern){
+    public InfoResolution(Date start_date,ArrayList<ResolutionDo> liste,String pattern){
         SimpleDateFormat format1 = new SimpleDateFormat(pattern);
         this.start_date = format1.format(start_date);
-        this.nb_do = nb_do;
+        this.liste = liste;
     }
 
     public String getStart_date() {
         return start_date;
     }
 
-    public int getNb_do() {
-        return nb_do;
+    public ArrayList<ResolutionDo> getListe() {
+        return liste;
     }
 }

@@ -2,6 +2,7 @@ package com.example.newyear.persistence;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -21,13 +22,13 @@ public class UserRes implements Serializable {
     private Resolution resolution;
 
     private Date start_date;
-    private int nb_do;
+    private ArrayList<ResolutionDo> liste;
 
-    public UserRes(UserClass user, Resolution resolution, Date start_date, int nb_do) {
+    public UserRes(UserClass user, Resolution resolution, Date start_date) {
         this.user = user;
         this.resolution = resolution;
         this.start_date = start_date;
-        this.nb_do = nb_do;
+        this.liste = new ArrayList<>();
     }
 
     public UserRes() {
@@ -69,11 +70,20 @@ public class UserRes implements Serializable {
         this.start_date = start_date;
     }
 
-    public int getNb_do() {
-        return nb_do;
+    public void addResolutionDo(Date d,int nb_do){
+        boolean f = false;
+        for(int i = 0;i < liste.size(); i++){
+            if(liste.get(i).getDate().getDay() == d.getDay()){
+                liste.get(i).setNb_do(liste.get(i).getNb_do()+nb_do);
+                f=true;
+                break;
+            }
+        }
+        if(!f){
+            liste.add(new ResolutionDo(new Date(System.currentTimeMillis()),nb_do));
+        }
     }
 
-    public void setNb_do(int nb_do) {
-        this.nb_do = nb_do;
-    }
+    public ArrayList<ResolutionDo> getListe(){return liste;}
+
 }

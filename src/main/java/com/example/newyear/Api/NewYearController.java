@@ -43,7 +43,7 @@ public class NewYearController {
         if(l.size()>0) {
             Collections.sort(l, new Comparator<Resolution>(){
                 public int compare(Resolution o1, Resolution o2){
-                    return (int) (o1.getId() - o2.getId());
+                    return (int) (o2.getId() - o1.getId());
                 }
             });
             return l.stream().collect(toList());
@@ -67,14 +67,20 @@ public class NewYearController {
     @ResponseBody
     public InfoResolution getUserRes(@RequestParam String username, @RequestParam int id){
         UserRes r = resolutionService.getUserRes(username,id);
-        return new InfoResolution(r.getStart_date(),r.getNb_do(),"yyyy-MM-dd");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"yyyy-MM-dd");
     }
 
     @GetMapping(value = "/api/done")
     @ResponseBody
     public InfoResolution done(@RequestParam String username, @RequestParam int id){
         UserRes r = resolutionService.setUserRes(username,id,1);
-        return new InfoResolution(r.getStart_date(),r.getNb_do(),"yyyy-MM-dd");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"yyyy-MM-dd");
+    }
+    @GetMapping(value = "/api/failed")
+    @ResponseBody
+    public InfoResolution failed(@RequestParam String username, @RequestParam int id){
+        UserRes r = resolutionService.setUserRes(username,id,-1);
+        return new InfoResolution(r.getStart_date(),r.getListe(),"yyyy-MM-dd");
     }
 
     @GetMapping(value = "/api/newResolution")

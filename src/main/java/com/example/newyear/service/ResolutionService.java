@@ -29,13 +29,13 @@ public class ResolutionService {
         Resolution r = new Resolution(title,des,nb_oc,freq);
         UserClass u = userRepository.findByUsername(username);
         repository.saveAndFlush(r);
-        userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis()),0));
+        userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis())));
     }
 
     public void addResolutionToUser(int id,String username){
         Resolution r = repository.findById(id);
         UserClass u = userRepository.findByUsername(username);
-        userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis()),0));
+        userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis())));
     }
 
     public List<Resolution> myResolution(String username){
@@ -72,7 +72,7 @@ public class ResolutionService {
 
     public UserRes setUserRes(String username,int id,int nb_do){
         UserRes u = getUserRes(username,id);
-        u.setNb_do(u.getNb_do() + nb_do);
+        u.addResolutionDo(new Date(System.currentTimeMillis()), nb_do);
         userResRepository.saveAndFlush(u);
         return u;
     }
