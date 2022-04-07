@@ -19,6 +19,7 @@ class AddResolution extends React.Component {
         axios.get(`/api/newResolution?title=`+title+"&des="+des+"&nb_oc="+nb_oc+"&freq="+freq+"&username="+this.props.username)
             .then(res => {
                 if(res.data == "ok") {
+                    this.setState({erreur:"",title:"",des : "",nb_oc : 0,freq : 0})
                     document.getElementById("popup-resolution").classList.remove('is-active')
                 }else{this.setState({ erreur : "Something went wrong"})}
             })
