@@ -13,7 +13,7 @@ Requetes :
 
 - [x] ajouter resolution
 - [x] recuperer list en fonction de l'utilisateur
-- [ ] 3 plus commune plus deux random (a moitier fait)
+- [x] 3 plus commune plus deux random
 - [ ] validation ou non d'un resolution (a moitier fait)
 - [ ] commit github 
 - [x] ajouter un compte 
