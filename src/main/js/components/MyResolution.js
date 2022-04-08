@@ -14,9 +14,6 @@ class MyResolution extends React.Component {
     componentDidMount() {
         this.fetchResolution()
     }
-    componentDidUpdate() {
-        this.fetchResolution()
-    }
     fetchResolution(){
         axios.get(`/api/myResolution?username=`+this.props.username)
             .then(res => {

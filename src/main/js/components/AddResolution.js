@@ -15,12 +15,13 @@ class AddResolution extends React.Component {
         }
 
     }
-    addResolution(title,des,nb_oc,freq){
-        axios.get(`/api/newResolution?title=`+title+"&des="+des+"&nb_oc="+nb_oc+"&freq="+freq+"&username="+this.props.username)
+    addResolution(){
+        axios.get(`/api/newResolution?title=`+this.state.title+"&des="+this.state.des+"&nb_oc="+this.state.nb_oc+"&freq="+this.state.freq+"&username="+this.props.username)
             .then(res => {
                 if(res.data == "ok") {
                     this.setState({erreur:"",title:"",des : "",nb_oc : 0,freq : 0})
                     document.getElementById("popup-resolution").classList.remove('is-active')
+                    this.props.refreshComponent()
                 }else{this.setState({ erreur : "Something went wrong"})}
             })
             .catch(res =>{
@@ -44,7 +45,7 @@ class AddResolution extends React.Component {
                             <input className="input is-link" type="number"  name="nb_oc" required value={this.state.nb_oc} onChange={event => this.setState({nb_oc: event.target.value})}/><br/><br/>
                             <label className="subtitle has-text-white" htmlFor="freq">Frequency: </label>
                             <input className="input is-link" type="number"  name="freq" required value={this.state.freq} onChange={event => this.setState({freq: event.target.value})}/><br/><br/>
-                            <button className="button is-success" onClick={() => this.addResolution(this.state.title,this.state.des,this.state.nb_oc,this.state.freq)}>Add resolution</button>
+                            <button className="button is-success" onClick={() => this.addResolution()}>Add resolution</button>
                         </div>
                     </div>
                 </div>

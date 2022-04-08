@@ -13,10 +13,7 @@ class Home extends React.Component {
     componentDidMount() {
         this.fetchResolution()
     }
-    componentDidUpdate() {
-        this.fetchResolution()
-    }
-    fetchResolution(){
+    fetchResolution = ()=>{
         axios.get(`/api/AllResolutions`)
             .then(res => {
                 this.setState({resolutions :{"resolutions":res.data }})

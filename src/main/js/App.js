@@ -6,6 +6,7 @@ import AddResolution from "./components/AddResolution.js";
 import MyResolution from "./components/MyResolution.js";
 import Settings from "./components/Settings.js";
 import Footer from "./components/Footer";
+import Refresh from "./components/Refresh";
 import axios from 'axios';
 
 class App extends React.Component {
@@ -13,11 +14,11 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayedTable:<Home />,
+            displayedTable:"Home",
             name : "",
             username : "",
             msg : "",
-            components : {}
+            components : {},
         }
 
     }
@@ -28,7 +29,7 @@ class App extends React.Component {
             axios.get(`/api/auto_connect?token=`+token)
                 .then(res => {
                     if(res.data != null) {
-                        this.setState({name: "Logged as " + res.data})
+                        this.setState({name: "Logged as " + res.data},this.showComponent("Home"))
                         this.setState({username: res.data})
                         this.showButton()
                         this.updateSate()
@@ -70,6 +71,7 @@ class App extends React.Component {
     updateSate = () =>{
         this.setState({components :{
                 "Home": <Home username={this.state.username} />,
+                "Refresh":<Refresh/>,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "MyResolution": <MyResolution username={this.state.username}/>,
@@ -114,6 +116,7 @@ class App extends React.Component {
     hideButton = ()=>{
         this.setState({components :{
                 "Home": <Home username={this.state.username} />,
+                "Refresh":<Refresh/>,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "MyResolution": <MyResolution username={this.state.username}/>,
@@ -131,8 +134,13 @@ class App extends React.Component {
         })
 
     }
-    showComponent(componentName) {
+    showComponent = (componentName)=> {
         this.setState({displayedTable: componentName});
+    }
+    refreshComponent= () =>{
+        const component = this.state.displayedTable
+        this.showComponent("Refresh")
+        this.showComponent(component)
     }
     componentWillMount(){
         this.showComponent('Home')
@@ -162,11 +170,11 @@ class App extends React.Component {
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.name}</div>
                     <div className="subtitle m-4 p-2 has-text-white">{this.state.msg}</div>
                     <button id="settings" className="button m-4 is-success is-hidden" onClick={() => this.showComponent('Settings')}>Settings</button>
-                    <button onClick={()=>this.logout() } className="button m-4 is-danger is-hidden" id="logout">Logout</button>
+                    <button onClick={()=>this.logout()} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>
                 <div id="content">
                     {this.state.components[this.state.displayedTable]}
-                    <AddResolution username={this.state.username}/>
+                    <AddResolution refreshComponent={this.refreshComponent} username={this.state.username}/>
                 </div>
                 <Footer/>
             </div>
