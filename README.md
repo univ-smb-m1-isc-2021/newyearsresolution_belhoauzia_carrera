@@ -1,4 +1,4 @@
-# NewYearsResolution_Belhoauzia_Carrera
+# NewYearsResolution_Belhaouzia_Carrera
 NewYearsResolution by Thomas Carrera and Zohir Belhaouzia
 
 Fonctionalitées :
