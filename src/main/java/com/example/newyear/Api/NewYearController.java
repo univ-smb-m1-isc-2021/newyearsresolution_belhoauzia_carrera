@@ -4,6 +4,7 @@ import com.example.newyear.persistence.*;
 import com.example.newyear.service.ResolutionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -143,14 +144,14 @@ public class NewYearController {
     }
     @GetMapping(value = "/api/done")
     @ResponseBody
-    public InfoResolution done(@RequestParam String username, @RequestParam int id, @RequestParam String date){
-        UserRes r = resolutionService.setUserRes(username,id,1);
+    public InfoResolution done(@RequestParam String username, @RequestParam int id, @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
+        UserRes r = resolutionService.setUserRes(username,id,1,date);
         return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
     }
     @GetMapping(value = "/api/failed")
     @ResponseBody
-    public InfoResolution failed(@RequestParam String username, @RequestParam int id, @RequestParam String date){
-        UserRes r = resolutionService.setUserRes(username,id,-1);
+    public InfoResolution failed(@RequestParam String username, @RequestParam int id,  @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
+        UserRes r = resolutionService.setUserRes(username,id,-1,date);
         return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
     }
 

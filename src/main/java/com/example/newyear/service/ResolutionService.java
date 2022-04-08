@@ -74,9 +74,9 @@ public class ResolutionService {
 
     public void removeUserRes(UserRes u){userResRepository.delete(u);}
 
-    public UserRes setUserRes(String username,int id,int nb_do){
+    public UserRes setUserRes(String username,int id,int nb_do,Date d){
         UserRes u = getUserRes(username,id);
-        u.addResolutionDo(new Date(System.currentTimeMillis()), nb_do);
+        u.addResolutionDo(d, nb_do);
         userResRepository.saveAndFlush(u);
         return u;
     }
