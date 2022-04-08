@@ -44,7 +44,7 @@ class Resolution extends React.Component {
     addResolution(id){
         axios.get(`/api/addResolutionToUser?username=`+this.props.username+"&id="+id)
             .then(res => {
-                this.setState({message :res.data,haveResolution:true })
+                this.setState({message :res.data,haveResolution:false })
             })
     }
     done(id){
