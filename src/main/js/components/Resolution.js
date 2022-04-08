@@ -8,7 +8,7 @@ class Resolution extends React.Component {
 
         let date = [];
         date.push(new Date());
-        for(let i = 0 ; i < 6 ; i++){
+        for(let i = 0 ; i < 7 ; i++){
             date.push(new Date(date[i]).getTime() - 24*60*60*1000);
         }
         this.state = {
@@ -17,7 +17,7 @@ class Resolution extends React.Component {
             nb_do:[],
             haveResolution:false,
             date_list:date,
-            date_selected:""
+            date_selected: date[0].getDate()+"/"+( date[0].getMonth() + 1)+"/"+ date[0].getFullYear()
         }
     }
     componentDidMount() {
@@ -56,6 +56,7 @@ class Resolution extends React.Component {
             })
     }
     done(id){
+        console.log(this.state.date_selected)
         axios.get(`/api/done?username=`+this.props.username+"&id="+id+"&date="+this.state.date_selected)
             .then(res => {
                 this.setState({nb_do :res.data.liste })

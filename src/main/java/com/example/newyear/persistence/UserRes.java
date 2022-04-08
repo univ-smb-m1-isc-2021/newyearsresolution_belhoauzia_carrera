@@ -80,7 +80,7 @@ public class UserRes implements Serializable {
             }
         }
         if(!f){
-            liste.add(new ResolutionDo(new Date(System.currentTimeMillis()),nb_do));
+            liste.add(new ResolutionDo(d,nb_do));
         }
     }
 
