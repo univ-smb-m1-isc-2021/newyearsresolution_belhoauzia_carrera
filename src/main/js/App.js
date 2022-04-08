@@ -163,23 +163,23 @@ class App extends React.Component {
                     <figure className="image is-64x64 m-2">
                         <img src="/assets/logo.png" alt="logo"/>
                     </figure>
-                    <button class="button m-4" onClick={() => this.showComponent('Home')}>Home</button>
-                    <button id="login" class="button m-4" onClick={() => this.showComponent('Login')}>Login</button>
-                    <button id="inscription" class="button m-4" onClick={() => this.showComponent('Inscription')}>Inscription</button>
-                    <button id="resolution" className="button m-4 is-hidden" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
-                    <button id="addResolution" className="button m-4 is-hidden" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
+                    <button class="button m-4 is-success" onClick={() => this.showComponent('Home')}>Home</button>
+                    <button id="login" class="button m-4 is-success" onClick={() => this.showComponent('Login')}>Login</button>
+                    <button id="inscription" class="button m-4 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
+                    <button id="resolution" className="button m-4 is-success is-hidden" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
+                    <button id="addResolution" className="button m-4 is-success is-hidden" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
                 </div>
 
                     <div className="navbar-end">
                         {this.state.username != "" ?
                             <div className="dropdown is-hoverable is-right">
                                 <div className="dropdown-trigger">
-                                    <div className="button m-4 has-text-black " aria-haspopup="true"
+                                    <div className="button m-4 is-success" aria-haspopup="true"
                                          aria-controls="dropdown-menu">{this.state.name}</div>
                                 </div>
                                 <div className="dropdown-menu is-centered">
                                     <div className="dropdown-content">
-                                        <button id="settings" className=" button m-4 is-success"
+                                        <button id="settings" className=" button m-4"
                                                 onClick={() => this.showComponent('Settings')}>Settings
                                         </button>
                                         <button onClick={() => this.logout()} className="button m-4 is-danger"
