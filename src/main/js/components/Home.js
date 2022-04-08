@@ -13,6 +13,9 @@ class Home extends React.Component {
     componentDidMount() {
         this.fetchResolution()
     }
+    componentDidUpdate() {
+        this.fetchResolution()
+    }
     fetchResolution(){
         axios.get(`/api/AllResolutions`)
             .then(res => {
