@@ -74,7 +74,7 @@ class App extends React.Component {
                 "Refresh":<Refresh/>,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
-                "MyResolution": <MyResolution username={this.state.username}/>,
+                "MyResolution": <MyResolution refreshComponent={this.refreshComponent} username={this.state.username}/>,
                 "Settings": <Settings resetHome={this.resetHome}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         })
@@ -119,7 +119,7 @@ class App extends React.Component {
                 "Refresh":<Refresh/>,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
-                "MyResolution": <MyResolution username={this.state.username}/>,
+                "MyResolution": <MyResolution refreshComponent={this.refreshComponent} username={this.state.username}/>,
                 "Settings": <Settings resetHome={this.resetHome}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         },()=>{

@@ -100,7 +100,7 @@ public class NewYearController {
         return res;
     }
 
-    public int nbDaysBetweenDate(Date d,Date d1){
+    public static int nbDaysBetweenDate(Date d,Date d1){
         long diff = d.getTime() - d1.getTime();
        return (int) (diff / (1000*60*60*24));
     }
@@ -135,7 +135,7 @@ public class NewYearController {
     @ResponseBody
     public InfoResolution getUserRes(@RequestParam String username, @RequestParam int id){
         UserRes r = resolutionService.getUserRes(username,id);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
     @GetMapping(value = "/api/haveResolution")
     @ResponseBody
@@ -146,13 +146,13 @@ public class NewYearController {
     @ResponseBody
     public InfoResolution done(@RequestParam String username, @RequestParam int id, @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
         UserRes r = resolutionService.setUserRes(username,id,1,date);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
     @GetMapping(value = "/api/failed")
     @ResponseBody
     public InfoResolution failed(@RequestParam String username, @RequestParam int id,  @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
         UserRes r = resolutionService.setUserRes(username,id,-1,date);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
 
     @GetMapping(value = "/api/newResolution")

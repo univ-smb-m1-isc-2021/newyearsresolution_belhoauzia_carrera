@@ -80,7 +80,6 @@ public class ResolutionService {
         userResRepository.saveAndFlush(u);
         return u;
     }
-
     public UserClass getUser(String username){
         return userRepository.findByUsername(username);
     }

@@ -1,5 +1,7 @@
 package com.example.newyear.persistence;
 
+import com.example.newyear.Api.NewYearController;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -85,5 +87,18 @@ public class UserRes implements Serializable {
     }
 
     public ArrayList<ResolutionDo> getListe(){return liste;}
+
+    public boolean isAccomplish(Date d){
+        int current_oc = 0;
+        for(int i = 0;i < liste.size();i++){
+            if(NewYearController.nbDaysBetweenDate(d,liste.get(i).getDate()) < resolution.getFrequency()){
+                current_oc += liste.get(i).getNb_do();
+                if(current_oc >= resolution.getNb_occurency()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

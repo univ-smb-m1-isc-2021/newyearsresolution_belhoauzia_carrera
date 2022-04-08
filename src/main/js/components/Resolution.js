@@ -17,7 +17,8 @@ class Resolution extends React.Component {
             nb_do:[],
             haveResolution:false,
             date_list:date,
-            date_selected: date[0].getDate()+"/"+( date[0].getMonth() + 1)+"/"+ date[0].getFullYear()
+            date_selected: date[0].getDate()+"/"+( date[0].getMonth() + 1)+"/"+ date[0].getFullYear(),
+            isValide:false,
         }
     }
     componentDidMount() {
@@ -25,7 +26,7 @@ class Resolution extends React.Component {
             axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.id)
                 .then(res => {
                     if (res.data != null) {
-                        this.setState({date: res.data.start_date, nb_do: res.data.liste})
+                        this.setState({date: res.data.start_date, nb_do: res.data.liste,isValide:res.data.valide})
                     }
                 })
         }else if(this.props.username != ""){
@@ -33,17 +34,6 @@ class Resolution extends React.Component {
                 .then(res => {
                     if (res.data != null) {
                         this.setState({haveResolution : !res.data})
-                    }
-                })
-        }
-    }
-
-    componentDidUpdate() {
-        if(!this.props.showButton) {
-            axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.id)
-                .then(res => {
-                    if (res.data != null) {
-                        this.setState({date: res.data.start_date, nb_do: res.data.liste})
                     }
                 })
         }
@@ -59,12 +49,14 @@ class Resolution extends React.Component {
         axios.get(`/api/done?username=`+this.props.username+"&id="+id+"&date="+this.state.date_selected)
             .then(res => {
                 this.setState({nb_do :res.data.liste })
+                this.props.refreshComponent()
             })
     }
     failed(id){
         axios.get(`/api/failed?username=`+this.props.username+"&id="+id+"&date="+this.state.date_selected)
             .then(res => {
-                this.setState({nb_do :res.data.liste })
+                this.setState({nb_do :res.data.liste})
+                this.props.refreshComponent()
             })
     }
     createNbDo =  (nb_do) => {
@@ -99,6 +91,8 @@ class Resolution extends React.Component {
                             <div className="subtitle has-text-white"> NB DO :
                                 {this.createNbDos(this.state.nb_do)}
                             </div>
+                            {this.state.isValide ? <div className={"subtitle has-text-white"}>&#9989; The resolution has been accomplished</div>
+                            : <div className={"subtitle has-text-white"}>&#10060; The resolution has not been accomplished</div>}
                             <div className={"subtitle has-text-white"}>Choose a date : </div>
                             <div className="select mb-2 is-info">
                                 <select value={this.state.date_selected} onChange={ (event)=>{this.setState({date_selected: event.target.value})}}>
