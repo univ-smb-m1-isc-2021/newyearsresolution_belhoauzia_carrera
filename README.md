@@ -18,8 +18,4 @@ Requetes :
 - [ ] commit github (requete faite)
 - [x] ajouter un compte 
 - [x] supprimer un compte (je le fait soon)
-- [x] connexion 
- 
- 
-Pour moi : 
-  https://spring.io/guides/tutorials/spring-boot-oauth2/
+- [x] connexion

@@ -134,7 +134,7 @@ public class NewYearController {
     @ResponseBody
     public InfoResolution getUserRes(@RequestParam String username, @RequestParam int id){
         UserRes r = resolutionService.getUserRes(username,id);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"yyyy-MM-dd");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
     }
     @GetMapping(value = "/api/haveResolution")
     @ResponseBody
@@ -143,15 +143,15 @@ public class NewYearController {
     }
     @GetMapping(value = "/api/done")
     @ResponseBody
-    public InfoResolution done(@RequestParam String username, @RequestParam int id){
+    public InfoResolution done(@RequestParam String username, @RequestParam int id, @RequestParam String date){
         UserRes r = resolutionService.setUserRes(username,id,1);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"yyyy-MM-dd");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
     }
     @GetMapping(value = "/api/failed")
     @ResponseBody
-    public InfoResolution failed(@RequestParam String username, @RequestParam int id){
+    public InfoResolution failed(@RequestParam String username, @RequestParam int id, @RequestParam String date){
         UserRes r = resolutionService.setUserRes(username,id,-1);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"yyyy-MM-dd");
+        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy");
     }
 
     @GetMapping(value = "/api/newResolution")
