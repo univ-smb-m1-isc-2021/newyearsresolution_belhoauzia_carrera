@@ -8,32 +8,33 @@ body {
   min-height: 100vh;
 }
 .navbar{
-  background-color: #104F55 !important;
+  background-color: #101654 !important;
 }
 .box{
-  background-color: #104F55 !important;
+  background-color: #101654 !important;
 }
 
 .footer{
   position:fixed;
   bottom:0;
   width: 100% !important;
-  background-color: #104F55 !important;
+  background-color: #101654 !important;
 }
-.scrollBox{
+.box{
   max-height: 70vh;
-  overflow-x: hidden;
+  overflow-y: scroll;
 }
+
 
 .dropdown-content{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #C7F0BD !important;
+  background-color: #6F8AB7 !important;
 }
 
 .is-success{
-  background-color: #C7F0BD !important;
+  background-color: #6F8AB7 !important;
 }
 
 
