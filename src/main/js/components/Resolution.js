@@ -23,12 +23,7 @@ class Resolution extends React.Component {
     }
     componentDidMount() {
         if(!this.props.showButton) {
-            axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.id)
-                .then(res => {
-                    if (res.data != null) {
-                        this.setState({date: res.data.start_date, nb_do: res.data.liste,isValide:res.data.valide})
-                    }
-                })
+            this.fetchInfo()
         }else if(this.props.username != ""){
             axios.get(`/api/haveResolution?username=` + this.props.username + "&id=" + this.props.resolution.id)
                 .then(res => {
@@ -38,7 +33,14 @@ class Resolution extends React.Component {
                 })
         }
     }
-
+    fetchInfo = () =>{
+        axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.id)
+            .then(res => {
+                if (res.data != null) {
+                    this.setState({date: res.data.start_date, nb_do: res.data.liste,isValide:res.data.valide})
+                }
+            })
+    }
     addResolution(id){
         axios.get(`/api/addResolutionToUser?username=`+this.props.username+"&id="+id)
             .then(res => {
@@ -49,14 +51,14 @@ class Resolution extends React.Component {
         axios.get(`/api/done?username=`+this.props.username+"&id="+id+"&date="+this.state.date_selected)
             .then(res => {
                 this.setState({nb_do :res.data.liste })
-                this.props.refreshComponent()
+                this.fetchInfo()
             })
     }
     failed(id){
         axios.get(`/api/failed?username=`+this.props.username+"&id="+id+"&date="+this.state.date_selected)
             .then(res => {
                 this.setState({nb_do :res.data.liste})
-                this.props.refreshComponent()
+                this.fetchInfo()
             })
     }
     createNbDo =  (nb_do) => {
