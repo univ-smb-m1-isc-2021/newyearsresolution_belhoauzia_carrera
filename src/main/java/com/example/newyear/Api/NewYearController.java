@@ -1,9 +1,6 @@
 package com.example.newyear.Api;
 
-import com.example.newyear.persistence.InfoResolution;
-import com.example.newyear.persistence.Resolution;
-import com.example.newyear.persistence.UserClass;
-import com.example.newyear.persistence.UserRes;
+import com.example.newyear.persistence.*;
 import com.example.newyear.service.ResolutionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -33,8 +27,54 @@ public class NewYearController {
     @GetMapping(value = "/api/AllResolutions")
     public List<Resolution> title(){
         logger.info("Service Resolutions");
-        return resolutionService.resolutionList().stream().collect(toList());
+        List<Resolution> l = resolutionService.resolutionList().stream().collect(toList());
+        ArrayList<PopularityResolution> li = new ArrayList<PopularityResolution>();
+        ArrayList<Resolution> res = new ArrayList<>();
+        for(int i = 0 ; i < l.size(); i++){
+            li.add(new PopularityResolution(l.get(i),resolutionService.nbUserResResolution(l.get(i))));
+        }
+        Collections.sort(li, new Comparator<PopularityResolution>(){
+            public int compare(PopularityResolution o1, PopularityResolution o2){
+                return (int) (o2.getPopularity() - o1.getPopularity());
+            }
+        });
+        for(int i = 0 ; i < 3 ; i++){
+            if(li.size() > i){
+                res.add(li.get(i).getR());
+            }
+        }
+        int random_left = 2;
+        boolean fini = false;
+        ArrayList<Resolution> done = new ArrayList<>();
+        while(random_left > 0 && !fini){
+            int random = new Random().nextInt(l.size()) ;
+            if(!isInArray(res,l.get(random))){
+                res.add(l.get(random));
+                random_left--;
+            }
+            if(!isInArray(done,l.get(random))){
+                done.add(l.get(random));
+            }
+            fini = isDone(done,l);
+        }
+        return res;
 
+    }
+    public boolean isDone(ArrayList<Resolution> l ,List<Resolution> d){
+        for(int i = 0 ; i < d.size(); i++){
+            if(!isInArray(l,d.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean isInArray(ArrayList<Resolution> l , Resolution r){
+        for(int i = 0; i < l.size();i++){
+            if(l.get(i).getId() == r.getId()){
+                return true;
+            }
+        }
+        return false;
     }
 
     @GetMapping(value = "/api/myResolution")

@@ -64,6 +64,10 @@ public class ResolutionService {
         return userResRepository.findByResolutionAndUser(r,u);
     }
 
+    public int nbUserResResolution(Resolution r){
+        return userResRepository.findByResolution(r).size();
+    }
+
     public List<UserRes> getUserResList(UserClass u){
         return userResRepository.findByUser(u);
     }
