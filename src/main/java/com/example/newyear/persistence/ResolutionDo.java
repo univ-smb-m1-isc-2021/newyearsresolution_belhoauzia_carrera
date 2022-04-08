@@ -18,7 +18,7 @@ public class ResolutionDo implements Serializable {
     private String show_date;
 
     public ResolutionDo(Date date, int nb_do) {
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         this.date = date;
         this.nb_do = nb_do;
         this.show_date = format1.format(this.date);
