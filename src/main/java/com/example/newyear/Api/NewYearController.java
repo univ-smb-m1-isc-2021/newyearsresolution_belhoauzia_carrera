@@ -69,7 +69,11 @@ public class NewYearController {
         UserRes r = resolutionService.getUserRes(username,id);
         return new InfoResolution(r.getStart_date(),r.getListe(),"yyyy-MM-dd");
     }
-
+    @GetMapping(value = "/api/haveResolution")
+    @ResponseBody
+    public boolean haveResolution(@RequestParam String username, @RequestParam int id){
+        return resolutionService.haveResolution(username,id);
+    }
     @GetMapping(value = "/api/done")
     @ResponseBody
     public InfoResolution done(@RequestParam String username, @RequestParam int id){

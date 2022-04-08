@@ -8,7 +8,8 @@ class Resolution extends React.Component {
         this.state = {
             message:"",
             date:"",
-            nb_do:[]
+            nb_do:[],
+            haveResolution:false
         }
     }
     componentDidMount() {
@@ -17,6 +18,13 @@ class Resolution extends React.Component {
                 .then(res => {
                     if (res.data != null) {
                         this.setState({date: res.data.start_date, nb_do: res.data.liste})
+                    }
+                })
+        }else if(this.props.username != ""){
+            axios.get(`/api/haveResolution?username=` + this.props.username + "&id=" + this.props.resolution.id)
+                .then(res => {
+                    if (res.data != null) {
+                        this.setState({haveResolution : !res.data})
                     }
                 })
         }
@@ -36,7 +44,7 @@ class Resolution extends React.Component {
     addResolution(id){
         axios.get(`/api/addResolutionToUser?username=`+this.props.username+"&id="+id)
             .then(res => {
-                this.setState({message :res.data })
+                this.setState({message :res.data,haveResolution:true })
             })
     }
     done(id){
@@ -67,7 +75,7 @@ class Resolution extends React.Component {
                 <div className="box has-text-centered is-one-third">
                     <h1 className="title has-text-white">{this.props.resolution.title}</h1>
                     <div className="subtitle has-text-white">{this.state.message}</div>
-                    { this.props.showButton && this.props.username != "" ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.id)}>Add resolution</button> : null }
+                    { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.id)}>Add resolution</button> : null }
                     { !this.props.showButton && this.props.username != "" ?
                         <div>
                             <div className="subtitle has-text-white"> Start date : {this.state.date}</div>

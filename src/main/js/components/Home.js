@@ -6,7 +6,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            resolutions:{"resolutions":[]},
+            resolutions:{"resolutions":[]}
         }
 
     }
@@ -23,7 +23,7 @@ class Home extends React.Component {
         return <Resolution username={this.props.username} showButton={true} resolution={resolution} key={resolution}/>;
     }
     createResolutions =  (resolutions) => {
-        return resolutions.map(this.createResolution);
+        return resolutions.map(this.createResolution)
     }
     render() {
         return (
