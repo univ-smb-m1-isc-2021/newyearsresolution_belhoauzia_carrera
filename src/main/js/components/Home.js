@@ -27,8 +27,8 @@ class Home extends React.Component {
     }
     render() {
         return (
-            <div className="columns mt-1 is-centered">
-                <div className="box has-text-centered is-one-third">
+            <div className="columns mt-1 is-centered is-8">
+                <div className="box has-text-centered is-8">
                     <h1 className="title has-text-white">Home page</h1>
                     <div className="scrollBox">
                     {this.createResolutions(this.state.resolutions.resolutions)}

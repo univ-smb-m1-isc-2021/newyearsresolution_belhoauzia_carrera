@@ -29,7 +29,7 @@ class App extends React.Component {
             axios.get(`/api/auto_connect?token=`+token)
                 .then(res => {
                     if(res.data != null) {
-                        this.setState({name: "Logged as " + res.data},this.showComponent("Home"))
+                        this.setState({name:res.data},this.showComponent("Home"))
                         this.setState({username: res.data})
                         this.showButton()
                         this.updateSate()
@@ -39,7 +39,7 @@ class App extends React.Component {
             axios.get(`/user`)
                 .then(res => {
                     if(res.data.name != undefined) {
-                        this.setState({name: "Logged as " + res.data.name})
+                        this.setState({name:res.data.name})
                         this.setState({username: res.data.name})
                         this.showButton()
                         this.updateSate()
@@ -57,7 +57,7 @@ class App extends React.Component {
         axios.get(`/api/login?username=`+username+"&password="+password+"&remember="+remember)
             .then((res) => {
                 if(res.data != "null") {
-                    this.setState({name: "Logged as " + res.data[0]})
+                    this.setState({name:res.data[0]})
                     this.setState({username: res.data[0]})
                     this.setState({ msg : ""})
                     this.showButton(res)
@@ -158,7 +158,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div class="pb-2 navbar">
+                <div class="navbar">
+                    <div className="navbar-start">
                     <figure className="image is-64x64 m-2">
                         <img src="/assets/logo.png" alt="logo"/>
                     </figure>
@@ -167,11 +168,23 @@ class App extends React.Component {
                     <button id="inscription" class="button m-4 is-success" onClick={() => this.showComponent('Inscription')}>Inscription</button>
                     <button id="resolution" className="button m-4 is-success is-hidden" onClick={() => this.showComponent('MyResolution')}>MyResolution</button>
                     <button id="addResolution" className="button m-4 is-success is-hidden" onClick={() => document.getElementById("popup-resolution").classList.add('is-active')}>AddResolution</button>
-                    <div className="subtitle m-4 p-2 has-text-white">{this.state.name}</div>
-                    <div className="subtitle m-4 p-2 has-text-white">{this.state.msg}</div>
-                    <button id="settings" className="button m-4 is-success is-hidden" onClick={() => this.showComponent('Settings')}>Settings</button>
-                    <button onClick={()=>this.logout()} className="button m-4 is-danger is-hidden" id="logout">Logout</button>
                 </div>
+                    <div className="navbar-end">
+                    <div className="dropdown is-hoverable is-right">
+                       <div className="dropdown-trigger">
+                        <div className="button m-4 has-text-black " aria-haspopup="true" aria-controls="dropdown-menu">{this.state.name}</div>
+                       </div>
+                       <div className="dropdown-menu">
+                        <div className="dropdown-content is-centered">
+                            <button id="settings" className=" button m-4 is-success is-center" onClick={() => this.showComponent('Settings')}>Settings</button>
+                            <div className="dropdown-divider"></div>
+                            <button onClick={()=>this.logout()} className="button m-4 is-danger is-center" id="logout">Logout</button>
+                        </div>
+                       </div>
+                   </div>
+                    <div className="subtitle m-4 p-2 has-text-white">{this.state.msg}</div>
+                    </div>
+            </div>
                 <div id="content">
                     {this.state.components[this.state.displayedTable]}
                     <AddResolution refreshComponent={this.refreshComponent} username={this.state.username}/>
