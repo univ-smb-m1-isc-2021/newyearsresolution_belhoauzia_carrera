@@ -56,7 +56,6 @@ class Resolution extends React.Component {
             })
     }
     done(id){
-        console.log(this.state.date_selected)
         axios.get(`/api/done?username=`+this.props.username+"&id="+id+"&date="+this.state.date_selected)
             .then(res => {
                 this.setState({nb_do :res.data.liste })
