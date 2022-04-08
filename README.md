@@ -15,7 +15,7 @@ Requetes :
 - [x] recuperer list en fonction de l'utilisateur
 - [x] 3 plus commune plus deux random
 - [ ] validation ou non d'un resolution (a moitier fait)
-- [ ] commit github 
+- [ ] commit github (requete faite)
 - [x] ajouter un compte 
 - [x] supprimer un compte (je le fait soon)
 - [x] connexion 

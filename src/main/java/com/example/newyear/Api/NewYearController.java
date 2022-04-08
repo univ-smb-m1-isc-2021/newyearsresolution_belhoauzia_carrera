@@ -77,6 +77,33 @@ public class NewYearController {
         return false;
     }
 
+    @GetMapping(value = "/api/github")
+    public ArrayList<Integer> github(@RequestParam String username){
+        UserClass u = resolutionService.getUser(username);
+        Date today = new Date(System.currentTimeMillis());
+        ArrayList<UserRes> url = (ArrayList<UserRes>) resolutionService.getUserResList(u);
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i = 0 ; i < 365 ; i++){
+            res.add(0);
+        }
+
+        for(int i = 0 ; i < url.size() ; i++){
+            for(int j = 0; j < url.get(i).getListe().size();j++){
+                final int nb_jours = nbDaysBetweenDate(today,url.get(i).getListe().get(j).getDate());
+                if( nb_jours <= 365) {
+                    res.set(nb_jours,url.get(i).getListe().get(j).getNb_do());
+                }
+            }
+        }
+
+        return res;
+    }
+
+    public int nbDaysBetweenDate(Date d,Date d1){
+        long diff = d.getTime() - d1.getTime();
+       return (int) (diff / (1000*60*60*24));
+    }
+
     @GetMapping(value = "/api/myResolution")
     public List<Resolution> myResolution(@RequestParam String username){
         List<Resolution> l = resolutionService.myResolution(username);

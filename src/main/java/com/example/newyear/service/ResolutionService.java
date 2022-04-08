@@ -81,6 +81,10 @@ public class ResolutionService {
         return u;
     }
 
+    public UserClass getUser(String username){
+        return userRepository.findByUsername(username);
+    }
+
     public boolean haveResolution(String username,int id){
         UserClass u = userRepository.findByUsername(username);
         Resolution r = repository.findById(id);
