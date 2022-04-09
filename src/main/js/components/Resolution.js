@@ -49,7 +49,6 @@ class Resolution extends React.Component {
         axios.get('/api/githubRes?username=' + this.props.username + "&id=" + this.props.resolution.id)
             .then(res =>{
                 this.setState({githubRes :res.data})
-                console.log(res.data)
             })
     }
 
@@ -64,6 +63,7 @@ class Resolution extends React.Component {
             .then(res => {
                 this.setState({nb_do :res.data.liste })
                 this.fetchInfo()
+                this.fetchResolutionTenacity()
             })
     }
     failed(id){
@@ -71,6 +71,7 @@ class Resolution extends React.Component {
             .then(res => {
                 this.setState({nb_do :res.data.liste})
                 this.fetchInfo()
+                this.fetchResolutionTenacity()
             })
     }
     createNbDo =  (nb_do) => {
