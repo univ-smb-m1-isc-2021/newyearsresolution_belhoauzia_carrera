@@ -15,7 +15,8 @@
     <description>New Year</description>
     <properties>
         <java.version>11</java.version>
-        <sonar.organization>univ-smb-m1-isc-2021</sonar.organization>
+        <sonar.projectKey>gjambet_chuck-facts</sonar.projectKey>
+        <sonar.organization>gjambet</sonar.organization>
         <sonar.host.url>https://sonarcloud.io/</sonar.host.url>
     </properties>
     <dependencies>
