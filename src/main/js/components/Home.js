@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import Resolution from "./Resolution";
+import Case from "./Case";
 
 class Home extends React.Component {
 
@@ -9,8 +10,8 @@ class Home extends React.Component {
         super(props);
         this.state = {
             resolutions:{"resolutions":[]},
-            github:{"github":[]},
-            cases:{"cases":[]},
+            github:[],
+            cases:[],
         }
 
     }
@@ -28,9 +29,8 @@ class Home extends React.Component {
     fetchGithub = ()=>{
         axios.get(`/api/github?username=`+this.props.username)
             .then(res => {
-                let str = ""
-                this.setState({github :{"github":res.data }})
-                //console.log(this.state.github)
+                this.setState({github :res.data})
+                console.log(res.data)
 
             })
     }
@@ -40,34 +40,29 @@ class Home extends React.Component {
     createResolutions =  (resolutions) => {
         return resolutions.map(this.createResolution)
     }
+    createCase =  (cases) => {
+        let color_case = "has-background-danger"
+        if(cases > 2){
+            color_case = "has-background-success"
+        }
+        return <Case case={color_case} />;
+    }
+    createCases =  (cases) => {
+        return cases.map(this.createCase)
+    }
     render() {
         return (
 
             <div className="columns is-centered">
-                {this.state.github}
                 <div className="column mt-1 is-centered is-8">
                     {this.props.username != "" ?
                         <div className="box home github">
                             <h1 className="title has-text-white">Your tenacity</h1>
                             <div className="resolution">
-                                {(() =>{
-                                    const str = [];
-                                    console.log("caca")
-                                    for(let i = 0; i< this.state.github.github.lenght; i++){
-                                        str.push("<div className='columns'>")
-                                        for(let j = 0; j<6; j++){
-                                            if (this.state.github.github.lenght[i]>2){
-                                                str.push("<div className='column case is-black'></div>")
-                                            }
-                                            else{
-                                                str.push("<div className='column case is-white'></div>")
-                                            }
-                                        }
-                                        str.push("</div>");
-                                        console.log(str);
-                                        return str;
-                                    }})}
+                                <div className='columns'>
+                                    {this.createCases(this.state.github)}
                                 </div>
+                            </div>
                         </div>
                     : ""}
                     <div className="box home has-text-centered is-8">

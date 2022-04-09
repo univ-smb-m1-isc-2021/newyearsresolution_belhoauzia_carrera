@@ -1,0 +1,14 @@
+import React from "react";
+
+class Case extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <div className={'column case ' + this.props.case}></div>
+        );
+    }
+}
+
+export default Case;
