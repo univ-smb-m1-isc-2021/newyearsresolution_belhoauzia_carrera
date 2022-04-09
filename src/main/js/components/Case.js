@@ -6,7 +6,7 @@ class Case extends React.Component {
     }
     render() {
         return (
-            <div className={'column case ' + this.props.case}></div>
+            <div className={'case ' + this.props.case + " " + this.props.col}></div>
         );
     }
 }

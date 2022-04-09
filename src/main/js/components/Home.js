@@ -40,15 +40,21 @@ class Home extends React.Component {
     createResolutions =  (resolutions) => {
         return resolutions.map(this.createResolution)
     }
-    createCase =  (cases) => {
+    createCase = (element, key) => {
+        let col = "";
+        if (key%7==0 || key ==0){
+            col = "column"
+        }
         let color_case = "has-background-danger"
-        if(cases > 2){
+        if(element > 2){
             color_case = "has-background-success"
         }
-        return <Case case={color_case} />;
+        return <Case case={color_case} col={col} />;
     }
     createCases =  (cases) => {
-        return cases.map(this.createCase)
+        return cases.map ((element, key) => {
+            this.createCase(element, key)
+        })
     }
     render() {
         return (
