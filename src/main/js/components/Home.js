@@ -49,11 +49,11 @@ class Home extends React.Component {
         if(element > 2){
             color_case = "has-background-success"
         }
-        return <Case case={color_case} col={col} />;
+        return <Case case={color_case} col={col} key={element} />;
     }
     createCases =  (cases) => {
         return cases.map ((element, key) => {
-            this.createCase(element, key)
+             return this.createCase(element, key)
         })
     }
     render() {
