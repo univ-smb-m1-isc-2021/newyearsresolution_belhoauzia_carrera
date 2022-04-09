@@ -28,7 +28,7 @@ class Resolution extends React.Component {
             this.fetchInfo()
             this.fetchResolutionTenacity()
         }else if(this.props.username != ""){
-            axios.get(`/api/haveResolution?username=` + this.props.username + "&id=" + this.props.resolution.id)
+            axios.get(`/api/haveResolution?username=` + this.props.username + "&id=" + this.props.resolution.resolution.id)
                 .then(res => {
                     if (res.data != null) {
                         this.setState({haveResolution : !res.data})
@@ -37,7 +37,7 @@ class Resolution extends React.Component {
         }
     }
     fetchInfo = () =>{
-        axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.id)
+        axios.get(`/api/getUserRes?username=` + this.props.username + "&id=" + this.props.resolution.resolution.id)
             .then(res => {
                 if (res.data != null) {
                     this.setState({date: res.data.start_date, nb_do: res.data.liste,isValide:res.data.valide})
@@ -46,7 +46,7 @@ class Resolution extends React.Component {
     }
 
     fetchResolutionTenacity(){
-        axios.get('/api/githubRes?username=' + this.props.username + "&id=" + this.props.resolution.id)
+        axios.get('/api/githubRes?username=' + this.props.username + "&id=" + this.props.resolution.resolution.id)
             .then(res =>{
                 this.setState({githubRes :res.data})
             })
@@ -121,13 +121,16 @@ class Resolution extends React.Component {
         return (
             <div className="columns mt-1 is-centered is-half">
                 <div className="box resolution has-text-centered ">
-                    <h1 className="title has-text-white">{this.props.resolution.title}</h1>
-                    <h2 className="subtitle has-text-white">{this.props.resolution.description}</h2>
+                    <h1 className="title has-text-white">{this.props.resolution.resolution.title}</h1>
+                    <h2 className="subtitle has-text-white">{this.props.resolution.resolution.description}</h2>
                     <h2>
-                        This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ? this.props.resolution.frequency/7 + "week(s)" : this.props.resolution.frequency + " day(s)" }
+                        This resolution has to be done {this.props.resolution.resolution.nb_occurency} times each  { this.props.resolution.resolution.frequency%7==0 ? this.props.resolution.resolution.frequency/7 + "week(s)" : this.props.resolution.resolution.frequency%31==0? this.props.resolution.resolution.frequency%31 +" month(s)":this.props.resolution.resolution.frequency + " day(s)" }
+                    </h2>
+                    <h2>
+                        {this.props.resolution.percent} % of the user has done this resolution in time
                     </h2>
                         <div className="subtitle has-text-white">{this.state.message}</div>
-                    { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.id)}>Add resolution</button> : null }
+                    { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.resolution.id)}>Add resolution</button> : null }
                     { !this.props.showButton && this.props.username != "" ?
                         <div>
                             <div className="subtitle has-text-white"> Start date : {this.state.date}</div>
@@ -145,8 +148,8 @@ class Resolution extends React.Component {
                                     {this.show_date()}
                                 </select>
                             </div><br/>
-                            <button className="button is-success" onClick={() => this.done(this.props.resolution.id)}>Done</button>
-                            <button className="button ml-3 is-danger" onClick={() => this.failed(this.props.resolution.id)}>Failed</button>
+                            <button className="button is-success" onClick={() => this.done(this.props.resolution.resolution.id)}>Done</button>
+                            <button className="button ml-3 is-danger" onClick={() => this.failed(this.props.resolution.resolution.id)}>Failed</button>
                         </div>
                     : null }
                 </div>

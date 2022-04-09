@@ -26,11 +26,11 @@ public class NewYearController {
     }
 
     @GetMapping(value = "/api/AllResolutions")
-    public List<Resolution> title(){
+    public List<ResolutionHome> title(){
         logger.info("Service Resolutions");
         List<Resolution> l = resolutionService.resolutionList().stream().collect(toList());
         ArrayList<PopularityResolution> li = new ArrayList<PopularityResolution>();
-        ArrayList<Resolution> res = new ArrayList<>();
+        ArrayList<ResolutionHome> res = new ArrayList<>();
         for(int i = 0 ; i < l.size(); i++){
             li.add(new PopularityResolution(l.get(i),resolutionService.nbUserResResolution(l.get(i))));
         }
@@ -41,27 +41,27 @@ public class NewYearController {
         });
         for(int i = 0 ; i < 3 ; i++){
             if(li.size() > i){
-                res.add(li.get(i).getR());
+                res.add(new ResolutionHome(li.get(i).getR(),10));
             }
         }
         int random_left = 2;
         boolean fini = false;
-        ArrayList<Resolution> done = new ArrayList<>();
+        ArrayList<ResolutionHome> done = new ArrayList<>();
         while(random_left > 0 && !fini){
             int random = new Random().nextInt(l.size()) ;
             if(!isInArray(res,l.get(random))){
-                res.add(l.get(random));
+                res.add(new ResolutionHome(l.get(random),10));
                 random_left--;
             }
             if(!isInArray(done,l.get(random))){
-                done.add(l.get(random));
+                done.add(new ResolutionHome( l.get(random),10));
             }
             fini = isDone(done,l);
         }
         return res;
 
     }
-    public boolean isDone(ArrayList<Resolution> l ,List<Resolution> d){
+    public boolean isDone(ArrayList<ResolutionHome> l ,List<Resolution> d){
         for(int i = 0 ; i < d.size(); i++){
             if(!isInArray(l,d.get(i))){
                 return false;
@@ -69,9 +69,9 @@ public class NewYearController {
         }
         return true;
     }
-    public boolean isInArray(ArrayList<Resolution> l , Resolution r){
+    public boolean isInArray(ArrayList<ResolutionHome> l , Resolution r){
         for(int i = 0; i < l.size();i++){
-            if(l.get(i).getId() == r.getId()){
+            if(l.get(i).getResolution().getId() == r.getId()){
                 return true;
             }
         }
