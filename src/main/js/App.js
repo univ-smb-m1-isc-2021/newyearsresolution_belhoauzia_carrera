@@ -14,7 +14,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayedTable:"Home",
+            displayedTable:"Refresh",
             name : "",
             username : "",
             msg : "",
@@ -29,27 +29,21 @@ class App extends React.Component {
             axios.get(`/api/auto_connect?token=`+token)
                 .then(res => {
                     if(res.data != null) {
-                        this.setState({name:res.data},this.showComponent("Home"))
-                        this.setState({username: res.data})
-                        this.showButton()
+                        this.setState({username: res.data,name:res.data,components :{
+                                "Home": <Home username={res.data} /> }},()=> this.showButton())
                         this.updateSate()
-                    }else{this.setState({ msg : "Something went wrong"})}
+                    }else{
+                        this.showComponent("Home")}
                 })
         }else{
             axios.get(`/user`)
                 .then(res => {
                     if(res.data.name != undefined) {
-                        this.setState({name:res.data.name})
-                        this.setState({username: res.data.name})
-                        this.showButton()
+                        this.setState({name:res.data.name,username: res.data.name},()=>this.showButton())
                         this.updateSate()
-                    }else if(res.data.erreur != undefined){
-                        this.setState({msg:  res.data.erreur})
+                    }else{
+                        this.showComponent("Home")
                     }
-                })
-            axios.get(`/getError`)
-                .then(res => {
-                    this.setState({ msg : res.data})
                 })
         }
     }
@@ -57,10 +51,7 @@ class App extends React.Component {
         axios.get(`/api/login?username=`+username+"&password="+password+"&remember="+remember)
             .then((res) => {
                 if(res.data != "null") {
-                    this.setState({name:res.data[0]})
-                    this.setState({username: res.data[0]})
-                    this.setState({ msg : ""})
-                    this.showButton(res)
+                    this.setState({username: res.data[0],name:res.data[0],msg : ""},()=>this.showButton())
                     this.updateSate()
                     this.addToken(res.data)
                 }else{
@@ -87,7 +78,7 @@ class App extends React.Component {
                         this.setState({name: "Logged as " + res.data[0]})
                         this.setState({username: res.data[0]})
                         this.setState({msg: ""})
-                        this.showButton(res)
+                        this.showButton()
                         this.updateSate()
                         this.addToken(res.data)
                     } else {
@@ -125,10 +116,12 @@ class App extends React.Component {
         },()=>{
             document.getElementById("login").classList.remove('is-hidden')
             document.getElementById("inscription").classList.remove('is-hidden')
-            document.getElementById("logout").classList.add('is-hidden')
+            if(document.getElementById("logout") != null) {
+                document.getElementById("logout").classList.add('is-hidden')
+                document.getElementById("settings").classList.add('is-hidden')
+            }
             document.getElementById("resolution").classList.add('is-hidden')
             document.getElementById("addResolution").classList.add('is-hidden')
-            document.getElementById("settings").classList.add('is-hidden')
             this.showComponent('Home')
             this.setState({name : "Succesfully logged out"})
         })
@@ -141,9 +134,6 @@ class App extends React.Component {
         const component = this.state.displayedTable
         this.showComponent("Refresh")
         this.showComponent(component)
-    }
-    componentWillMount(){
-        this.showComponent('Home')
     }
     resetHome = () =>{
         this.setState({username:""},this.hideButton)
