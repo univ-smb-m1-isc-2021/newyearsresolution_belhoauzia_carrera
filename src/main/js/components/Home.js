@@ -43,7 +43,7 @@ class Home extends React.Component {
             })
     }
     createResolution =  (resolution) => {
-        return <Resolution username={this.props.username} showButton={true} resolution={resolution} key={resolution}/>;
+        return <Resolution username={this.props.username} showButton={true} resolution={resolution.resolution} key={resolution.resolution} percent={resolution.percent}/>;
     }
     createResolutions =  (resolutions) => {
         return resolutions.map(this.createResolution)
