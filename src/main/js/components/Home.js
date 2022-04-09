@@ -11,15 +11,24 @@ class Home extends React.Component {
         this.state = {
             resolutions:{"resolutions":[]},
             github:[],
-            cases:[],
+            was:false
         }
 
     }
     componentDidMount() {
         this.fetchResolution()
-
-        this.fetchGithub()
+        if(this.props.username != "") {
+            this.setState({was:true})
+            this.fetchGithub()
+        }
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(!this.state.was){
+            this.setState({was:true})
+            this.fetchGithub()
+        }
+    }
+
     fetchResolution = ()=>{
         axios.get(`/api/AllResolutions`)
             .then(res => {
@@ -30,7 +39,6 @@ class Home extends React.Component {
         axios.get(`/api/github?username=`+this.props.username)
             .then(res => {
                 this.setState({github :res.data})
-                console.log(res.data)
 
             })
     }
