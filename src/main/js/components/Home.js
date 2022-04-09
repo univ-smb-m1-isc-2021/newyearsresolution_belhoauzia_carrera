@@ -40,32 +40,39 @@ class Home extends React.Component {
     createResolutions =  (resolutions) => {
         return resolutions.map(this.createResolution)
     }
-    createCase = (element, key) => {
-        let col = "";
-        if (key%7==0 || key ==0){
-            col = "column"
+    createCase = (cases) => {
+        let color_case
+        if(cases < 1){
+            color_case = "lv1"
         }
-        let color_case = "has-background-danger"
-        if(element > 2){
-            color_case = "has-background-success"
+        else if(cases < 5){
+            color_case = "lv2"
         }
-        return <Case case={color_case} col={col} key={element} />;
+        else if(cases < 10){
+            color_case = "lv3"
+        }
+        else if(cases < 15){
+            color_case = "lv4"
+        }
+        else {
+            color_case = "lv5"
+        }
+        return <Case case={color_case}/>;
     }
     createCases =  (cases) => {
-        return cases.map ((element, key) => {
-             return this.createCase(element, key)
+        return cases.map ((cases) => {
+             return this.createCase(cases)
         })
     }
     render() {
         return (
-
             <div className="columns is-centered">
                 <div className="column mt-1 is-centered is-8">
                     {this.props.username != "" ?
-                        <div className="box home github">
+                        <div className="box github">
                             <h1 className="title has-text-white">Your tenacity</h1>
-                            <div className="resolution">
-                                <div className='columns'>
+                            <div className="">
+                                <div className='boxGit'>
                                     {this.createCases(this.state.github)}
                                 </div>
                             </div>

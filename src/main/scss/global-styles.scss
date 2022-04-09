@@ -19,15 +19,45 @@ body {
 }
 
 .resoltions{
+  max-height: 60vh;
   overflow-y: scroll;
-  background-color: black !important;
+  background-color: #101654 !important;
+}
+
+.boxGit{
+  display: grid;
+  grid-template-columns: 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px 13px;
+  grid-template-rows: 13px 13px 13px 13px 13px 13px 13px;
+  gap: 4px 4px;
+  grid-auto-flow: column;
+  grid-template-areas:
+  ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
 }
 
 .case{
-  height: 1px;
-  weight: 1px;
-  border: .1px solid black;
-  margin: .5px;
+  border-radius: 2px;
+}
+
+.lv1{
+  background-color: #0C0311;
+}
+.lv2{
+  background-color: #4A1269;
+}
+.lv3{
+  background-color: #7C1EAE;
+}
+.lv4{
+  background-color: #BF73E7;
+}
+.lv5{
+  background-color: #F7EEFC;
 }
 
 .footer{
@@ -38,7 +68,7 @@ body {
 }
 
 .home{
-  max-height: 80vh;
+  max-height: 50vh;
   overflow-y: scroll;
   background-color: #101654 !important;
 }
