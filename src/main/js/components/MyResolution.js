@@ -31,8 +31,8 @@ class MyResolution extends React.Component {
     render() {
         return (
             <div class="columns mt-1 is-mobile is-centered">
-                <div class="box has-text-centered is-one-third">
-                    <h1 class="title has-text-white">My resolution</h1>
+                <div class="box home has-text-centered is-one-third">
+                    <h1 class="title mb-10 has-text-white">My resolution</h1>
                     <div className="subtitle has-text-white">{this.state.message}</div>
                     <div className="scrollBox">
                         {this.createResolutions(this.state.resolutions.resolutions)}

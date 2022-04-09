@@ -82,10 +82,14 @@ class Resolution extends React.Component {
     }
     render() {
         return (
-            <div className="columns mt-1 is-centered">
-                <div className="box has-text-centered is-one-third">
+            <div className="columns mt-1 is-centered is-half">
+                <div className="box resolution has-text-centered ">
                     <h1 className="title has-text-white">{this.props.resolution.title}</h1>
-                    <div className="subtitle has-text-white">{this.state.message}</div>
+                    <h2 className="subtitle has-text-white">{this.props.resolution.description}</h2>
+                    <h2>
+                        This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ? this.props.resolution.frequency/7 + "week(s)" : this.props.resolution.frequency + " day(s)" }
+                    </h2>
+                        <div className="subtitle has-text-white">{this.state.message}</div>
                     { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.id)}>Add resolution</button> : null }
                     { !this.props.showButton && this.props.username != "" ?
                         <div>
