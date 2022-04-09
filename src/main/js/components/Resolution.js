@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import ResolutionDo from "./ResolutionDo";
+import Case from "./Case";
 
 class Resolution extends React.Component {
     constructor(props) {
@@ -19,11 +20,13 @@ class Resolution extends React.Component {
             date_list:date,
             date_selected: date[0].getDate()+"/"+( date[0].getMonth() + 1)+"/"+ date[0].getFullYear(),
             isValide:false,
+            githubRes:[],
         }
     }
     componentDidMount() {
         if(!this.props.showButton) {
             this.fetchInfo()
+            this.fetchResolutionTenacity()
         }else if(this.props.username != ""){
             axios.get(`/api/haveResolution?username=` + this.props.username + "&id=" + this.props.resolution.id)
                 .then(res => {
@@ -41,6 +44,15 @@ class Resolution extends React.Component {
                 }
             })
     }
+
+    fetchResolutionTenacity(){
+        axios.get('/api/githubRes?username=' + this.props.username + "&id=" + this.props.resolution.id)
+            .then(res =>{
+                this.setState({githubRes :res.data})
+                console.log(res.data)
+            })
+    }
+
     addResolution(id){
         axios.get(`/api/addResolutionToUser?username=`+this.props.username+"&id="+id)
             .then(res => {
@@ -80,6 +92,30 @@ class Resolution extends React.Component {
     show_date(){
         return this.state.date_list.map(this.createSelect)
     }
+    createCase = (cases) => {
+        let color_case
+        if(cases < 1){
+            color_case = "lv1"
+        }
+        else if(cases < 5){
+            color_case = "lv2"
+        }
+        else if(cases < 10){
+            color_case = "lv3"
+        }
+        else if(cases < 15){
+            color_case = "lv4"
+        }
+        else {
+            color_case = "lv5"
+        }
+        return <Case case={color_case}/>;
+    }
+    createCases =  (cases) => {
+        return cases.map ((cases) => {
+            return this.createCase(cases)
+        })
+    }
     render() {
         return (
             <div className="columns mt-1 is-centered is-half">
@@ -94,8 +130,11 @@ class Resolution extends React.Component {
                     { !this.props.showButton && this.props.username != "" ?
                         <div>
                             <div className="subtitle has-text-white"> Start date : {this.state.date}</div>
-                            <div className="subtitle has-text-white"> NB DO :
-                                {this.createNbDos(this.state.nb_do)}
+                            <div className="github">
+                                <h3 className="title has-text-white">Your tenacity</h3>
+                                    <div className='boxGit'>
+                                        {this.createCases(this.state.githubRes)}
+                                    </div>
                             </div>
                             {this.state.isValide ? <div className={"subtitle has-text-white"}>&#9989; The resolution has been accomplished</div>
                             : <div className={"subtitle has-text-white"}>&#10060; The resolution has not been accomplished</div>}

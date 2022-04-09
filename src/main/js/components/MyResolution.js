@@ -7,7 +7,7 @@ class MyResolution extends React.Component {
         super(props);
         this.state = {
             resolutions:{"resolutions":[]},
-            message:""
+            message:"",
         }
 
     }

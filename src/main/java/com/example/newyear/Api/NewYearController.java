@@ -100,6 +100,30 @@ public class NewYearController {
         return res;
     }
 
+    @GetMapping(value = "/api/githubRes")
+    public ArrayList<Integer> githubRes(@RequestParam String username,@RequestParam int id){
+        UserClass u = resolutionService.getUser(username);
+        Date today = new Date(System.currentTimeMillis());
+        ArrayList<UserRes> url = (ArrayList<UserRes>) resolutionService.getUserResList(u);
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i = 0 ; i < 371 ; i++){
+            res.add(0);
+        }
+
+        for(int i = 0 ; i < url.size() ; i++){
+            for(int j = 0; j < url.get(i).getListe().size();j++){
+                final int nb_jours = nbDaysBetweenDate(today,url.get(i).getListe().get(j).getDate());
+                if( nb_jours <= 371) {
+                    if (url.get(i).getResId()==id){
+                        res.set(nb_jours,url.get(i).getListe().get(j).getNb_do());
+                    }
+                }
+            }
+        }
+        Collections.reverse(res);
+        return res;
+    }
+
     public static int nbDaysBetweenDate(Date d,Date d1){
         long diff = d.getTime() - d1.getTime();
        return (int) (diff / (1000*60*60*24));

@@ -10,6 +10,5 @@ import java.io.Serializable;
 public interface ResolutionRepository extends JpaRepository<Resolution, Long> {
 
     Resolution findById(long id);
-    //Resolution findAll(long id);
 
 }
