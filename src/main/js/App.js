@@ -62,7 +62,7 @@ class App extends React.Component {
     }
     updateSate = () =>{
         this.setState({components :{
-                "Home": <Home username={this.state.username} createMonth={this.createMonth} createDay={this.createDay} createCases={this.createCases}/>,
+                "Home": <Home username={this.state.username} createMonth={this.createMonth} createDay={this.createDay} createCases={this.createCases} showButton={this.showButton}/>,
                 "Refresh":<Refresh/>,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
