@@ -86,7 +86,7 @@ class Home extends React.Component {
         render() {
         return (
             <div className="columns is-centered">
-                <div className="column mt-1 is-centered is-8">
+                <div className="column p-0 mt-5 is-centered is-8 home is-rounded ">
                     {this.props.username != "" ?
                         <div className="box github">
                             <h1 className="title has-text-white">Your tenacity</h1>
@@ -101,7 +101,7 @@ class Home extends React.Component {
                             </div>
                         </div>
                     : ""}
-                    <div className="box home has-text-centered is-8">
+                    <div className="box has-text-centered is-8">
                         <h1 className="title has-text-white">Most Popular Resolutions</h1>
                         <div className="scrollBox">
                         {this.createResolutions(this.state.resolutions.resolutions)}

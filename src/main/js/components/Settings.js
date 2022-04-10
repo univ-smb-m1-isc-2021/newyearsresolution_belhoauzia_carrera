@@ -57,7 +57,7 @@ class Settings extends React.Component {
 
     render() {return (
             <div className="columns mt-1 is-mobile is-centered">
-                <div className="box column field is-one-third is-centered has-text-centered">
+                <div className="box column field is-one-third is-centered has-text-centered home">
                     <h1 className="title mt-2 has-text-centered has-text-white">Settings</h1>
                     <div id="message" className="m-2 has-text-white">{this.state.message}</div>
                     <input type="checkbox" name="remember-me" className="m-2" checked={this.state.remember} onChange={() =>this.changeBox()}/>
