@@ -34,7 +34,7 @@ public class NewYearController {
         ArrayList<PopularityResolution> li = new ArrayList<PopularityResolution>();
         ArrayList<ResolutionHome> res = new ArrayList<>();
         for(int i = 0 ; i < l.size(); i++){
-            li.add(new PopularityResolution(l.get(i),resolutionService.nbUserResResolution(l.get(i))));
+            li.add(new PopularityResolution(l.get(i),resolutionService.nbUserResResolutionAcc(l.get(i))));
         }
         Collections.sort(li, new Comparator<PopularityResolution>(){
             public int compare(PopularityResolution o1, PopularityResolution o2){
@@ -43,7 +43,7 @@ public class NewYearController {
         });
         for(int i = 0 ; i < 3 ; i++){
             if(li.size() > i){
-                int percent = (int)(((float)resolutionService.nbUserResResolution(li.get(i).getR())/nb_user)*100);
+                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(li.get(i).getR())/nb_user)*100);
                 res.add(new ResolutionHome(li.get(i).getR(),percent));
             }
         }
@@ -53,12 +53,12 @@ public class NewYearController {
         while(random_left > 0 && !fini){
             int random = new Random().nextInt(l.size()) ;
             if(!isInArray(res,l.get(random))){
-                int percent = (int)(((float)resolutionService.nbUserResResolution(l.get(random))/nb_user)*100);
+                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nb_user)*100);
                 res.add(new ResolutionHome(l.get(random),percent));
                 random_left--;
             }
             if(!isInArray(done,l.get(random))){
-                int percent = (int)(((float)resolutionService.nbUserResResolution(l.get(random))/nb_user)*100);
+                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nb_user)*100);
                 done.add(new ResolutionHome( l.get(random),percent));
             }
             fini = isDone(done,l);

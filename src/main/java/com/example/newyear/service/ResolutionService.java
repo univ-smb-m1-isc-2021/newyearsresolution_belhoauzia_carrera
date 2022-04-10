@@ -68,6 +68,18 @@ public class ResolutionService {
         return userResRepository.findByResolution(r).size();
     }
 
+    public int nbUserResResolutionAcc(Resolution r) {
+        int res = 0;
+        List<UserRes> liste =userResRepository.findAll();
+
+        for(int i = 0;i<liste.size();i++){
+            if(liste.get(i).isAccomplish(new Date()) && (liste.get(i).getResId()==r.getId())){
+                res = res +1;
+            }
+        }
+        return res;
+    }
+
     public List<UserRes> getUserResList(UserClass u){
         return userResRepository.findByUser(u);
     }
