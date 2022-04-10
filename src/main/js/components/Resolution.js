@@ -151,6 +151,19 @@ class Resolution extends React.Component {
                                         {this.createCases(this.state.githubRes)}
                                         {this.createDay()}
                                     </div>
+                                <div>
+                                    <div className="legende">
+                                        <div className="jour">Less</div>
+                                        <div className="cooloor">
+                                            <div className='case lv1'></div>
+                                            <div className='case lv2'></div>
+                                            <div className='case lv3'></div>
+                                            <div className='case lv4'></div>
+                                            <div className='case lv5'></div>
+                                        </div>
+                                        <div className="jour">More</div>
+                                    </div>
+                                </div>
                             </div>
                             {this.state.isValide ? <div className={"subtitle has-text-white"}>&#9989; The resolution has been accomplished</div>
                             : <div className={"subtitle has-text-white"}>&#10060; The resolution has not been accomplished</div>}

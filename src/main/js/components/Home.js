@@ -97,7 +97,7 @@ class Home extends React.Component {
                                 </div>
                                 <div>
                                     <div className="legende">
-                                        <div className="jour">Less</div>
+                                        <div className="descLegende">Less</div>
                                         <div className="cooloor">
                                             <div className='case lv1'></div>
                                             <div className='case lv2'></div>
@@ -105,7 +105,7 @@ class Home extends React.Component {
                                             <div className='case lv4'></div>
                                             <div className='case lv5'></div>
                                         </div>
-                                        <div className="jour">More</div>
+                                        <div className="descLegende">More</div>
                                     </div>
                                 </div>
                             </div>
