@@ -51,7 +51,8 @@ public class NewYearController {
         boolean fini = false;
         ArrayList<ResolutionHome> done = new ArrayList<>();
         while(random_left > 0 && !fini){
-            int random = new Random().nextInt(l.size()) ;
+            Random rand = new Random();
+            int random = rand.nextInt(l.size()) ;
             if(!isInArray(res,l.get(random))){
                 int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nb_user)*100);
                 res.add(new ResolutionHome(l.get(random),percent));
@@ -205,7 +206,7 @@ public class NewYearController {
     @ResponseBody
     public String newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq,@RequestParam String username){
 
-        if(title != "" && des != "" && nb_oc > 0 && freq > 0) {
+        if(title.equals("") && des.equals("") && nb_oc > 0 && freq > 0) {
             resolutionService.addResolution(title, des, nb_oc, freq,username);
             logger.info("nouvelle resolution ajouté");
             return "ok";
