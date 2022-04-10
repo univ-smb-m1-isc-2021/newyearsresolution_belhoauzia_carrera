@@ -75,7 +75,7 @@ class App extends React.Component {
             axios.get(`/api/newUser?username=` + username + "&password=" + password+"&remember="+remember)
                 .then((res) => {
                     if (res.data != "Un utilisateur porte déjà ce nom") {
-                        this.setState({name: "Logged as " + res.data[0]})
+                        this.setState({name: res.data[0]})
                         this.setState({username: res.data[0]})
                         this.setState({msg: ""})
                         this.showButton()
