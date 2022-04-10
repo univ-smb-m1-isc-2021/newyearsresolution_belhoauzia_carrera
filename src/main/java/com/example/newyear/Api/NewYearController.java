@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 import static java.util.stream.Collectors.toList;
@@ -51,7 +52,7 @@ public class NewYearController {
         boolean fini = false;
         ArrayList<ResolutionHome> done = new ArrayList<>();
         while(random_left > 0 && !fini){
-            Random rand = new Random();
+            SecureRandom rand = new SecureRandom();
             int random = rand.nextInt(l.size()) ;
             if(!isInArray(res,l.get(random))){
                 int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nb_user)*100);
