@@ -4,6 +4,7 @@
 import com.example.newyear.InitReact;
 import com.example.newyear.persistence.InfoResolution;
 import com.example.newyear.persistence.ResolutionDo;
+import com.example.newyear.persistence.UserClass;
 import org.junit.jupiter.api.Test;
 
 import junit.framework.TestCase;
@@ -34,6 +35,12 @@ class JUnitTest extends TestCase{
         assertTrue(info_res.getStart_date().equals("28/07/2011"));
         assertTrue(info_res.getListe().size() == 0);
         assertTrue(info_res.isValide() == true);
+
+        UserClass u = new UserClass("Test","1234",false);
+        assertTrue(UserClass.encrytePassword("1234").length() > 20);
+        assertTrue(u.getToken() == null);
+        u.setToken();
+        assertTrue(u.getToken().length() > 20);
     }
 
 }
