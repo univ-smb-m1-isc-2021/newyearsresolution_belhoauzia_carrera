@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 import ResolutionDo from "./ResolutionDo";
 import Case from "./Case";
+import Day from "./day";
 
 class Resolution extends React.Component {
     constructor(props) {
@@ -117,6 +118,16 @@ class Resolution extends React.Component {
             return this.createCase(cases)
         })
     }
+
+    createDay = ()=>{
+        const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const d = new Date();
+        let day = weekday[d.getDay()];
+        for(let i = 0;i < 7;i++){
+            console.log(day);
+            return <Day day={day.substring(0, 3)}/>;
+        }
+    }
     render() {
         return (
             <div className="columns mt-1 is-centered is-half">
@@ -124,7 +135,7 @@ class Resolution extends React.Component {
                     <h1 className="title has-text-white">{this.props.resolution.title}</h1>
                     <h2 className="subtitle has-text-white">{this.props.resolution.description}</h2>
                     <h2>
-                        This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ? this.props.resolution.frequency/7 + "week(s)" : this.props.resolution.frequency%31==0? this.props.resolution.frequency%31 +" month(s)":this.props.resolution.frequency + " day(s)" }
+                        This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ? this.props.resolution.frequency/7 + "week(s)" : this.props.resolution.frequency%31==0? this.props.resolution.frequency/31 +" month(s)":this.props.resolution.frequency + " day(s)" }
                     </h2>
                         <div className="subtitle has-text-white">{this.state.message}</div>
                     { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.resolution.id)}>Add resolution</button> : null }
@@ -135,6 +146,7 @@ class Resolution extends React.Component {
                                 <h3 className="title has-text-white">Your tenacity</h3>
                                     <div className='boxGit'>
                                         {this.createCases(this.state.githubRes)}
+                                        {this.createDay()}
                                     </div>
                             </div>
                             {this.state.isValide ? <div className={"subtitle has-text-white"}>&#9989; The resolution has been accomplished</div>
