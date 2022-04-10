@@ -18,6 +18,9 @@ body {
   background-color: #6F8AB7 !important;
 }
 
+.github{
+}
+
 .resolutions{
   max-height: 80vh;
   overflow-y: scroll;
@@ -30,10 +33,27 @@ body {
   grid-template-rows: 13px 13px 13px 13px 13px 13px 13px;
   gap: 4px 4px;
   grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .case{
   border-radius: 2px;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px 0 2px;
+}
+
+.legende {
+  display: flex;
+  flex-direction: row;
+}
+
+.cooloor {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10px 0 10px;
+  align-items: center;
 }
 
 .jour{

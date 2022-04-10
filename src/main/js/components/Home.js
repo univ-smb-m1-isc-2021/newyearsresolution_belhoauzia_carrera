@@ -95,8 +95,18 @@ class Home extends React.Component {
                                     {this.createCases(this.state.github)}
                                     {this.createDay()}
                                 </div>
-                                <div className="legende">
-                                    <div className="case "></div>
+                                <div>
+                                    <div className="legende">
+                                        <div className="jour">Less</div>
+                                        <div className="cooloor">
+                                            <div className='case lv1'></div>
+                                            <div className='case lv2'></div>
+                                            <div className='case lv3'></div>
+                                            <div className='case lv4'></div>
+                                            <div className='case lv5'></div>
+                                        </div>
+                                        <div className="jour">More</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
