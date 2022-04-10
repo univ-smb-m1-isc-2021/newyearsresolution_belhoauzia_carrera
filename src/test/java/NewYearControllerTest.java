@@ -1,8 +1,6 @@
 import com.example.newyear.Api.NewYearController;
-import com.example.newyear.NewYearApplication;
 import com.example.newyear.persistence.Resolution;
 import com.example.newyear.persistence.ResolutionHome;
-import com.example.newyear.service.ResolutionService;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +17,7 @@ class NewYearControllerTest extends TestCase{
     public void test(){
         NewYearController rs = new NewYearController(null);
         ArrayList<ResolutionHome> l = new ArrayList<ResolutionHome>();
-        List<ResolutionHome> d = new ArrayList<ResolutionHome>();
+        List<Resolution> d = new ArrayList<>();
         Resolution r1 = new Resolution("Test","test",0,1);
         r1.setId(1L);
         r1.setId(2L);
@@ -27,10 +25,10 @@ class NewYearControllerTest extends TestCase{
         assertTrue(rs.isInArray(l,r1) == false);
         l.add(new ResolutionHome(r1,10));
         assertTrue(rs.isInArray(l,r1) == true);
-        d.add(new ResolutionHome(r1,10));
-        //assertTrue(rs.isDone(l,d) == true);
-        d.add(new ResolutionHome(r2,10));
-        //assertTrue(rs.isDone(l,d) == false);
+        d.add(r1);
+        assertTrue(rs.isDone(l,d) == true);
+        d.add(r2);
+        assertTrue(rs.isDone(l,d) == false);
 
     }
 

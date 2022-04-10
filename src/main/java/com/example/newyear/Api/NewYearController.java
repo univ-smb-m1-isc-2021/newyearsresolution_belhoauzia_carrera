@@ -25,6 +25,7 @@ public class NewYearController {
         this.resolutionService = resolutionService;
     }
 
+    //send 3 most popular resolution + 2 random with % of success
     @GetMapping(value = "/api/AllResolutions")
     public List<ResolutionHome> title(){
         logger.info("Service Resolutions");
@@ -65,6 +66,8 @@ public class NewYearController {
         return res;
 
     }
+
+    //send true if the array are equal
     public boolean isDone(ArrayList<ResolutionHome> l ,List<Resolution> d){
         for(int i = 0 ; i < d.size(); i++){
             if(!isInArray(l,d.get(i))){
@@ -73,6 +76,8 @@ public class NewYearController {
         }
         return true;
     }
+
+    //return true in the resolution is in the array
     public boolean isInArray(ArrayList<ResolutionHome> l , Resolution r){
         for(int i = 0; i < l.size();i++){
             if(l.get(i).getResolution().getId() == r.getId()){
@@ -82,6 +87,7 @@ public class NewYearController {
         return false;
     }
 
+    //send an array of integer for the github resolution
     @GetMapping(value = "/api/github")
     public ArrayList<Integer> github(@RequestParam String username){
         UserClass u = resolutionService.getUser(username);
@@ -103,6 +109,7 @@ public class NewYearController {
         Collections.reverse(res);
         return res;
     }
+
 
     @GetMapping(value = "/api/githubRes")
     public ArrayList<Integer> githubRes(@RequestParam String username,@RequestParam int id){
@@ -128,11 +135,13 @@ public class NewYearController {
         return res;
     }
 
+    //return the number of day between two days
     public static int nbDaysBetweenDate(Date d,Date d1){
         long diff = d.getTime() - d1.getTime();
        return (int) (diff / (1000*60*60*24));
     }
 
+    //send all resolution of an user
     @GetMapping(value = "/api/myResolution")
     public List<Resolution> myResolution(@RequestParam String username){
         List<Resolution> l = resolutionService.myResolution(username);
@@ -148,6 +157,7 @@ public class NewYearController {
         }
     }
 
+    //add a resolution to an user
     @GetMapping(value = "/api/addResolutionToUser")
     @ResponseBody
     public String addResolutionToUser(@RequestParam String username,@RequestParam int id){
@@ -159,23 +169,30 @@ public class NewYearController {
         }
     }
 
+    //send info for a reolution
     @GetMapping(value = "/api/getUserRes")
     @ResponseBody
     public InfoResolution getUserRes(@RequestParam String username, @RequestParam int id){
         UserRes r = resolutionService.getUserRes(username,id);
         return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
+
+    //send true is the user have this resolution
     @GetMapping(value = "/api/haveResolution")
     @ResponseBody
     public boolean haveResolution(@RequestParam String username, @RequestParam int id){
         return resolutionService.haveResolution(username,id);
     }
+
+    //when a user validate his resolution
     @GetMapping(value = "/api/done")
     @ResponseBody
     public InfoResolution done(@RequestParam String username, @RequestParam int id, @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
         UserRes r = resolutionService.setUserRes(username,id,1,date);
         return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
+
+    //when a user fail his resolution
     @GetMapping(value = "/api/failed")
     @ResponseBody
     public InfoResolution failed(@RequestParam String username, @RequestParam int id,  @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
@@ -183,6 +200,7 @@ public class NewYearController {
         return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
 
+    //creation of a new resolution
     @GetMapping(value = "/api/newResolution")
     @ResponseBody
     public String newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq,@RequestParam String username){
@@ -193,6 +211,8 @@ public class NewYearController {
             return "ok";
         }else{logger.info("erreur nouvelle resolution");return "nok";}
     }
+
+    //creation of a new user
     @GetMapping(value = "/api/newUser")
     @ResponseBody
     public List<String> newUser(@RequestParam String username,@RequestParam String password,@RequestParam Boolean remember){
@@ -209,6 +229,8 @@ public class NewYearController {
         res.add(username);
         return rememberMe(username, remember, res);
     }
+
+    //login of an user
     @GetMapping(value = "/api/login")
     public List<String> login(@RequestParam String username,@RequestParam String password,@RequestParam Boolean remember){
         List<UserClass> ul = resolutionService.userList();
@@ -230,6 +252,8 @@ public class NewYearController {
         return res;
 
     }
+
+    //generate a token for remember me
     @GetMapping(value = "/api/getToken")
     public String generateToken(@RequestParam String username){
         List<UserClass> ul = resolutionService.userList();
@@ -244,6 +268,8 @@ public class NewYearController {
         logger.info("error during generation");
         return null;
     }
+
+    //delete an user
     @GetMapping(value = "/api/deleteAccount")
     public String deleteAccount(@RequestParam String username,@RequestParam String password){
         List<UserClass> ul = resolutionService.userList();
@@ -266,6 +292,8 @@ public class NewYearController {
         logger.info("error account deletion");
         return null;
     }
+
+    //change password of an user
     @GetMapping(value = "/api/changePassword")
     public String changePassword(@RequestParam String username,@RequestParam String password){
         List<UserClass> ul = resolutionService.userList();
@@ -280,6 +308,8 @@ public class NewYearController {
         logger.info("error while changing password");
         return "Error while changing the password";
     }
+
+    //remember me connection
     @GetMapping(value = "/api/auto_connect")
     public String autoConnection(@RequestParam String token){
         List<UserClass> ul = resolutionService.userList();
@@ -292,6 +322,7 @@ public class NewYearController {
         return "null";
 
     }
+
     private List<String> rememberMe( String username, Boolean remember, List<String> res) {
         List<UserClass> ul;
         if(remember){
