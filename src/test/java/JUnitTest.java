@@ -2,9 +2,7 @@
 
 
 import com.example.newyear.InitReact;
-import com.example.newyear.persistence.InfoResolution;
-import com.example.newyear.persistence.ResolutionDo;
-import com.example.newyear.persistence.UserClass;
+import com.example.newyear.persistence.*;
 import org.junit.jupiter.api.Test;
 
 import junit.framework.TestCase;
@@ -24,7 +22,7 @@ class JUnitTest extends TestCase{
         InitReact ir = new InitReact();
         assertTrue(ir.serialize().length() > 0);
 
-        //Info resolution
+        //INFO RESOLUTION
         String inputDate = "07/28/2011 11:06:37 AM";
         Date date = null;
         try {
@@ -36,11 +34,24 @@ class JUnitTest extends TestCase{
         assertTrue(info_res.getListe().size() == 0);
         assertTrue(info_res.isValide() == true);
 
+
+        //USER CLASS
         UserClass u = new UserClass("Test","1234",false);
         assertTrue(UserClass.encrytePassword("1234").length() > 20);
         assertTrue(u.getToken() == null);
         u.setToken();
         assertTrue(u.getToken().length() > 20);
+
+
+        //UserRes
+        Resolution r1 = new Resolution("Test","test",11,1);
+        UserRes ur = new UserRes(u,r1,date);
+        ur.addResolutionDo(date,10);
+        assertTrue(ur.getListe().size() == 1);
+        assertTrue(ur.isAccomplish(date) == false);
+        ur.addResolutionDo(date,10);
+        assertTrue(ur.getListe().size() == 1 && ur.getListe().get(0).getNb_do() == 20);
+        assertTrue(ur.isAccomplish(date) == true);
     }
 
 }
