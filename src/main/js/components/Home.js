@@ -77,9 +77,7 @@ class Home extends React.Component {
         const d = new Date();
         weekday = weekday.slice(0,d.getDay()+1).reverse().concat(weekday.slice(d.getDay()+1).reverse());
         weekday = weekday.reverse();
-        console.log(weekday);
         return weekday.map((element,key)=>{
-                console.log(element);
                 return <div className="jour">{element.substring(0, 3)}</div>;
             }
         )
@@ -96,6 +94,9 @@ class Home extends React.Component {
                                 <div className='boxGit'>
                                     {this.createCases(this.state.github)}
                                     {this.createDay()}
+                                </div>
+                                <div className="legende">
+                                    <div className="case "></div>
                                 </div>
                             </div>
                         </div>
