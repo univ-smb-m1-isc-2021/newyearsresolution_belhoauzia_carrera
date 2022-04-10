@@ -123,12 +123,20 @@ class Resolution extends React.Component {
         const d = new Date();
         weekday = weekday.slice(0,d.getDay()+1).reverse().concat(weekday.slice(d.getDay()+1).reverse());
         weekday = weekday.reverse();
-        console.log(weekday);
         return weekday.map((element,key)=>{
-                console.log(element);
                 return <div className="jour">{element.substring(0, 3)}</div>;
             }
         )
+    }
+
+    createMonth = ()=> {
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const m = new Date();
+        months = months.slice(0,m.getMonth()+1).reverse().concat(months.slice(m.getMonth()+1).reverse());
+        months = months.reverse();
+        return months.map((element,key)=>{
+            return <div className="month">{element.substring(0, 3)}</div>;
+        })
     }
 
     render() {
@@ -147,8 +155,8 @@ class Resolution extends React.Component {
                             <div className="subtitle has-text-white"> Start date : {this.state.date}</div>
                             <div className="github">
                                 <h3 className="title has-text-white">Your tenacity</h3>
-                                <div className="month">
-                                    
+                                <div className="months">
+                                    {this.createMonth()}
                                 </div>
                                     <div className='boxGit'>
                                         {this.createCases(this.state.githubRes)}

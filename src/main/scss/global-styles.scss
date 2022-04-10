@@ -65,6 +65,19 @@ body {
   padding: 4px;
 }
 
+.month{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin: 0px 25px 0px 25px;
+}
+
+.months{
+  display: flex;
+  flex-direction: row;
+}
+
 .descLegende{
   display: flex;
   align-items: center;
