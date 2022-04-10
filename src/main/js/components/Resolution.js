@@ -138,7 +138,7 @@ class Resolution extends React.Component {
                     <h1 className="title has-text-white">{this.props.resolution.title}</h1>
                     <h2 className="subtitle has-text-white">{this.props.resolution.description}</h2>
                     <h2>
-                        This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ? this.props.resolution.frequency/7 + "week(s)" : this.props.resolution.frequency%31==0? this.props.resolution.frequency/31 +" month(s)":this.props.resolution.frequency + " day(s)" }
+                        This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ?this.props.resolution.frequency/7==1? "week" : this.props.resolution.frequency/7 + " weeks" : this.props.resolution.frequency%31==0? this.props.resolution.frequency/31==1? "month" : this.props.resolution.frequency/31 +" months": this.props.resolution.frequency==1? "day" : this.props.resolution.frequency + " day(s)" }
                     </h2>
                         <div className="subtitle has-text-white">{this.state.message}</div>
                     { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.id)}>Add resolution</button> : null }
@@ -147,13 +147,16 @@ class Resolution extends React.Component {
                             <div className="subtitle has-text-white"> Start date : {this.state.date}</div>
                             <div className="github">
                                 <h3 className="title has-text-white">Your tenacity</h3>
+                                <div className="month">
+                                    
+                                </div>
                                     <div className='boxGit'>
                                         {this.createCases(this.state.githubRes)}
                                         {this.createDay()}
                                     </div>
                                 <div>
                                     <div className="legende">
-                                        <div className="jour">Less</div>
+                                        <div className="descLegende">Less</div>
                                         <div className="cooloor">
                                             <div className='case lv1'></div>
                                             <div className='case lv2'></div>
@@ -161,7 +164,7 @@ class Resolution extends React.Component {
                                             <div className='case lv4'></div>
                                             <div className='case lv5'></div>
                                         </div>
-                                        <div className="jour">More</div>
+                                        <div className="descLegende">More</div>
                                     </div>
                                 </div>
                             </div>
