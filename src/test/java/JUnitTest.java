@@ -12,8 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public
-class JUnitTest extends TestCase{
+public class JUnitTest extends TestCase{
 
 
     @Test
@@ -29,16 +28,16 @@ class JUnitTest extends TestCase{
             date = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a").parse(inputDate);
         } catch (ParseException e) {
         }
-        InfoResolution info_res = new InfoResolution(date,new ArrayList<ResolutionDo>(),"dd/MM/yyy",true);
-        assertTrue(info_res.getStart_date().equals("28/07/2011"));
-        assertTrue(info_res.getListe().size() == 0);
-        assertTrue(info_res.isValide() == true);
+        InfoResolution infoRes = new InfoResolution(date,new ArrayList<ResolutionDo>(),"dd/MM/yyy",true);
+        assertEquals(infoRes.getStart_date(),"28/07/2011");
+        assertEquals(infoRes.getListe().size() , 0);
+        assertEquals(infoRes.isValide() , true);
 
 
         //USER CLASS
         UserClass u = new UserClass("Test","1234",false);
         assertTrue(UserClass.encrytePassword("1234").length() > 20);
-        assertTrue(u.getToken() == null);
+        assertEquals(u.getToken() , null);
         u.setToken();
         assertTrue(u.getToken().length() > 20);
 
@@ -47,11 +46,11 @@ class JUnitTest extends TestCase{
         Resolution r1 = new Resolution("Test","test",11,1);
         UserRes ur = new UserRes(u,r1,date);
         ur.addResolutionDo(date,10);
-        assertTrue(ur.getListe().size() == 1);
-        assertTrue(ur.isAccomplish(date) == false);
+        assertEquals(ur.getListe().size() , 1);
+        assertEquals(ur.isAccomplish(date) , false);
         ur.addResolutionDo(date,10);
         assertTrue(ur.getListe().size() == 1 && ur.getListe().get(0).getNb_do() == 20);
-        assertTrue(ur.isAccomplish(date) == true);
+        assertEquals(ur.isAccomplish(date) , true);
     }
 
 }

@@ -9,8 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public
-class NewYearControllerTest extends TestCase{
+public class NewYearControllerTest extends TestCase{
 
 
     @Test
@@ -22,13 +21,13 @@ class NewYearControllerTest extends TestCase{
         r1.setId(1L);
         r1.setId(2L);
         Resolution r2 = new Resolution("Test","test",0,1);
-        assertTrue(rs.isInArray(l,r1) == false);
+        assertEquals(rs.isInArray(l,r1) , false);
         l.add(new ResolutionHome(r1,10));
-        assertTrue(rs.isInArray(l,r1) == true);
+        assertEquals(rs.isInArray(l,r1) , true);
         d.add(r1);
-        assertTrue(rs.isDone(l,d) == true);
+        assertEquals(rs.isDone(l,d) , true);
         d.add(r2);
-        assertTrue(rs.isDone(l,d) == false);
+        assertEquals(rs.isDone(l,d) , false);
 
     }
 

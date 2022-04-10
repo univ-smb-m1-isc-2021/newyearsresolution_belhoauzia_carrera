@@ -49,7 +49,7 @@ public class ResolutionService {
             try{
                 r = re.get();
             }catch(NoSuchElementException e){
-                System.out.println(e);
+                System.err.println(e);
             }
             if(r != null){
                 res.add(r);
