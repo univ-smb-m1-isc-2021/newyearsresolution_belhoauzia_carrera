@@ -1,5 +1,5 @@
 # NewYearsResolution_Belhaouzia_Carrera
-NewYearsResolution by Thomas Carrera and Zohir Belhaouzia
+NewYearsResolution by _Thomas Carrera_ and _Zohir Belhaouzia_
 
 Fonctionalitées :
 application mutli-utilisateur (s'enregistrer / supprimer son compte / social login / remember me)
