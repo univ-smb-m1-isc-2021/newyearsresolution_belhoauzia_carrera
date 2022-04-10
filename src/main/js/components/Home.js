@@ -2,7 +2,6 @@ import React from "react";
 import axios from 'axios';
 import Resolution from "./Resolution";
 import Case from "./Case";
-import Day from "./day";
 
 class Home extends React.Component {
 
@@ -76,12 +75,12 @@ class Home extends React.Component {
     createDay = ()=> {
         let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const d = new Date();
-        weekday = weekday.slice(d.getDay()).concat(weekday.slice(0,d.getDay()));
+        weekday = weekday.slice(0,d.getDay()+1).reverse().concat(weekday.slice(d.getDay()+1).reverse());
         weekday = weekday.reverse();
         console.log(weekday);
-        weekday.map((element,key)=>{
-            console.log(element);
-            return <div className="jour">{element.substring(0, 3)}</div>;
+        return weekday.map((element,key)=>{
+                console.log(element);
+                return <div className="jour">{element.substring(0, 3)}</div>;
             }
         )
     }
