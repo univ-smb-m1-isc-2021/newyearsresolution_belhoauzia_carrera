@@ -126,9 +126,6 @@ class Resolution extends React.Component {
                     <h2>
                         This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ? this.props.resolution.frequency/7 + "week(s)" : this.props.resolution.frequency%31==0? this.props.resolution.frequency%31 +" month(s)":this.props.resolution.frequency + " day(s)" }
                     </h2>
-                    <h2>
-                        {this.props.showButton?this.props.percent + "% of the user has done this resolution in time" :""}
-                    </h2>
                         <div className="subtitle has-text-white">{this.state.message}</div>
                     { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.resolution.id)}>Add resolution</button> : null }
                     { !this.props.showButton && this.props.username != "" ?
@@ -151,7 +148,9 @@ class Resolution extends React.Component {
                             <button className="button is-success" onClick={() => this.done(this.props.resolution.id)}>Done</button>
                             <button className="button ml-3 is-danger" onClick={() => this.failed(this.props.resolution.id)}>Failed</button>
                         </div>
-                    : null }
+                    :   <h2>
+                            {this.props.percent + "% of the user has done this resolution in time"}
+                        </h2> }
                 </div>
             </div>
         );

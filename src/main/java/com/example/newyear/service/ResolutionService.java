@@ -72,6 +72,7 @@ public class ResolutionService {
         return userResRepository.findByUser(u);
     }
 
+
     public void removeUserRes(UserRes u){userResRepository.delete(u);}
 
     public UserRes setUserRes(String username,int id,int nb_do,Date d){
@@ -107,4 +108,8 @@ public class ResolutionService {
     }
 
     public void removeUser(UserClass u){userRepository.delete(u);}
+
+    public long nb_user(){
+        return userRepository.count();
+    }
 }
