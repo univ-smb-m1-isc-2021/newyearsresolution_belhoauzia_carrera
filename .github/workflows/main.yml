@@ -20,8 +20,8 @@ jobs:
           java-version: '17'
 
       - name: Maven Build & Sonar analysis
-        #run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-        run: mvn -B verify --file pom.xml
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=univ-smb-m1-isc-2021_newyearsresolution_belhoauzia_carrera
+        #run: mvn -B verify --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
