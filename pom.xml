@@ -117,7 +117,6 @@
 
     </dependencies>
 
-
     <build>
         <pluginManagement>
             <plugins>
@@ -242,10 +241,14 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <formats>
+                                <format>XML</format>
+                            </formats>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
