@@ -16,7 +16,7 @@
     <properties>
         <java.version>11</java.version>
         <sonar.organization>univ-smb-m1-isc-2021</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io/</sonar.host.url>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
@@ -38,6 +38,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -100,6 +104,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.22.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -112,30 +122,6 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.3.0</version>
-                </plugin>
-                <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.9.1</version>
                 </plugin>
@@ -146,8 +132,31 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
         <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>node_modules</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <environmentVariables>
+                        <SPRING_DATASOURCE_URL>jdbc:postgresql://localhost:5432/postgres</SPRING_DATASOURCE_URL>
+                        <SPRING_DATASOURCE_USERNAME>postgres</SPRING_DATASOURCE_USERNAME>
+                        <SPRING_DATASOURCE_PASSWORD>password</SPRING_DATASOURCE_PASSWORD>
+                        <SPRING_JPA_HIBERNATE_DDL_AUTO>update</SPRING_JPA_HIBERNATE_DDL_AUTO>
+                        <SPRING_JPA_DATABASE>POSTGRESQL</SPRING_JPA_DATABASE>
+                    </environmentVariables>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
@@ -184,25 +193,42 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <environmentVariables>
-                        <SPRING_DATASOURCE_URL>jdbc:postgresql://localhost:5432/postgres</SPRING_DATASOURCE_URL>
-                        <SPRING_DATASOURCE_USERNAME>postgres</SPRING_DATASOURCE_USERNAME>
-                        <SPRING_DATASOURCE_PASSWORD>password</SPRING_DATASOURCE_PASSWORD>
-                        <SPRING_JPA_HIBERNATE_DDL_AUTO>update</SPRING_JPA_HIBERNATE_DDL_AUTO>
-                        <SPRING_JPA_DATABASE>POSTGRESQL</SPRING_JPA_DATABASE>
-                    </environmentVariables>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>main.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
 
             <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <version>4.9.10</version>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+            </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -223,53 +249,14 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>enforce-versions</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <bannedPlugins>
-                                    <level>WARN</level>
-                                    <excludes>
-                                        <exclude>org.apache.maven.plugins:maven-verifier-plugin</exclude>
-                                    </excludes>
-                                    <message>Please consider using the maven-invoker-plugin
-                                        (http://maven.apache.org/plugins/maven-invoker-plugin/)!
-                                    </message>
-                                </bannedPlugins>
-                                <requireMavenVersion>
-                                    <version>3.5</version>
-                                </requireMavenVersion>
-                                <requireJavaVersion>
-                                    <version>11</version>
-                                </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.9.0</version>
-                <executions>
-                    <execution>
-                        <id>display-plugin-updates</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>display-plugin-updates</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+    <repositories>
+        <!-- ... possibly other repository elements ... -->
+        <repository>
+            <id>spring-snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>http://repo.spring.io/snapshot</url>
+        </repository>
+    </repositories>
 </project>
