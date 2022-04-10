@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import Legende from "./Legende";
 
 class Resolution extends React.Component {
     constructor(props) {
@@ -105,19 +106,7 @@ class Resolution extends React.Component {
                                         {this.props.createCases(this.state.githubRes)}
                                         {this.props.createDay()}
                                     </div>
-                                <div>
-                                    <div className="legende">
-                                        <div className="descLegende">Less</div>
-                                        <div className="cooloor">
-                                            <div className='case lv1'></div>
-                                            <div className='case lv2'></div>
-                                            <div className='case lv3'></div>
-                                            <div className='case lv4'></div>
-                                            <div className='case lv5'></div>
-                                        </div>
-                                        <div className="descLegende">More</div>
-                                    </div>
-                                </div>
+                                <Legende/>
                             </div>
                             {this.state.isValide ? <div className={"subtitle has-text-white"}>&#9989; The resolution has been accomplished</div>
                             : <div className={"subtitle has-text-white"}>&#10060; The resolution has not been accomplished</div>}
