@@ -24,7 +24,7 @@ class AddResolution extends React.Component {
                     this.props.refreshComponent()
                 }else{this.setState({ erreur : "Something went wrong"})}
             })
-            .catch(res =>{
+            .catch(() =>{
                 this.setState({ erreur : "Something went wrong"})
             })
     }

@@ -141,7 +141,7 @@ class App extends React.Component {
     }
     logout(){
         axios.post(`/logout`)
-            .then(res => {
+            .then(() => {
                 this.resetHome()
                 localStorage.removeItem("rememberme")
             })

@@ -1,7 +1,5 @@
 import React from "react";
 import axios from 'axios';
-import ResolutionDo from "./ResolutionDo";
-import Case from "./Case";
 
 class Resolution extends React.Component {
     constructor(props) {
