@@ -1,7 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import Resolution from "./Resolution";
-import Case from "./Case";
+import Legende from "./Legende";
 
 class Home extends React.Component {
 
@@ -22,7 +22,7 @@ class Home extends React.Component {
             this.fetchGithub()
         }
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate() {
         if(!this.state.was){
             this.setState({was:true})
             this.fetchGithub()
@@ -64,19 +64,7 @@ class Home extends React.Component {
                                     {this.props.createCases(this.state.github)}
                                     {this.props.createDay()}
                                 </div>
-                                <div>
-                                    <div className="legende">
-                                        <div className="descLegende">Less</div>
-                                        <div className="cooloor">
-                                            <div className='case lv1'></div>
-                                            <div className='case lv2'></div>
-                                            <div className='case lv3'></div>
-                                            <div className='case lv4'></div>
-                                            <div className='case lv5'></div>
-                                        </div>
-                                        <div className="descLegende">More</div>
-                                    </div>
-                                </div>
+                                <Legende/>
                             </div>
                         </div>
                     : ""}

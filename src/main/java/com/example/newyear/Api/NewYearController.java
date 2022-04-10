@@ -30,7 +30,7 @@ public class NewYearController {
     @GetMapping(value = "/api/AllResolutions")
     public List<ResolutionHome> title(){
         logger.info("Service Resolutions");
-        float nb_user = (float) resolutionService.nb_user();
+        float nbUser = (float) resolutionService.nb_user();
         List<Resolution> l = resolutionService.resolutionList().stream().collect(toList());
         ArrayList<PopularityResolution> li = new ArrayList<PopularityResolution>();
         ArrayList<ResolutionHome> res = new ArrayList<>();
@@ -44,23 +44,23 @@ public class NewYearController {
         });
         for(int i = 0 ; i < 3 ; i++){
             if(li.size() > i){
-                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(li.get(i).getR())/nb_user)*100);
+                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(li.get(i).getR())/nbUser)*100);
                 res.add(new ResolutionHome(li.get(i).getR(),percent));
             }
         }
-        int random_left = 2;
+        int randomLeft = 2;
         boolean fini = false;
         ArrayList<ResolutionHome> done = new ArrayList<>();
-        while(random_left > 0 && !fini){
+        while(randomLeft > 0 && !fini){
             SecureRandom rand = new SecureRandom();
             int random = rand.nextInt(l.size()) ;
             if(!isInArray(res,l.get(random))){
-                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nb_user)*100);
+                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nbUser)*100);
                 res.add(new ResolutionHome(l.get(random),percent));
-                random_left--;
+                randomLeft--;
             }
             if(!isInArray(done,l.get(random))){
-                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nb_user)*100);
+                int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nbUser)*100);
                 done.add(new ResolutionHome( l.get(random),percent));
             }
             fini = isDone(done,l);
@@ -92,6 +92,10 @@ public class NewYearController {
     //send an array of integer for the github resolution
     @GetMapping(value = "/api/github")
     public ArrayList<Integer> github(@RequestParam String username){
+    return githubParcous(username,-1);
+    }
+
+    public ArrayList<Integer> githubParcous(String username,int id){
         UserClass u = resolutionService.getUser(username);
         Date today = new Date(System.currentTimeMillis());
         ArrayList<UserRes> url = (ArrayList<UserRes>) resolutionService.getUserResList(u);
@@ -102,9 +106,15 @@ public class NewYearController {
 
         for(int i = 0 ; i < url.size() ; i++){
             for(int j = 0; j < url.get(i).getListe().size();j++){
-                final int nb_jours = nbDaysBetweenDate(today,url.get(i).getListe().get(j).getDate());
-                if( nb_jours <= 371) {
-                    res.set(nb_jours,url.get(i).getListe().get(j).getNb_do());
+                final int nbJours = nbDaysBetweenDate(today,url.get(i).getListe().get(j).getDate());
+                if( nbJours <= 371) {
+                    if(id != -1){
+                        if (url.get(i).getResId()==id){
+                            res.set(nbJours,url.get(i).getListe().get(j).getNb_do());
+                        }
+                    }else{
+                        res.set(nbJours,url.get(i).getListe().get(j).getNb_do());
+                    }
                 }
             }
         }
@@ -112,29 +122,9 @@ public class NewYearController {
         return res;
     }
 
-
     @GetMapping(value = "/api/githubRes")
     public ArrayList<Integer> githubRes(@RequestParam String username,@RequestParam int id){
-        UserClass u = resolutionService.getUser(username);
-        Date today = new Date(System.currentTimeMillis());
-        ArrayList<UserRes> url = (ArrayList<UserRes>) resolutionService.getUserResList(u);
-        ArrayList<Integer> res = new ArrayList<>();
-        for(int i = 0 ; i < 371 ; i++){
-            res.add(0);
-        }
-
-        for(int i = 0 ; i < url.size() ; i++){
-            for(int j = 0; j < url.get(i).getListe().size();j++){
-                final int nb_jours = nbDaysBetweenDate(today,url.get(i).getListe().get(j).getDate());
-                if( nb_jours <= 371) {
-                    if (url.get(i).getResId()==id){
-                        res.set(nb_jours,url.get(i).getListe().get(j).getNb_do());
-                    }
-                }
-            }
-        }
-        Collections.reverse(res);
-        return res;
+        return githubParcous(username,id);
     }
 
     //return the number of day between two days
@@ -206,9 +196,9 @@ public class NewYearController {
     @GetMapping(value = "/api/newResolution")
     @ResponseBody
     public String newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq,@RequestParam String username){
-
-        if(title.equals("") && des.equals("") && nb_oc > 0 && freq > 0) {
-            resolutionService.addResolution(title, des, nb_oc, freq,username);
+        int nb = nb_oc;
+        if(title.equals("") && des.equals("") && nb > 0 && freq > 0) {
+            resolutionService.addResolution(title, des, nb, freq,username);
             logger.info("nouvelle resolution ajouté");
             return "ok";
         }else{logger.info("erreur nouvelle resolution");return "nok";}
