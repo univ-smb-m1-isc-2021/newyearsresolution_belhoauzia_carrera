@@ -48,50 +48,6 @@ class Home extends React.Component {
     createResolutions =  (resolutions) => {
         return resolutions.map(this.createResolution)
     }
-    createCase = (cases) => {
-        let color_case
-        if(cases < 1){
-            color_case = "lv1"
-        }
-        else if(cases < 5){
-            color_case = "lv2"
-        }
-        else if(cases < 10){
-            color_case = "lv3"
-        }
-        else if(cases < 15){
-            color_case = "lv4"
-        }
-        else {
-            color_case = "lv5"
-        }
-        return <Case case={color_case}/>;
-    }
-    createCases =  (cases) => {
-        return cases.map ((cases) => {
-             return this.createCase(cases)
-        })
-    }
-    createDay = ()=> {
-        let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const d = new Date();
-        weekday = weekday.slice(0,d.getDay()+1).reverse().concat(weekday.slice(d.getDay()+1).reverse());
-        weekday = weekday.reverse();
-        return weekday.map((element,key)=>{
-                return <div className="jour">{element.substring(0, 3)}</div>;
-            }
-        )
-    }
-
-    createMonth = ()=> {
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const m = new Date();
-        months = months.slice(0,m.getMonth()+1).reverse().concat(months.slice(m.getMonth()+1).reverse());
-        months = months.reverse();
-        return months.map((element,key)=>{
-            return <div className="month">{element.substring(0, 3)}</div>;
-        })
-    }
 
         render() {
         return (
@@ -102,11 +58,11 @@ class Home extends React.Component {
                             <h1 className="title has-text-white">Your tenacity</h1>
                             <div className="">
                                 <div className="months">
-                                    {this.createMonth()}
+                                    {this.props.createMonth()}
                                 </div>
                                 <div className='boxGit'>
-                                    {this.createCases(this.state.github)}
-                                    {this.createDay()}
+                                    {this.props.createCases(this.state.github)}
+                                    {this.props.createDay()}
                                 </div>
                                 <div>
                                     <div className="legende">

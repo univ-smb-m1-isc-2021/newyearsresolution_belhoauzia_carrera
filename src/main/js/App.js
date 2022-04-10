@@ -8,6 +8,7 @@ import Settings from "./components/Settings.js";
 import Footer from "./components/Footer";
 import Refresh from "./components/Refresh";
 import axios from 'axios';
+import Case from "./components/Case";
 
 class App extends React.Component {
 
@@ -30,7 +31,7 @@ class App extends React.Component {
                 .then(res => {
                     if(res.data != null) {
                         this.setState({username: res.data,name:res.data,components :{
-                                "Home": <Home username={res.data} /> }},()=> this.showButton())
+                                "Home": <Home username={res.data}  createMonth={this.createMonth} createDay={this.createDay} createCases={this.createCases}/> }},()=> this.showButton())
                         this.updateSate()
                     }else{
                         this.showComponent("Home")}
@@ -61,11 +62,11 @@ class App extends React.Component {
     }
     updateSate = () =>{
         this.setState({components :{
-                "Home": <Home username={this.state.username} />,
+                "Home": <Home username={this.state.username} createMonth={this.createMonth} createDay={this.createDay} createCases={this.createCases}/>,
                 "Refresh":<Refresh/>,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
-                "MyResolution": <MyResolution username={this.state.username}/>,
+                "MyResolution": <MyResolution username={this.state.username} createMonth={this.createMonth} createDay={this.createDay} createCases={this.createCases}/>,
                 "Settings": <Settings resetHome={this.resetHome}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         })
@@ -106,11 +107,11 @@ class App extends React.Component {
     }
     hideButton = ()=>{
         this.setState({components :{
-                "Home": <Home username={this.state.username} />,
+                "Home": <Home username={this.state.username} createMonth={this.createMonth} createDay={this.createDay} createCases={this.createCases}/>,
                 "Refresh":<Refresh/>,
                 "Login": <Login login={this.login} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
                 "Inscription": <Inscription createAccount={this.createAccount} updateSate={this.updateSate} showButton={this.showButton} addToken={this.addToken}/>,
-                "MyResolution": <MyResolution username={this.state.username}/>,
+                "MyResolution": <MyResolution username={this.state.username} createMonth={this.createMonth} createDay={this.createDay} createCases={this.createCases}/>,
                 "Settings": <Settings resetHome={this.resetHome}  setWithExpiry={this.setWithExpiry} getWithExpiry={this.getWithExpiry} name={this.state.username}/>
             }
         },()=>{
@@ -144,6 +145,50 @@ class App extends React.Component {
                 this.resetHome()
                 localStorage.removeItem("rememberme")
             })
+    }
+    createCase = (cases) => {
+        let color_case
+        if(cases < 1){
+            color_case = "lv1"
+        }
+        else if(cases < 5){
+            color_case = "lv2"
+        }
+        else if(cases < 10){
+            color_case = "lv3"
+        }
+        else if(cases < 15){
+            color_case = "lv4"
+        }
+        else {
+            color_case = "lv5"
+        }
+        return <Case case={color_case}/>;
+    }
+    createCases =  (cases) => {
+        return cases.map ((cases) => {
+            return this.createCase(cases)
+        })
+    }
+    createDay = ()=> {
+        let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const d = new Date();
+        weekday = weekday.slice(0,d.getDay()+1).reverse().concat(weekday.slice(d.getDay()+1).reverse());
+        weekday = weekday.reverse();
+        return weekday.map((element,key)=>{
+                return <div className="jour">{element.substring(0, 3)}</div>;
+            }
+        )
+    }
+
+    createMonth = ()=> {
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const m = new Date();
+        months = months.slice(0,m.getMonth()+1).reverse().concat(months.slice(m.getMonth()+1).reverse());
+        months = months.reverse();
+        return months.map((element,key)=>{
+            return <div className="month">{element.substring(0, 3)}</div>;
+        })
     }
     render() {
         return (

@@ -23,7 +23,7 @@ class MyResolution extends React.Component {
             })
     }
     createResolution =  (resolution) => {
-        return <Resolution username={this.props.username} showButton={false} resolution={resolution} key={resolution}/>;
+        return <Resolution username={this.props.username} showButton={false} resolution={resolution} key={resolution} createMonth={this.props.createMonth} createDay={this.props.createDay} createCases={this.props.createCases}/>;
     }
     createResolutions =  (resolutions) => {
         return resolutions.map(this.createResolution);

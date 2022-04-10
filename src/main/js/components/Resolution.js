@@ -74,16 +74,6 @@ class Resolution extends React.Component {
                 this.fetchResolutionTenacity()
             })
     }
-    createNbDo =  (nb_do) => {
-        return <ResolutionDo nb_do={nb_do} key={nb_do}/>;
-    }
-    createNbDos =  (nb_do) => {
-        if(nb_do.length > 0) {
-            return nb_do.map(this.createNbDo);
-        }else{
-            return <div className="subtitle has-text-white">No action done</div>
-        }
-    }
 
     createSelect(date){
         const d = new Date(date)
@@ -92,51 +82,6 @@ class Resolution extends React.Component {
     }
     show_date(){
         return this.state.date_list.map(this.createSelect)
-    }
-    createCase = (cases) => {
-        let color_case
-        if(cases < 1){
-            color_case = "lv1"
-        }
-        else if(cases < 5){
-            color_case = "lv2"
-        }
-        else if(cases < 10){
-            color_case = "lv3"
-        }
-        else if(cases < 15){
-            color_case = "lv4"
-        }
-        else {
-            color_case = "lv5"
-        }
-        return <Case case={color_case}/>;
-    }
-    createCases =  (cases) => {
-        return cases.map ((cases) => {
-            return this.createCase(cases)
-        })
-    }
-
-    createDay = ()=> {
-        let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const d = new Date();
-        weekday = weekday.slice(0,d.getDay()+1).reverse().concat(weekday.slice(d.getDay()+1).reverse());
-        weekday = weekday.reverse();
-        return weekday.map((element,key)=>{
-                return <div className="jour">{element.substring(0, 3)}</div>;
-            }
-        )
-    }
-
-    createMonth = ()=> {
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const m = new Date();
-        months = months.slice(0,m.getMonth()+1).reverse().concat(months.slice(m.getMonth()+1).reverse());
-        months = months.reverse();
-        return months.map((element,key)=>{
-            return <div className="month">{element.substring(0, 3)}</div>;
-        })
     }
 
     render() {
@@ -156,11 +101,11 @@ class Resolution extends React.Component {
                             <div className="github">
                                 <h3 className="title has-text-white">Your tenacity</h3>
                                 <div className="months">
-                                    {this.createMonth()}
+                                    {this.props.createMonth()}
                                 </div>
                                     <div className='boxGit'>
-                                        {this.createCases(this.state.githubRes)}
-                                        {this.createDay()}
+                                        {this.props.createCases(this.state.githubRes)}
+                                        {this.props.createDay()}
                                     </div>
                                 <div>
                                     <div className="legende">
