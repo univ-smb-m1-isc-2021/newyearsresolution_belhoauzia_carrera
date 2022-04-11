@@ -80,7 +80,9 @@ public class ResolutionService {
         return userResRepository.findByUser(u);
     }
 
-
+    public int nbUserResResolution(Resolution r){
+        return userResRepository.findByResolution(r).size();
+    }
     public void removeUserRes(UserRes u){userResRepository.delete(u);}
 
     public UserRes setUserRes(String username,int id,int nb_do,Date d){
