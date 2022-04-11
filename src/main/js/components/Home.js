@@ -56,7 +56,7 @@ class Home extends React.Component {
                     {this.props.username != "" ?
                         <div className="box github">
                             <h1 className="title has-text-white">Your tenacity</h1>
-                            <div className="">
+                            <div className="github">
                                 <div className="months">
                                     {this.props.createMonth()}
                                 </div>

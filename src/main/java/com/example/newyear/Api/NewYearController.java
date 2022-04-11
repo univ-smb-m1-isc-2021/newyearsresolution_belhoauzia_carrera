@@ -30,7 +30,6 @@ public class NewYearController {
     @GetMapping(value = "/api/AllResolutions")
     public List<ResolutionHome> title(){
         logger.info("Service Resolutions");
-        float nbUser = (float) resolutionService.nb_user();
         List<Resolution> l = resolutionService.resolutionList().stream().collect(toList());
         ArrayList<PopularityResolution> li = new ArrayList<PopularityResolution>();
         ArrayList<ResolutionHome> res = new ArrayList<>();
@@ -44,6 +43,7 @@ public class NewYearController {
         });
         for(int i = 0 ; i < 3 ; i++){
             if(li.size() > i){
+                float nbUser = resolutionService.nbUserResResolution(li.get(i).getR());
                 int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(li.get(i).getR())/nbUser)*100);
                 res.add(new ResolutionHome(li.get(i).getR(),percent));
             }
@@ -55,11 +55,13 @@ public class NewYearController {
             SecureRandom rand = new SecureRandom();
             int random = rand.nextInt(l.size()) ;
             if(!isInArray(res,l.get(random))){
+                float nbUser = resolutionService.nbUserResResolution(l.get(random));
                 int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nbUser)*100);
                 res.add(new ResolutionHome(l.get(random),percent));
                 randomLeft--;
             }
             if(!isInArray(done,l.get(random))){
+                float nbUser = resolutionService.nbUserResResolution(l.get(random));
                 int percent = (int)(((float)resolutionService.nbUserResResolutionAcc(l.get(random))/nbUser)*100);
                 done.add(new ResolutionHome( l.get(random),percent));
             }
