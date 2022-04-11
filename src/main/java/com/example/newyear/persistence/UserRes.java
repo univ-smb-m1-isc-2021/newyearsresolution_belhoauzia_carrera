@@ -25,13 +25,13 @@ public class UserRes implements Serializable {
     @JoinColumn(name = "resolution_id")
     private Resolution resolution;
 
-    private Date start_date;
+    private Date startdate;
     private ArrayList<ResolutionDo> liste;
 
-    public UserRes(UserClass user, Resolution resolution, Date start_date) {
+    public UserRes(UserClass user, Resolution resolution, Date startdate) {
         this.user = user;
         this.resolution = resolution;
-        this.start_date = start_date;
+        this.startdate = startdate;
         this.liste = new ArrayList<>();
     }
 
@@ -66,12 +66,12 @@ public class UserRes implements Serializable {
         this.resolution = resolution;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartdate() {
+        return startdate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
     }
 
     public void addResolutionDo(Date d,int nb_do){
@@ -104,7 +104,7 @@ public class UserRes implements Serializable {
         for(int i = 0;i < liste.size();i++){
             if(NewYearController.nbDaysBetweenDate(d,liste.get(i).getDate()) < resolution.getFrequency()){
                 current_oc += liste.get(i).getNbdo();
-                if(current_oc >= resolution.getNb_occurency()){
+                if(current_oc >= resolution.getNboccurency()){
                     return true;
                 }
             }

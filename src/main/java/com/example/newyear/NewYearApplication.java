@@ -46,15 +46,15 @@ public class NewYearApplication {
         if(principal!= null) {
             String name = principal.getAttribute("name");
             List<UserClass> ul = resolutionService.userList();
-            Boolean user_exist = false;
+            boolean userexist = false;
             for (int i = 0 ; i < ul.size();i++){
                 if(ul.get(i).getUsername().equals(name)){
                     if(!ul.get(i).getIsSocial()){return Collections.singletonMap("erreur", "Un utilisateur posséde déjà ce nom");}
-                    user_exist = true;
+                    userexist = true;
                     break;
                 }
             }
-            if(!user_exist){
+            if(!userexist){
                 resolutionService.addUser(name, UUID.randomUUID().toString(),true);
             }
             return Collections.singletonMap("name", name);

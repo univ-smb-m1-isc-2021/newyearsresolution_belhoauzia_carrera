@@ -25,8 +25,8 @@ public class ResolutionService {
         return userRepository.findAll();
     }
 
-    public void addResolution(String title,String des,int nb_oc,int freq,String username){
-        Resolution r = new Resolution(title,des,nb_oc,freq);
+    public void addResolution(String title,String des,int nboc,int freq,String username){
+        Resolution r = new Resolution(title,des,nboc,freq);
         UserClass u = userRepository.findByUsername(username);
         repository.saveAndFlush(r);
         userResRepository.saveAndFlush(new UserRes(u, r, new Date(System.currentTimeMillis())));
@@ -85,9 +85,9 @@ public class ResolutionService {
     }
     public void removeUserRes(UserRes u){userResRepository.delete(u);}
 
-    public UserRes setUserRes(String username,int id,int nb_do,Date d){
+    public UserRes setUserRes(String username,int id,int nbdo,Date d){
         UserRes u = getUserRes(username,id);
-        u.addResolutionDo(d, nb_do);
+        u.addResolutionDo(d, nbdo);
         userResRepository.saveAndFlush(u);
         return u;
     }
@@ -109,7 +109,7 @@ public class ResolutionService {
         return false;
     }
 
-    public void addUser(String username,String pass,Boolean isSocial){
+    public void addUser(String username,String pass,boolean isSocial){
         userRepository.saveAndFlush(new UserClass(username,pass,isSocial));
     }
 
@@ -119,7 +119,7 @@ public class ResolutionService {
 
     public void removeUser(UserClass u){userRepository.delete(u);}
 
-    public long nb_user(){
+    public long nbuser(){
         return userRepository.count();
     }
 }

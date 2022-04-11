@@ -38,16 +38,16 @@ public class Initializer {
             repository.saveAndFlush(vegetable);
 
             //create userRes
-            UserRes zohir_vege = new UserRes(zohir, vegetable, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022"));
-            zohir_vege.addListe(new ResolutionDo("01/04/2022",3));
-            zohir_vege.addListe(new ResolutionDo("02/04/2022",1));
-            zohir_vege.addListe(new ResolutionDo("03/04/2022",2));
-            zohir_vege.addListe(new ResolutionDo("04/04/2022",2));
-            zohir_vege.addListe(new ResolutionDo("05/04/2022",1));
-            zohir_vege.addListe(new ResolutionDo("06/04/2022",2));
-            zohir_vege.addListe(new ResolutionDo("08/04/2022",2));
-            zohir_vege.addListe(new ResolutionDo("09/04/2022",1));
-            userResRepository.saveAndFlush(zohir_vege);
+            UserRes zohirvege = new UserRes(zohir, vegetable, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022"));
+            zohirvege.addListe(new ResolutionDo("01/04/2022",3));
+            zohirvege.addListe(new ResolutionDo("02/04/2022",1));
+            zohirvege.addListe(new ResolutionDo("03/04/2022",2));
+            zohirvege.addListe(new ResolutionDo("04/04/2022",2));
+            zohirvege.addListe(new ResolutionDo("05/04/2022",1));
+            zohirvege.addListe(new ResolutionDo("06/04/2022",2));
+            zohirvege.addListe(new ResolutionDo("08/04/2022",2));
+            zohirvege.addListe(new ResolutionDo("09/04/2022",1));
+            userResRepository.saveAndFlush(zohirvege);
         }
     }
 }

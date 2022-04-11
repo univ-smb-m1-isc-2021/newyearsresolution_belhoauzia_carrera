@@ -168,7 +168,7 @@ public class NewYearController {
     @ResponseBody
     public InfoResolution getUserRes(@RequestParam String username, @RequestParam int id){
         UserRes r = resolutionService.getUserRes(username,id);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
+        return new InfoResolution(r.getStartdate(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
 
     //send true is the user have this resolution
@@ -183,7 +183,7 @@ public class NewYearController {
     @ResponseBody
     public InfoResolution done(@RequestParam String username, @RequestParam int id, @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
         UserRes r = resolutionService.setUserRes(username,id,1,date);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
+        return new InfoResolution(r.getStartdate(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
 
     //when a user fail his resolution
@@ -191,7 +191,7 @@ public class NewYearController {
     @ResponseBody
     public InfoResolution failed(@RequestParam String username, @RequestParam int id,  @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date){
         UserRes r = resolutionService.setUserRes(username,id,-1,date);
-        return new InfoResolution(r.getStart_date(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
+        return new InfoResolution(r.getStartdate(),r.getListe(),"dd-MM-yyyy",r.isAccomplish(new Date(System.currentTimeMillis())));
     }
 
     //creation of a new resolution

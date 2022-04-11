@@ -14,14 +14,14 @@ public class Resolution {
 
     private String title;
     private String description;
-    private int nb_occurency;
+    private int nboccurency;
     private int frequency;
 
 
-    public Resolution(String title, String description, int nb_occurency, int frequency) {
+    public Resolution(String title, String description, int nboccurency, int frequency) {
         this.title = title;
         this.description = description;
-        this.nb_occurency = nb_occurency;
+        this.nboccurency = nboccurency;
         this.frequency = frequency;
     }
 
@@ -54,12 +54,12 @@ public class Resolution {
         this.description = description;
     }
 
-    public int getNb_occurency() {
-        return nb_occurency;
+    public int getNboccurency() {
+        return nboccurency;
     }
 
-    public void setNb_occurency(int nb_occurency) {
-        this.nb_occurency = nb_occurency;
+    public void setNboccurency(int nboccurency) {
+        this.nboccurency = nboccurency;
     }
 
     public int getFrequency() {

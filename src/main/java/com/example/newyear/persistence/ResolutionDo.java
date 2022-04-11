@@ -16,20 +16,20 @@ public class ResolutionDo implements Serializable {
 
     private Date date;
     private int nbdo;
-    private String show_date;
+    private String showdate;
 
     public ResolutionDo(Date date, int nbdo) {
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         this.date = date;
         this.nbdo = nbdo;
-        this.show_date = format1.format(this.date);
+        this.showdate = format1.format(this.date);
     }
     public ResolutionDo(String str, int nbdo) throws ParseException {
         Date date = createDate(str);
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         this.date = date;
         this.nbdo = nbdo;
-        this.show_date = format1.format(this.date);
+        this.showdate = format1.format(this.date);
     }
 
     public ResolutionDo() {
@@ -56,8 +56,8 @@ public class ResolutionDo implements Serializable {
         this.nbdo = nbdo;
     }
 
-    public String getShow_date() {
-        return show_date;
+    public String getShowdate() {
+        return showdate;
     }
 
     public Long getId() {

@@ -1,6 +1,5 @@
 package com.example.newyear.persistence;
 
-import com.example.newyear.persistence.UserClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
