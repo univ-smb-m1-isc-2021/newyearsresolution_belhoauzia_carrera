@@ -195,10 +195,9 @@ public class NewYearController {
     //creation of a new resolution
     @GetMapping(value = "/api/newResolution")
     @ResponseBody
-    public String newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nb_oc,@RequestParam int freq,@RequestParam String username){
-        int nb = nb_oc;
-        if(title.equals("") && des.equals("") && nb > 0 && freq > 0) {
-            resolutionService.addResolution(title, des, nb, freq,username);
+    public String newResolution(@RequestParam String title,@RequestParam String des,@RequestParam int nboc,@RequestParam int freq,@RequestParam String username){
+        if(!title.equals("") && !des.equals("") && nboc > 0 && freq > 0) {
+            resolutionService.addResolution(title, des, nboc, freq,username);
             logger.info("nouvelle resolution ajouté");
             return "ok";
         }else{logger.info("erreur nouvelle resolution");return "nok";}

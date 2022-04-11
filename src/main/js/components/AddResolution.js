@@ -16,7 +16,7 @@ class AddResolution extends React.Component {
 
     }
     addResolution(){
-        axios.get(`/api/newResolution?title=`+this.state.title+"&des="+this.state.des+"&nb_oc="+this.state.nb_oc+"&freq="+this.state.freq+"&username="+this.props.username)
+        axios.get(`/api/newResolution?title=`+this.state.title+"&des="+this.state.des+"&nboc="+this.state.nb_oc+"&freq="+this.state.freq+"&username="+this.props.username)
             .then(res => {
                 if(res.data == "ok") {
                     this.setState({erreur:"",title:"",des : "",nb_oc : 0,freq : 0})
