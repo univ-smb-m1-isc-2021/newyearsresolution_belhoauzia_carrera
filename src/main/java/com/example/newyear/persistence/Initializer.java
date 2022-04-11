@@ -27,9 +27,9 @@ public class Initializer {
 
         if (repository.findAll().isEmpty() && userRepository.findAll().isEmpty() &&  userResRepository.findAll().isEmpty()) {
             //creation d'uilisateur
-            UserClass zohir = new UserClass( "Zohir", UserClass.encrytePassword("supermotdepasse"),false);
+            UserClass zohir = new UserClass( "Zohir", UserClass.encrytePassword("onizuka"),false);
             UserClass haris = new UserClass( "Haris", UserClass.encrytePassword("barbac"),false);
-            UserClass thomas = new UserClass( "Thomas", UserClass.encrytePassword("supermotdepasse"),false);
+            UserClass thomas = new UserClass( "Thomas", UserClass.encrytePassword("onizuka"),false);
             userRepository.saveAndFlush(zohir);
             userRepository.saveAndFlush(haris);
             userRepository.saveAndFlush(thomas);
