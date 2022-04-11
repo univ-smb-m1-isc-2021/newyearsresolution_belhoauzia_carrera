@@ -91,7 +91,7 @@ class Resolution extends React.Component {
                     <h1 className="title has-text-white">{this.props.resolution.title}</h1>
                     <h2 className="subtitle has-text-white">{this.props.resolution.description}</h2>
                     <h2>
-                        This resolution has to be done {this.props.resolution.nb_occurency} times each  { this.props.resolution.frequency%7==0 ?this.props.resolution.frequency/7==1? "week" : this.props.resolution.frequency/7 + " weeks" : this.props.resolution.frequency%31==0? this.props.resolution.frequency/31==1? "month" : this.props.resolution.frequency/31 +" months": this.props.resolution.frequency==1? "day" : this.props.resolution.frequency + " day(s)" }
+                        This resolution has to be done {this.props.resolution.nboccurency} times each  { this.props.resolution.frequency%7==0 ?this.props.resolution.frequency/7==1? "week" : this.props.resolution.frequency/7 + " weeks" : this.props.resolution.frequency%31==0? this.props.resolution.frequency/31==1? "month" : this.props.resolution.frequency/31 +" months": this.props.resolution.frequency==1? "day" : this.props.resolution.frequency + " day(s)" }
                     </h2>
                         <div className="subtitle has-text-white">{this.state.message}</div>
                     { this.props.showButton && this.props.username != "" && this.state.haveResolution ? <button className="button is-success" onClick={() => this.addResolution(this.props.resolution.id)}>Add resolution</button> : null }
