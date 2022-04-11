@@ -112,10 +112,10 @@ public class NewYearController {
                 if( nbJours <= 371) {
                     if(id != -1){
                         if (url.get(i).getResId()==id){
-                            res.set(nbJours,url.get(i).getListe().get(j).getNb_do());
+                            res.set(nbJours,url.get(i).getListe().get(j).getNbdo());
                         }
                     }else{
-                        res.set(nbJours,url.get(i).getListe().get(j).getNb_do());
+                        res.set(nbJours,url.get(i).getListe().get(j).getNbdo());
                     }
                 }
             }

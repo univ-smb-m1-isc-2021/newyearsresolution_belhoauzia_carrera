@@ -15,20 +15,20 @@ public class ResolutionDo implements Serializable {
     private Long id;
 
     private Date date;
-    private int nb_do;
+    private int nbdo;
     private String show_date;
 
-    public ResolutionDo(Date date, int nb_do) {
+    public ResolutionDo(Date date, int nbdo) {
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         this.date = date;
-        this.nb_do = nb_do;
+        this.nbdo = nbdo;
         this.show_date = format1.format(this.date);
     }
-    public ResolutionDo(String str, int nb_do) {
+    public ResolutionDo(String str, int nbdo) throws ParseException {
         Date date = createDate(str);
         SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy");
         this.date = date;
-        this.nb_do = nb_do;
+        this.nbdo = nbdo;
         this.show_date = format1.format(this.date);
     }
 
@@ -36,13 +36,8 @@ public class ResolutionDo implements Serializable {
         //JPA
     }
 
-    public Date createDate(String d){
-        try {
-            return new SimpleDateFormat("dd/MM/yyyy").parse(d);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public Date createDate(String d) throws ParseException {
+        return new SimpleDateFormat("dd/MM/yyyy").parse(d);
     }
 
     public Date getDate() {
@@ -53,12 +48,12 @@ public class ResolutionDo implements Serializable {
         this.date = date;
     }
 
-    public int getNb_do() {
-        return nb_do;
+    public int getNbdo() {
+        return nbdo;
     }
 
-    public void setNb_do(int nb_do) {
-        this.nb_do = nb_do;
+    public void setNbdo(int nbdo) {
+        this.nbdo = nbdo;
     }
 
     public String getShow_date() {

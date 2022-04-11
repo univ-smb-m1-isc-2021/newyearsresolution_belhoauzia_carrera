@@ -12,11 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class JUnitTest extends TestCase{
+class JUnitTest extends TestCase{
 
 
     @Test
-    public void test() throws ParseException {
+    void test() throws ParseException {
         //Init react
         InitReact ir = new InitReact();
         assertTrue(ir.serialize().length() > 0);
@@ -49,7 +49,7 @@ public class JUnitTest extends TestCase{
         assertEquals(ur.getListe().size() , 1);
         assertEquals(ur.isAccomplish(date) , false);
         ur.addResolutionDo(date,10);
-        assertTrue(ur.getListe().size() == 1 && ur.getListe().get(0).getNb_do() == 20);
+        assertTrue(ur.getListe().size() == 1 && ur.getListe().get(0).getNbdo() == 20);
         assertEquals(ur.isAccomplish(date) , true);
         assertEquals(ur.isSameDay(new Date(),new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022")), false);
         assertEquals(ur.isSameDay(new SimpleDateFormat("MM/dd/yyyy").parse("04/01/2022"),new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022")), true);

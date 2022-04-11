@@ -9,11 +9,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class NewYearControllerTest extends TestCase{
+class NewYearControllerTest extends TestCase{
 
 
     @Test
-    public void test(){
+    void test(){
         NewYearController rs = new NewYearController(null);
         ArrayList<ResolutionHome> l = new ArrayList<ResolutionHome>();
         List<Resolution> d = new ArrayList<>();

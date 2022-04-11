@@ -4,11 +4,7 @@ import com.example.newyear.Api.NewYearController;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,7 +78,7 @@ public class UserRes implements Serializable {
         boolean f = false;
         for(int i = 0;i < liste.size(); i++){
             if(isSameDay(liste.get(i).getDate(), d)){
-                liste.get(i).setNb_do(liste.get(i).getNb_do()+nb_do);
+                liste.get(i).setNbdo(liste.get(i).getNbdo()+nb_do);
                 f=true;
                 break;
             }
@@ -107,7 +103,7 @@ public class UserRes implements Serializable {
         int current_oc = 0;
         for(int i = 0;i < liste.size();i++){
             if(NewYearController.nbDaysBetweenDate(d,liste.get(i).getDate()) < resolution.getFrequency()){
-                current_oc += liste.get(i).getNb_do();
+                current_oc += liste.get(i).getNbdo();
                 if(current_oc >= resolution.getNb_occurency()){
                     return true;
                 }
