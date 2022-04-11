@@ -34,7 +34,7 @@ public class NewYearController {
         ArrayList<PopularityResolution> li = new ArrayList<PopularityResolution>();
         ArrayList<ResolutionHome> res = new ArrayList<>();
         for(int i = 0 ; i < l.size(); i++){
-            li.add(new PopularityResolution(l.get(i),resolutionService.nbUserResResolutionAcc(l.get(i))));
+            li.add(new PopularityResolution(l.get(i),resolutionService.nbUserResResolution(l.get(i))));
         }
         Collections.sort(li, new Comparator<PopularityResolution>(){
             public int compare(PopularityResolution o1, PopularityResolution o2){

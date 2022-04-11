@@ -28,13 +28,22 @@ public class Initializer {
         if (repository.findAll().isEmpty() && userRepository.findAll().isEmpty() &&  userResRepository.findAll().isEmpty()) {
             //creation d'uilisateur
             UserClass zohir = new UserClass( "Zohir", UserClass.encrytePassword("supermotdepasse"),false);
+            UserClass haris = new UserClass( "Haris", UserClass.encrytePassword("barbac"),false);
+            UserClass thomas = new UserClass( "Thomas", UserClass.encrytePassword("supermotdepasse"),false);
             userRepository.saveAndFlush(zohir);
-            userRepository.saveAndFlush(new UserClass( "Haris", UserClass.encrytePassword("barbac"),false));
-            userRepository.saveAndFlush(new UserClass( "Thomas", UserClass.encrytePassword("supermotdepasse"),false));
+            userRepository.saveAndFlush(haris);
+            userRepository.saveAndFlush(thomas);
 
             //creation de resolution
             Resolution vegetable = new Resolution("Vegetables","Eat vegetables at each meal (twice a day)",2,1);
-            repository.saveAndFlush(new Resolution("Bike","Do bike twice a week",2,7));
+            Resolution bike = new Resolution("Bike","Do bike twice a week",2,7);
+            Resolution sleep = new Resolution("Sleep","Sleep before midnight",2,7);
+            repository.saveAndFlush(bike);
+            repository.saveAndFlush(sleep);
+            repository.saveAndFlush(new Resolution("Mom","Call my mom",1,31));
+            repository.saveAndFlush(new Resolution("Alcohol","Don't drink alcohol today",4,7));
+            repository.saveAndFlush(new Resolution("Brush Teeth","Brush your teeth",3,1));
+            repository.saveAndFlush(new Resolution("Wake up","Wake up before 10 am",1,1));
             repository.saveAndFlush(vegetable);
 
             //create userRes
@@ -48,6 +57,12 @@ public class Initializer {
             zohirvege.addListe(new ResolutionDo("08/04/2022",2));
             zohirvege.addListe(new ResolutionDo("09/04/2022",1));
             userResRepository.saveAndFlush(zohirvege);
+
+            userResRepository.saveAndFlush( new UserRes(haris, vegetable, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022")));
+            userResRepository.saveAndFlush( new UserRes(thomas, vegetable, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022")));
+            userResRepository.saveAndFlush( new UserRes(haris, bike, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022")));
+            userResRepository.saveAndFlush( new UserRes(thomas, bike, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022")));
+            userResRepository.saveAndFlush( new UserRes(haris, sleep, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022")));
         }
     }
 }
