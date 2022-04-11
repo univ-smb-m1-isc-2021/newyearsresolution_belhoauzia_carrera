@@ -4,6 +4,12 @@ import com.example.newyear.Api.NewYearController;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -75,7 +81,7 @@ public class UserRes implements Serializable {
     public void addResolutionDo(Date d,int nb_do){
         boolean f = false;
         for(int i = 0;i < liste.size(); i++){
-            if(liste.get(i).getDate().getDay() == d.getDay()){
+            if(isSameDay(liste.get(i).getDate(), d)){
                 liste.get(i).setNb_do(liste.get(i).getNb_do()+nb_do);
                 f=true;
                 break;
@@ -84,6 +90,14 @@ public class UserRes implements Serializable {
         if(!f){
             liste.add(new ResolutionDo(d,nb_do));
         }
+    }
+
+    public  boolean isSameDay(Date date1, Date date2) {
+        Instant instant1 = date1.toInstant()
+                .truncatedTo(ChronoUnit.DAYS);
+        Instant instant2 = date2.toInstant()
+                .truncatedTo(ChronoUnit.DAYS);
+        return instant1.equals(instant2);
     }
 
     public ArrayList<ResolutionDo> getListe(){return liste;}

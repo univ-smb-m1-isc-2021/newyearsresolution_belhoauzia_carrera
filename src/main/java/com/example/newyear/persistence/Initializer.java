@@ -3,6 +3,9 @@ package com.example.newyear.persistence;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Service
@@ -19,7 +22,7 @@ public class Initializer {
     }
 
     @PostConstruct
-    public void initial(){
+    public void initial() throws ParseException {
         userResRepository.deleteAllInBatch();
         repository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
@@ -37,15 +40,15 @@ public class Initializer {
             repository.saveAndFlush(vegetable);
 
             //create userRes
-            UserRes zohir_vege = new UserRes(zohir, vegetable, new Date("04/01/2022"));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/01/2022"),3));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/02/2022"),1));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/03/2022"),2));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/04/2022"),2));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/05/2022"),1));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/07/2022"),2));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/08/2022"),2));
-            zohir_vege.addListe(new ResolutionDo(new Date("04/09/2022"),1));
+            UserRes zohir_vege = new UserRes(zohir, vegetable, new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2022"));
+            zohir_vege.addListe(new ResolutionDo("01/04/2022",3));
+            zohir_vege.addListe(new ResolutionDo("02/04/2022",1));
+            zohir_vege.addListe(new ResolutionDo("03/04/2022",2));
+            zohir_vege.addListe(new ResolutionDo("04/04/2022",2));
+            zohir_vege.addListe(new ResolutionDo("05/04/2022",1));
+            zohir_vege.addListe(new ResolutionDo("06/04/2022",2));
+            zohir_vege.addListe(new ResolutionDo("08/04/2022",2));
+            zohir_vege.addListe(new ResolutionDo("09/04/2022",1));
             userResRepository.saveAndFlush(zohir_vege);
         }
     }

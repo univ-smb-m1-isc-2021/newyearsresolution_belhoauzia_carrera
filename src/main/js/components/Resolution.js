@@ -47,6 +47,7 @@ class Resolution extends React.Component {
     fetchResolutionTenacity(){
         axios.get('/api/githubRes?username=' + this.props.username + "&id=" + this.props.resolution.id)
             .then(res =>{
+                console.log(res.data)
                 this.setState({githubRes :res.data})
             })
     }
