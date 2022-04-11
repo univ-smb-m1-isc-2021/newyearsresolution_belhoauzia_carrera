@@ -87,6 +87,7 @@ public class UserRes implements Serializable {
     }
 
     public ArrayList<ResolutionDo> getListe(){return liste;}
+    public void addListe(ResolutionDo d){liste.add(d);}
 
     public boolean isAccomplish(Date d){
         int current_oc = 0;
